@@ -1,0 +1,13 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+top to bottom direction
+
+node "Application" {
+  component "api"
+}
+database "Database"
+
+"api" --> "Database"
+
+@enduml

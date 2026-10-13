@@ -1,0 +1,18 @@
+{
+  "name": "rup-flow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude skill that moves a project between requirements, RUP documentation and code",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "validate": "node tools/validate.mjs",
+    "icon": "node tools/make-icon.mjs",
+    "package:web": "node tools/package-web.mjs",
+    "check": "npm run validate && npm test"
+  }
+}

@@ -1,0 +1,28 @@
+@startuml
+!theme plain
+hide empty members
+hide circle
+skinparam linetype polyline
+skinparam nodesep 60
+skinparam ranksep 70
+top to bottom direction
+
+package "Level 1 - Core" {
+  class CoreEntity {
+    id
+    name
+  }
+}
+
+package "Level 2 - Structural" {
+  class StructuralEntity
+}
+
+package "Level 3 - Detail" {
+  class DetailEntity
+}
+
+CoreEntity "1" *-down- "0..*" StructuralEntity : contains
+StructuralEntity "1" o-down- "0..*" DetailEntity : qualifies
+
+@enduml

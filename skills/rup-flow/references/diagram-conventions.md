@@ -1,0 +1,56 @@
+# Diagram conventions (PlantUML)
+
+## Rendering pipeline
+
+```
+.puml  ──(POST /svg)──►  PlantUML server (Docker)  ──►  .svg next to the source
+```
+
+Start the server once with `RUP server up`; check with `RUP health`; render with `RUP render`. Markdown references the SVG: `![Domain model](./domain-model.svg)`. The server runs with the `SANDBOX` security profile, so diagrams must not use `!include` of files or URLs.
+
+A file with several `@start…/@end…` blocks yields `name-01.svg`, `name-02.svg`.
+
+## Header
+
+```
+@startuml
+!theme plain
+hide empty members
+hide circle
+skinparam linetype polyline
+```
+
+Use `top to bottom direction` for hierarchies (domain, class diagrams, deployment) and `left to right direction` for collaborations and flows.
+
+## Avoiding collisions
+
+1. Keep each diagram to ≤ 12–15 elements. Split into views (full and simple) before squeezing.
+2. Group related elements in `package`; place level bands top to bottom.
+3. Fix the order of bands or elements with hidden links:
+
+   ```
+   CoreEntity -[hidden]down-> StructuralEntity
+   A -[hidden]right-> B
+   ```
+
+4. Hold elements together or apart with `together { … }` and `skinparam nodesep` / `ranksep` (50–80).
+5. Prefer short relation labels; put long text in notes attached to elements, not to lines.
+6. Between bands, write relations with a direction (`Order *-down- OrderLine`, `OrderLine -down-> Product`). A plain `--` lets both ends land on the same row and breaks the level order. Add `A -[hidden]right- B` to keep siblings of one band side by side.
+7. Avoid relations from one hub to everything; introduce a package or an intermediate element.
+8. If after two adjustments lines still cross badly, split the diagram.
+
+## Per diagram
+
+| Diagram | Notes |
+| --- | --- |
+| Domain model | Bands by level, multiplicities on every relation, composition only for lifecycle dependency |
+| Specification | Composite state named after the use case, unlabeled inner states, notes narrate Actor/System |
+| Wireframes | `salt`, one block per screen; filename always `wireframes.puml` |
+| Collaboration | Numbered messages, stereotypes `<<boundary>> <<control>> <<entity>>` |
+| Sequence | Failure path as `alt`/`else`, transaction boundary marked with a note |
+| Data model | `entity` with `PK`/`FK`, lines for foreign keys only |
+| Deployment | Nodes → containers → components, protocols on links |
+
+## Naming
+
+PlantUML identifiers in English, no spaces (`as`), same names as in the model. Titles inside diagrams are optional; the Markdown heading names the diagram.

@@ -1,0 +1,24 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+top to bottom direction
+
+package "api" {
+  class ExampleController
+}
+package "application" {
+  class ExampleService
+}
+package "domain" {
+  class Example
+}
+package "persistence" {
+  interface ExampleRepository
+}
+
+ExampleController --> ExampleService
+ExampleService --> Example
+ExampleService --> ExampleRepository
+
+@enduml
