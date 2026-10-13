@@ -1,0 +1,13 @@
+classDiagram
+  direction TB
+
+  class ExampleController
+  class ExampleService
+  class Example
+  class ExampleRepository {
+    <<interface>>
+  }
+
+  ExampleController --> ExampleService
+  ExampleService --> Example
+  ExampleService --> ExampleRepository

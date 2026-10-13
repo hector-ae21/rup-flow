@@ -1,0 +1,15 @@
+@startuml
+!theme plain
+hide empty members
+hide circle
+skinparam linetype polyline
+top to bottom direction
+
+class CoreEntity
+class StructuralEntity
+class DetailEntity
+
+CoreEntity *-- StructuralEntity
+StructuralEntity o-- DetailEntity
+
+@enduml

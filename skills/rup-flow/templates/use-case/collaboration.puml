@@ -1,0 +1,16 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+top to bottom direction
+
+class "{{actor}}" as user <<actor>>
+class "{{ucName}}Screen" as screen <<boundary>>
+class "{{ucName}}Controller" as controller <<control>>
+class "Entity" as entity <<entity>>
+
+user --> screen : 1: acts
+screen --> controller : 2: requests
+controller --> entity : 3: reads and updates
+
+@enduml

@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph presentation [Presentation]
+    web["Web client"]
+  end
+  subgraph application [Application]
+    api["Orders API"]
+    service["Order service"]
+    port{{"OrderPort"}}
+  end
+  subgraph infrastructure [Infrastructure]
+    adapter["Persistence adapter"]
+    db[("Database")]
+  end
+
+  web -->|HTTPS| api
+  api --> service
+  service --> port
+  adapter -.->|implements| port
+  adapter -->|SQL| db

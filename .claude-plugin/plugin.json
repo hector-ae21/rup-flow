@@ -1,0 +1,23 @@
+{
+  "name": "rup-flow",
+  "displayName": "RUP Flow",
+  "version": "0.3.2",
+  "description": "Generate RUP documentation, PlantUML diagrams and code in both directions: requirements to models to code, and code back to models.",
+  "author": {
+    "name": "hector-ae21",
+    "url": "https://github.com/hector-ae21"
+  },
+  "homepage": "https://github.com/hector-ae21/rup-flow",
+  "repository": "https://github.com/hector-ae21/rup-flow",
+  "license": "MIT",
+  "keywords": [
+    "rup",
+    "uml",
+    "plantuml",
+    "documentation",
+    "use-cases",
+    "domain-model",
+    "reverse-engineering",
+    "code-generation"
+  ]
+}
