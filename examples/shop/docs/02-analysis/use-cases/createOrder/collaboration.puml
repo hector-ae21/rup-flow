@@ -1,0 +1,18 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+left to right direction
+
+class "Customer" as user <<actor>>
+class "CheckoutScreen" as screen <<boundary>>
+class "CreateOrderController" as controller <<control>>
+class "Order" as order <<entity>>
+class "Product" as product <<entity>>
+
+user --> screen : 1: confirms checkout
+screen --> controller : 2: createOrder(lines, address)
+controller --> product : 3: checks and reserves stock
+controller --> order : 4: creates with lines
+
+@enduml

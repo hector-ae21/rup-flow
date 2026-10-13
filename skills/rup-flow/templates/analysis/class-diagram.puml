@@ -1,0 +1,14 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+top to bottom direction
+
+class ExampleScreen <<boundary>>
+class ExampleController <<control>>
+class ExampleEntity <<entity>>
+
+ExampleScreen --> ExampleController
+ExampleController --> ExampleEntity
+
+@enduml

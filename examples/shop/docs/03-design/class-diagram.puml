@@ -1,0 +1,34 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+top to bottom direction
+
+package "api" {
+  class OrdersController {
+    +create(request) : OrderResponse
+  }
+}
+package "application" {
+  class CreateOrderService {
+    +execute(command) : Order
+  }
+}
+package "domain" {
+  class Order
+  class OrderLine
+  class Product
+}
+package "persistence" {
+  interface OrderRepository
+  interface ProductRepository
+}
+
+OrdersController --> CreateOrderService
+CreateOrderService --> Order
+CreateOrderService --> OrderRepository
+CreateOrderService --> ProductRepository
+Order *-- OrderLine
+OrderLine --> Product
+
+@enduml

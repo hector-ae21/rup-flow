@@ -1,0 +1,29 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+skinparam responseMessageBelowArrow true
+
+actor "Customer" as customer
+participant "OrdersController" as controller
+participant "CreateOrderService" as service
+database "ProductRepository" as products
+database "OrderRepository" as orders
+
+customer -> controller : POST /orders
+controller -> service : execute(command)
+note over service : transaction starts
+service -> products : lockBySku(skus)
+products --> service : products
+alt stock insufficient (RN-002)
+  service --> controller : InsufficientStock
+  controller --> customer : 409
+else stock available
+  service -> products : decrease(stock)
+  service -> orders : save(order)
+  orders --> service : order
+  note over service : transaction commits
+  service --> controller : order
+  controller --> customer : 201 order number
+end
+
+@enduml

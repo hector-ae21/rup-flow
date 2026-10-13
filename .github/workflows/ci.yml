@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate skill and plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run validate
+      - run: node tools/package-web.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rup-flow-skill
+          path: dist/rup-flow-skill.zip
+
+  test:
+    name: Test (Node ${{ matrix.node }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+
+  render:
+    name: Render with PlantUML server
+    runs-on: ubuntu-latest
+    services:
+      plantuml:
+        image: plantuml/plantuml-server:jetty
+        ports:
+          - 8085:8080
+        env:
+          PLANTUML_SECURITY_PROFILE: SANDBOX
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Wait for the server
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8085/ >/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
+      - name: Generate, render and check a sample project
+        run: |
+          RUP="node skills/rup-flow/scripts/rup.mjs --root $RUNNER_TEMP/sample"
+          mkdir -p "$RUNNER_TEMP/sample"
+          $RUP init
+          $RUP new use-case createOrder
+          $RUP render
+          $RUP check
+
+  complete:
+    name: CI complete
+    if: always()
+    needs: [validate, test, render]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every job to pass
+        run: |
+          [ "${{ needs.validate.result }}" = "success" ] &&
+          [ "${{ needs.test.result }}" = "success" ] &&
+          [ "${{ needs.render.result }}" = "success" ]

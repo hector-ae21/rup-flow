@@ -1,0 +1,21 @@
+@startuml
+!theme plain
+hide empty members
+skinparam linetype polyline
+top to bottom direction
+
+class CheckoutScreen <<boundary>>
+class CreateOrderController <<control>>
+class Order <<entity>>
+class OrderLine <<entity>>
+class Product <<entity>>
+class Customer <<entity>>
+
+CheckoutScreen --> CreateOrderController
+CreateOrderController --> Order
+CreateOrderController --> Product
+CreateOrderController --> Customer
+Order *-- OrderLine
+OrderLine --> Product
+
+@enduml

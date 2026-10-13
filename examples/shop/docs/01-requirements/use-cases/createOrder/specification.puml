@@ -1,0 +1,25 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+hide empty description
+
+state "createOrder" as createOrder {
+  state " " as Basket
+  state " " as Checkout
+  state " " as Validating
+  state " " as Placed
+
+  [*] --> Basket
+  Basket --> Checkout : Customer asks to check out
+  Checkout --> Validating : Customer confirms address
+  Validating --> Checkout : System reports unavailable stock or missing address
+  Validating --> Placed : System creates order and reserves stock
+  Placed --> [*]
+
+  note on link
+    Actor: asks to check out
+    System: shows lines, totals and the address form
+  end note
+}
+
+@enduml

@@ -1,0 +1,23 @@
+@startsalt
+{
+  {* Shop | Basket | Orders }
+  ==
+  Checkout
+  --
+  {
+    Product | Qty | Price
+    Blue mug | 2 | 18.00
+    Notebook | 1 | 6.50
+    ..
+    Total | | 24.50
+  }
+  --
+  {
+    Street | "                    "
+    City | "                    "
+    Postal code | "          "
+    Country | ^Spain^
+  }
+  [ Place order ] | [ Back to basket ]
+}
+@endsalt

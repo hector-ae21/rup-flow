@@ -1,0 +1,13 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype polyline
+top to bottom direction
+
+entity example {
+  * id : uuid <<PK>>
+  --
+  name : varchar(120)
+}
+
+@enduml

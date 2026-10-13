@@ -1,0 +1,34 @@
+{
+  "project": "Online shop",
+  "outDir": "docs",
+  "docLanguage": "en",
+  "codeRoot": ".",
+  "paths": {
+    "domain": "00-domain-model",
+    "requirements": "01-requirements",
+    "analysis": "02-analysis",
+    "design": "03-design",
+    "implementation": "04-implementation",
+    "quality": "05-quality"
+  },
+  "useCaseDir": "use-cases",
+  "plantuml": {
+    "url": "http://127.0.0.1:8085",
+    "previewPng": false,
+    "timeoutMs": 30000
+  },
+  "ids": {
+    "requirement": "RF",
+    "nonFunctional": "RNF",
+    "useCase": "UC",
+    "rule": "RN",
+    "decision": "DEC",
+    "test": "TC"
+  },
+  "targetStack": {
+    "language": "",
+    "framework": "",
+    "persistence": "",
+    "testing": ""
+  }
+}

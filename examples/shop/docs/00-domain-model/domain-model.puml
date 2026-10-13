@@ -1,0 +1,56 @@
+@startuml
+!theme plain
+hide empty members
+hide circle
+skinparam linetype polyline
+skinparam nodesep 70
+skinparam ranksep 70
+top to bottom direction
+
+package "Level 1 - Core" {
+  class Order {
+    number
+    placedAt
+    status
+    total
+  }
+}
+
+package "Level 2 - Structural" {
+  class Customer {
+    email
+    name
+  }
+  class OrderLine {
+    quantity
+    unitPrice
+  }
+}
+
+package "Level 3 - Detail" {
+  class Product {
+    sku
+    name
+    price
+    stock
+  }
+}
+
+package "Level 4 - Support" {
+  class Address {
+    street
+    city
+    postalCode
+    country
+  }
+}
+
+Order "1" *-down- "1..*" OrderLine : is made of
+Order "0..*" -down- "1" Customer : placed by
+OrderLine "0..*" -down-> "1" Product : sells
+Order "0..*" -down-> "1" Address : ships to
+
+Customer -[hidden]right- OrderLine
+Product -[hidden]down- Address
+
+@enduml
