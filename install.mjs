@@ -11,7 +11,7 @@ const SUBAGENTS = ['rup-architect.md', 'rup-reviewer.md'];
 /**
  * One entry per client family. To support a new agent that reads the Agent
  * Skills format from its own folder, add an entry here and document it in
- * docs/other-agents.md.
+ * the wiki page Other Agents.
  */
 const TARGETS = {
   claude: {
