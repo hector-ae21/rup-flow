@@ -162,30 +162,26 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
   function load(key) { try { return localStorage.getItem('rupflow.' + key); } catch (e) { return null; } }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function text(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
-  var BLOCKED = { SCRIPT: 1, IFRAME: 1, OBJECT: 1, EMBED: 1, LINK: 1, META: 1, BASE: 1 };
-  function clean(root) {
-    var all = root.querySelectorAll('*'), i, j, el, name, value;
-    for (i = all.length - 1; i >= 0; i--) {
-      el = all[i];
-      if (BLOCKED[el.tagName.toUpperCase()]) { el.parentNode.removeChild(el); continue; }
-      for (j = el.attributes.length - 1; j >= 0; j--) {
-        name = el.attributes[j].name.toLowerCase(); value = el.attributes[j].value.replace(/[\s\x00-\x1f]/g, '').toLowerCase();
-        if (name.indexOf('on') === 0 || ((name === 'href' || name === 'xlink:href' || name === 'src') && (value.indexOf('javascript:') === 0 || value.indexOf('data:text/html') === 0))) el.removeAttribute(el.attributes[j].name);
-      }
+  var SVG_NS = 'http://www.w3.org/2000/svg', XLINK_NS = 'http://www.w3.org/1999/xlink';
+  function h(tag, props, kids) {
+    var el = document.createElement(tag), k;
+    for (k in (props || {})) { if (k === 'text') el.textContent = props[k]; else el.setAttribute(k, props[k]); }
+    (kids || []).forEach(function (c) { el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return el;
+  }
+  function buildNode(node, ns) {
+    if (typeof node === 'string') return document.createTextNode(node);
+    var own = node.a && node.a.xmlns ? node.a.xmlns : ns, el = document.createElementNS(own, node.t), k;
+    for (k in node.a) {
+      if (k === 'xmlns') continue;
+      if (k.indexOf('xlink:') === 0) el.setAttributeNS(XLINK_NS, k, node.a[k]); else el.setAttribute(k, node.a[k]);
     }
-    return root;
+    node.c.forEach(function (child) { el.appendChild(buildNode(child, own)); });
+    return el;
   }
-  function setSvg(target, svgText) {
+  function setSvg(target, tree) {
     target.textContent = '';
-    var parsed = new DOMParser().parseFromString(svgText, 'image/svg+xml');
-    if (parsed.querySelector('parsererror') || !parsed.documentElement) return;
-    target.appendChild(document.importNode(clean(parsed.documentElement), true));
-  }
-  function setHtml(target, htmlText) {
-    var parsed = new DOMParser().parseFromString('<body>' + htmlText + '</body>', 'text/html');
-    clean(parsed.body);
-    target.textContent = '';
-    while (parsed.body.firstChild) target.appendChild(document.adoptNode(parsed.body.firstChild));
+    if (tree) target.appendChild(buildNode(tree, SVG_NS));
   }
   function toast(msg) { var t = $('#toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(function () { t.style.display = 'none'; }, 1600); }
 
@@ -207,12 +203,11 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
       if (!groups[g]) { groups[g] = []; order.push(g); }
       groups[g].push({ i: i, n: n });
     });
-    var list = $('#list'); list.innerHTML = '';
+    var list = $('#list'); list.textContent = '';
     order.forEach(function (g) {
-      var h = document.createElement('h2');
-      h.innerHTML = '<span>' + esc(g) + '</span><span>' + groups[g].length + (collapsed[g] ? ' ▸' : ' ▾') + '</span>';
-      h.onclick = function () { collapsed[g] = !collapsed[g]; buildList(); };
-      list.appendChild(h);
+      var head = h('h2', {}, [h('span', { text: g }), h('span', { text: groups[g].length + (collapsed[g] ? ' ▸' : ' ▾') })]);
+      head.onclick = function () { collapsed[g] = !collapsed[g]; buildList(); };
+      list.appendChild(head);
       groups[g].forEach(function (e) {
         visible.push(e.i);
         if (collapsed[g] && !q) return;
@@ -224,7 +219,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
         list.appendChild(a);
       });
     });
-    if (!order.length) list.innerHTML = '<div class="empty">No diagram matches.</div>';
+    if (!order.length) list.appendChild(h('div', { 'class': 'empty', text: 'No diagram matches.' }));
     $('#count').textContent = visible.length + ' of ' + items.length + ' diagrams';
     updateNav();
   }
@@ -249,7 +244,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
   function show(i, keepHash) {
     if (i < 0 || i >= items.length) return;
     current = i; selected = null; infoEl.style.display = 'none'; $('#find').value = ''; docStack = [];
-    var it = items[i]; setSvg(canvas, it.svg);
+    var it = items[i]; setSvg(canvas, it.tree);
     var svg = $('svg', canvas);
     if (svg) {
       var vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
@@ -267,7 +262,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
   }
 
   function buildChips() {
-    var it = items[current], chips = $('#chips'); chips.innerHTML = '';
+    var it = items[current], chips = $('#chips'); chips.textContent = '';
     var siblings = items.map(function (x, i) { return { x: x, i: i }; }).filter(function (e) { return it.useCase ? e.x.useCase === it.useCase : (e.x.group === it.group && !e.x.useCase); });
     if (siblings.length < 2) { chips.style.display = 'none'; return; }
     chips.style.display = 'flex';
@@ -320,7 +315,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
     all.forEach(function (e) { if (keep.indexOf(e) < 0 && !keep.some(function (k) { return k.contains(e) || e.contains(k); })) e.classList.add('dim'); });
     el.classList.add('sel');
     var names = r.ids.filter(function (n) { return n !== id; }).map(function (n) { var e = document.getElementById(n); return e ? { id: n, name: nameOf(e) } : null; }).filter(Boolean);
-    infoEl.style.display = 'block'; infoEl.innerHTML = '<b></b><div class="row"><span>Trace:</span><button id="d1">Direct</button><button id="dall">All reachable</button></div><div class="rel"></div>';
+    infoEl.style.display = 'block'; infoEl.textContent = ''; infoEl.appendChild(h('b')); infoEl.appendChild(h('div', { 'class': 'row' }, [h('span', { text: 'Trace:' }), h('button', { id: 'd1', text: 'Direct' }), h('button', { id: 'dall', text: 'All reachable' })])); infoEl.appendChild(h('div', { 'class': 'rel' }));
     $('b', infoEl).textContent = nameOf(el);
     $('#d1').setAttribute('aria-pressed', depth === '1'); $('#dall').setAttribute('aria-pressed', depth === 'all');
     $('#d1').onclick = function () { depth = '1'; select(el); }; $('#dall').onclick = function () { depth = 'all'; select(el); };
@@ -338,7 +333,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
     $$('foreignObject', canvas).forEach(function (fo) { if (text(fo).toLowerCase().indexOf(q) >= 0) hits.push(fo.querySelector('span, p, div') || fo); });
     hits.forEach(function (t) { t.classList.add('hit'); });
     if (hits.length) $$('g.entity, g.cluster, g.node, g.link', canvas).forEach(function (g) { if (!g.querySelector('.hit') && !g.classList.contains('hit')) g.classList.add('dim'); });
-    infoEl.style.display = 'block'; infoEl.innerHTML = '<b></b>'; $('b', infoEl).textContent = hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' in this diagram';
+    infoEl.style.display = 'block'; infoEl.textContent = ''; infoEl.appendChild(h('b')); $('b', infoEl).textContent = hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' in this diagram';
     if (hits.length) centerOn(hits[0].closest ? (hits[0].closest('g') || hits[0]) : hits[0]);
     hash();
   }
@@ -349,44 +344,60 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
     parts.split('/').forEach(function (p) { if (p === '..') out.pop(); else if (p && p !== '.') out.push(p); });
     return out.join('/');
   }
+  function link(label, attrs) { return h('a', attrs, [label]); }
   function inline(s, key) {
-    s = esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
-    s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, alt, src) {
-      var id = normalize(key, src.split('#')[0]), idx = items.findIndex(function (x) { return x.id === id; });
-      return idx >= 0 ? '<a class="go open" data-open="' + idx + '">▸ Open diagram: ' + (alt || items[idx].title) + '</a>' : '<span>[' + alt + ']</span>';
-    });
-    return s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, label, href) {
-      if (/^https?:/.test(href)) return '<a href="' + href + '" target="_blank" rel="noopener">' + label + '</a>';
-      var path = normalize(key, href.split('#')[0]);
-      if (docs[path]) return '<a class="go" data-doc="' + esc(path) + '">' + label + '</a>';
-      var idx = items.findIndex(function (x) { return x.id === path; });
-      return idx >= 0 ? '<a class="go" data-open="' + idx + '">' + label + '</a>' : '<span>' + label + '</span>';
-    });
+    var out = [], re = /`([^`]+)`|\*\*([^*]+)\*\*|!\[([^\]]*)\]\(([^)\s]+)\)|\[([^\]]+)\]\(([^)\s]+)\)/g, last = 0, m;
+    while ((m = re.exec(s)) !== null) {
+      if (m.index > last) out.push(s.slice(last, m.index));
+      last = m.index + m[0].length;
+      if (m[1] !== undefined) out.push(h('code', { text: m[1] }));
+      else if (m[2] !== undefined) out.push(h('b', { text: m[2] }));
+      else if (m[4] !== undefined) {
+        var id = normalize(key, m[4].split('#')[0]), idx = items.findIndex(function (x) { return x.id === id; });
+        out.push(idx >= 0 ? link('▸ Open diagram: ' + (m[3] || items[idx].title), { 'class': 'go open', 'data-open': String(idx) }) : h('span', { text: '[' + m[3] + ']' }));
+      } else {
+        var href = m[6];
+        if (/^https?:/.test(href)) out.push(link(m[5], { href: href, target: '_blank', rel: 'noopener noreferrer' }));
+        else {
+          var path = normalize(key, href.split('#')[0]), target = items.findIndex(function (x) { return x.id === path; });
+          if (docs[path]) out.push(link(m[5], { 'class': 'go', 'data-doc': path }));
+          else if (target >= 0) out.push(link(m[5], { 'class': 'go', 'data-open': String(target) }));
+          else out.push(h('span', { text: m[5] }));
+        }
+      }
+    }
+    if (last < s.length) out.push(s.slice(last));
+    return out;
   }
   function markdown(src, key) {
-    var lines = src.replace(/^---\n[\s\S]*?\n---\n/, '').split('\n'), out = [], i = 0;
+    var lines = src.replace(/^---\n[\s\S]*?\n---\n/, '').split('\n'), out = [], i = 0, cells;
+    function row(tag, line) { return h('tr', {}, line.split('|').slice(1, -1).map(function (c) { return h(tag, {}, inline(c.trim(), key)); })); }
     while (i < lines.length) {
       var l = lines[i];
-      if (/^```/.test(l)) { var code = []; i++; while (i < lines.length && !/^```/.test(lines[i])) code.push(lines[i++]); i++; out.push('<pre>' + esc(code.join('\n')) + '</pre>'); continue; }
+      if (/^```/.test(l)) { var code = []; i++; while (i < lines.length && !/^```/.test(lines[i])) code.push(lines[i++]); i++; out.push(h('pre', { text: code.join('\n') })); continue; }
       if (/^<!--/.test(l)) { i++; continue; }
-      var h = /^(#{1,4})\s+(.*)$/.exec(l); if (h) { out.push('<h' + h[1].length + '>' + inline(h[2], key) + '</h' + h[1].length + '>'); i++; continue; }
+      var hd = /^(#{1,4})\s+(.*)$/.exec(l); if (hd) { out.push(h('h' + hd[1].length, {}, inline(hd[2], key))); i++; continue; }
       if (/^\|/.test(l) && /^\|[\s:|-]+\|?\s*$/.test(lines[i + 1] || '')) {
-        var head = l.split('|').slice(1, -1), rows = []; i += 2;
-        while (i < lines.length && /^\|/.test(lines[i])) { rows.push(lines[i].split('|').slice(1, -1)); i++; }
-        out.push('<table><tr>' + head.map(function (c) { return '<th>' + inline(c.trim(), key) + '</th>'; }).join('') + '</tr>' + rows.map(function (r) { return '<tr>' + r.map(function (c) { return '<td>' + inline(c.trim(), key) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>'); continue;
+        cells = [row('th', l)]; i += 2;
+        while (i < lines.length && /^\|/.test(lines[i])) cells.push(row('td', lines[i++]));
+        out.push(h('table', {}, cells)); continue;
       }
-      if (/^\s*[-*]\s+/.test(l)) { var li = []; while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) li.push('<li>' + inline(lines[i++].replace(/^\s*[-*]\s+/, ''), key) + '</li>'); out.push('<ul>' + li.join('') + '</ul>'); continue; }
-      if (/^\s*\d+\.\s+/.test(l)) { var ol = []; while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) ol.push('<li>' + inline(lines[i++].replace(/^\s*\d+\.\s+/, ''), key) + '</li>'); out.push('<ol>' + ol.join('') + '</ol>'); continue; }
+      if (/^\s*[-*]\s+/.test(l)) { var li = []; while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) li.push(h('li', {}, inline(lines[i++].replace(/^\s*[-*]\s+/, ''), key))); out.push(h('ul', {}, li)); continue; }
+      if (/^\s*\d+\.\s+/.test(l)) { var ol = []; while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) ol.push(h('li', {}, inline(lines[i++].replace(/^\s*\d+\.\s+/, ''), key))); out.push(h('ol', {}, ol)); continue; }
       if (!l.trim()) { i++; continue; }
       var para = []; while (i < lines.length && lines[i].trim() && !/^(#|```|\||\s*[-*]\s|\s*\d+\.\s)/.test(lines[i])) para.push(lines[i++]);
-      out.push('<p>' + inline(para.join(' '), key) + '</p>');
+      if (!para.length) para.push(lines[i++]);
+      out.push(h('p', {}, inline(para.join(' '), key)));
     }
-    return out.join('\n');
+    return out;
   }
   function openDoc(key, push) {
-    if (!key || !docs[key]) { setHtml(docEl, '<div class="empty">No document next to this diagram.</div>'); return; }
+    docEl.textContent = '';
+    if (!key || !docs[key]) { docEl.appendChild(h('div', { 'class': 'empty', text: 'No document next to this diagram.' })); return; }
     if (push) docStack.push(key); else if (!docStack.length || docStack[docStack.length - 1] !== key) docStack = [key];
-    setHtml(docEl, (docStack.length > 1 ? '<a class="go back" data-back="1">← Back</a>' : '') + '<small style="color:var(--page-muted)">' + esc(key) + '</small>' + markdown(docs[key], key));
+    if (docStack.length > 1) docEl.appendChild(link('← Back', { 'class': 'go back', 'data-back': '1' }));
+    docEl.appendChild(h('small', { style: 'color:var(--page-muted)', text: key }));
+    markdown(docs[key], key).forEach(function (n) { docEl.appendChild(n); });
   }
   docEl.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a.go') : null; if (!a) return;
@@ -492,7 +503,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
 
   if (load('group') === 'usecase') { groupMode = 'usecase'; $('#by-discipline').setAttribute('aria-pressed', false); $('#by-usecase').setAttribute('aria-pressed', true); }
   buildList();
-  if (!items.length) { canvas.innerHTML = '<div class="empty">No rendered diagrams found. Run render first.</div>'; return; }
+  if (!items.length) { canvas.textContent = 'No rendered diagrams found. Run render first.'; return; }
   fromHash();
 })();
 </script>

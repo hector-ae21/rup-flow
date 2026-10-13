@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cssVariables } from './themes.mjs';
+import { svgToTree } from './svgtree.mjs';
 
 const TEMPLATE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'explorer.html');
 const KIND_BY_FILE = {
@@ -71,9 +72,11 @@ export function collectDiagrams(outDirAbs, files) {
       const suffix = svgName.replace(base, '').replace('.svg', '');
       const title = `${useCase ? `${useCase} · ` : ''}${kind}${suffix}`;
       const svg = sanitizeSvg(fs.readFileSync(path.join(dir, svgName), 'utf8'));
+      const tree = svgToTree(svg);
+      if (!tree) continue;
       items.push({
         id: relative.join('/'),
-        title, group, kind, lang, useCase, svg,
+        title, group, kind, lang, useCase, tree,
         source: sourceText,
         text: plainText(svg),
         doc: readDoc(path.join(dir, 'README.md')),
