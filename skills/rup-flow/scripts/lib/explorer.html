@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: blob:; font-src data:">
 <title>{{TITLE}} — diagram explorer</title>
 <style>
 :root { {{VARS}} }
@@ -161,6 +162,31 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
   function load(key) { try { return localStorage.getItem('rupflow.' + key); } catch (e) { return null; } }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function text(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
+  var BLOCKED = { SCRIPT: 1, IFRAME: 1, OBJECT: 1, EMBED: 1, LINK: 1, META: 1, BASE: 1 };
+  function clean(root) {
+    var all = root.querySelectorAll('*'), i, j, el, name, value;
+    for (i = all.length - 1; i >= 0; i--) {
+      el = all[i];
+      if (BLOCKED[el.tagName.toUpperCase()]) { el.parentNode.removeChild(el); continue; }
+      for (j = el.attributes.length - 1; j >= 0; j--) {
+        name = el.attributes[j].name.toLowerCase(); value = el.attributes[j].value.replace(/[\s\x00-\x1f]/g, '').toLowerCase();
+        if (name.indexOf('on') === 0 || ((name === 'href' || name === 'xlink:href' || name === 'src') && (value.indexOf('javascript:') === 0 || value.indexOf('data:text/html') === 0))) el.removeAttribute(el.attributes[j].name);
+      }
+    }
+    return root;
+  }
+  function setSvg(target, svgText) {
+    target.textContent = '';
+    var parsed = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+    if (parsed.querySelector('parsererror') || !parsed.documentElement) return;
+    target.appendChild(document.importNode(clean(parsed.documentElement), true));
+  }
+  function setHtml(target, htmlText) {
+    var parsed = new DOMParser().parseFromString('<body>' + htmlText + '</body>', 'text/html');
+    clean(parsed.body);
+    target.textContent = '';
+    while (parsed.body.firstChild) target.appendChild(document.adoptNode(parsed.body.firstChild));
+  }
   function toast(msg) { var t = $('#toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(function () { t.style.display = 'none'; }, 1600); }
 
   function matches(it, q) {
@@ -223,7 +249,7 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
   function show(i, keepHash) {
     if (i < 0 || i >= items.length) return;
     current = i; selected = null; infoEl.style.display = 'none'; $('#find').value = ''; docStack = [];
-    var it = items[i]; canvas.innerHTML = it.svg;
+    var it = items[i]; setSvg(canvas, it.svg);
     var svg = $('svg', canvas);
     if (svg) {
       var vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
@@ -358,9 +384,9 @@ section { display: grid; grid-template-rows: auto auto auto 1fr; min-width: 0; m
     return out.join('\n');
   }
   function openDoc(key, push) {
-    if (!key || !docs[key]) { docEl.innerHTML = '<div class="empty">No document next to this diagram.</div>'; return; }
+    if (!key || !docs[key]) { setHtml(docEl, '<div class="empty">No document next to this diagram.</div>'); return; }
     if (push) docStack.push(key); else if (!docStack.length || docStack[docStack.length - 1] !== key) docStack = [key];
-    docEl.innerHTML = (docStack.length > 1 ? '<a class="go back" data-back="1">← Back</a>' : '') + '<small style="color:var(--page-muted)">' + esc(key) + '</small>' + markdown(docs[key], key);
+    setHtml(docEl, (docStack.length > 1 ? '<a class="go back" data-back="1">← Back</a>' : '') + '<small style="color:var(--page-muted)">' + esc(key) + '</small>' + markdown(docs[key], key));
   }
   docEl.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a.go') : null; if (!a) return;

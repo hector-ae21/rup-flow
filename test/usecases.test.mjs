@@ -120,3 +120,13 @@ test('the explorer carries searchable text, documents and use-case grouping', ()
   assert.ok(Object.keys(data.docs).some((k) => k.endsWith('04-implementation/use-cases/createOrder/README.md')));
   assert.equal(sanitizeSvg('<svg onload="x()"></svg>'), '<svg></svg>');
 });
+
+test('the explorer inserts diagrams and documents as nodes, not as raw HTML, and blocks external loads', () => {
+  const html = fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'skills/rup-flow/scripts/lib/explorer.html'), 'utf8');
+  assert.match(html, /Content-Security-Policy[^>]*default-src 'none'/);
+  assert.doesNotMatch(html, /canvas\.innerHTML = it\.svg/);
+  assert.doesNotMatch(html, /docEl\.innerHTML/);
+  assert.match(html, /DOMParser/);
+  assert.match(html, /adoptNode\(parsed\.body\.firstChild\)/);
+  assert.equal([...html].filter((c) => c.charCodeAt(0) === 0).length, 0);
+});
