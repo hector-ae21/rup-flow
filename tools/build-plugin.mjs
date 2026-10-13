@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { iconPng } from './make-icon.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outFlag = process.argv.indexOf('--out');
@@ -14,6 +15,10 @@ export function buildPlugin(out = OUT) {
   fs.rmSync(out, { recursive: true, force: true });
   fs.mkdirSync(path.join(out, '.claude-plugin'), { recursive: true });
   for (const item of PAYLOAD) fs.cpSync(path.join(ROOT, item), path.join(out, item), { recursive: true });
+
+  // The directory asks for a square PNG inside the plugin. It lives only in this generated
+  // tree: main keeps no binary files, and nothing in the payload refers to the image.
+  fs.writeFileSync(path.join(out, '.claude-plugin', 'icon.png'), iconPng());
 
   const plugin = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin', 'plugin.json'), 'utf8'));
   fs.writeFileSync(path.join(out, '.claude-plugin', 'plugin.json'), `${JSON.stringify(plugin, null, 2)}\n`);
