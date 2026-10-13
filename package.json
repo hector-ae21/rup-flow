@@ -1,6 +1,6 @@
 {
   "name": "rup-flow",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "Claude skill that moves a project between requirements, RUP documentation and code",
   "type": "module",
@@ -12,6 +12,7 @@
     "test": "node --test",
     "validate": "node tools/validate.mjs",
     "icon": "node tools/make-icon.mjs",
+    "gallery": "node tools/build-gallery.mjs",
     "package:web": "node tools/package-web.mjs",
     "check": "npm run validate && npm test"
   }

@@ -118,7 +118,7 @@ try {
       fs.mkdirSync(path.dirname(out), { recursive: true });
       spawnSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--window-size=1400,860', `--screenshot=${out}`, pathToFileURL(explorer).href + hash], { encoding: 'utf8' });
     }
-  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (pass --browser <path to a browser>).');
+  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (install Chrome or Edge in a standard location).');
   console.log(`SVG gallery written to ${path.relative(ROOT, IMAGES)}; explorer screenshots to ${path.relative(ROOT, SHOTS)} (publish them to the docs-assets branch, see CONTRIBUTING.md)`);
 } finally {
   fs.rmSync(work, { recursive: true, force: true });

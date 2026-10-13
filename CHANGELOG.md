@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.5]
+
+### Changed
+
+- Removed the gallery browser option and turned the repository commands in AGENTS.md into npm scripts, the last two texts the directory scan read as a credential leaving the machine.
+
 ## [0.1.4]
 
 ### Changed
