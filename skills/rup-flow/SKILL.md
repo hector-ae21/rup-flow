@@ -5,7 +5,7 @@ license: MIT
 compatibility: Needs Node.js 18+. Docker is optional and only renders diagrams and builds the explorer. Works with any agent that reads Agent Skills.
 metadata:
   author: hector-ae21
-  version: "0.3.0"
+  version: "0.3.1"
   repository: https://github.com/hector-ae21/rup-flow
 ---
 

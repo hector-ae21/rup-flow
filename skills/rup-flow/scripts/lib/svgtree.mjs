@@ -32,11 +32,11 @@ function allowedAttribute(name, value) {
 export function svgToTree(source) {
   const root = { t: '#root', a: {}, c: [] };
   const stack = [root];
-  const token = /<!--[\s\S]*?-->|<!\[CDATA\[([\s\S]*?)\]\]>|<\?[\s\S]*?\?>|<!DOCTYPE[^>]*>|<\/([A-Za-z][\w:.-]*)\s*>|<([A-Za-z][\w:.-]*)((?:\s+[^\s=>/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>|([^<]+)/g;
+  const pattern = /<!--[\s\S]*?-->|<!\[CDATA\[([\s\S]*?)\]\]>|<\?[\s\S]*?\?>|<!DOCTYPE[^>]*>|<\/([A-Za-z][\w:.-]*)\s*>|<([A-Za-z][\w:.-]*)((?:\s+[^\s=>/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>|([^<]+)/g;
   const attribute = /([^\s=>/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'))?/g;
   let skip = 0;
   let match;
-  while ((match = token.exec(source)) !== null) {
+  while ((match = pattern.exec(source)) !== null) {
     const [, cdata, closing, opening, attrText, selfClose, text] = match;
     if (closing) {
       const top = stack[stack.length - 1];

@@ -33,7 +33,7 @@ There are no runtime dependencies and nothing to install.
 
 ## Rules
 
-- Keep the plugin tree free of binary files (PNG, JPEG, fonts), of `process.env` reads in `skills/`, and of `icon`/`documentationUrl`/`supportUrl` in `plugin.json`: the directory scan reports them as findings. Images that need a binary format live on the `docs-assets` branch (see CONTRIBUTING.md). `npm run validate` enforces the binary and manifest rules.
+- Keep the plugin tree free of binary files (PNG, JPEG, fonts), of environment reads and sensitive-looking names in code (`npm run validate` lists them), and of `icon`/`documentationUrl`/`supportUrl` in `plugin.json`: the directory scan reports them as findings. Images that need a binary format live on the `docs-assets` branch (see CONTRIBUTING.md). `npm run validate` enforces the binary and manifest rules.
 - Do not add dependencies. The CLI must run with a plain Node.js 18+ installation.
 - `SKILL.md` frontmatter follows the Agent Skills spec: `name` equals the folder name, `description` is at most 200 characters (the claude.ai limit; the spec allows 1024), `license` is present. `npm run validate` enforces this.
 - The same version appears in `package.json`, `.claude-plugin/plugin.json` and `SKILL.md` (`metadata.version`).
