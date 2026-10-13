@@ -1,0 +1,14 @@
+stateDiagram-v2
+  state createOrder {
+    [*] --> Basket
+    Basket --> Checkout : Customer asks to check out
+    Checkout --> Validating : Customer confirms address
+    Validating --> Checkout : System reports unavailable stock or missing address
+    Validating --> Placed : System creates order and reserves stock
+    Placed --> [*]
+  }
+
+  note right of Checkout
+    Actor: asks to check out
+    System: shows lines, totals and the address form
+  end note

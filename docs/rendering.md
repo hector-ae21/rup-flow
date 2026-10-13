@@ -27,6 +27,14 @@ node <skill-dir>/scripts/rup.mjs render --preview-png
 
 A file with several `@start…/@end…` blocks produces `name-01.svg`, `name-02.svg`. Failures list the file and error; a syntax error is reported as a failure, not saved as an image.
 
+## Mermaid
+
+Mermaid sources (`.mmd`) are rendered by the mermaid-cli container; there is nothing to start. The first render pulls the image (about 1 GB) and later renders reuse it. Docker must be running. All `.mmd` files of one run share a single container start.
+
+## Themes and outputs
+
+Both renderers apply the project theme at render time. `--outputs svg,png,html` also writes PNG previews (PlantUML) and the interactive explorer. See [formats and themes](formats-and-themes.md).
+
 ## Another port or an existing server
 
 Set `plantuml.url` in `rup.config.json`, or use `--plantuml-url`, or `RUP_PLANTUML_URL`. For a different host port when starting: `server up --plantuml-url http://127.0.0.1:9000`.

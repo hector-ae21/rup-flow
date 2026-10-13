@@ -36,7 +36,7 @@ rup-flow is a Claude skill. You describe a system (or point Claude at existing c
 | Check docs against code | "Use rup-flow to check whether the code still matches the documentation" |
 | Change where things go | "Use rup-flow and write the documentation to `documentation/rup` instead" |
 
-More, with what each produces: [Usage guide](usage.md). A finished sample: [examples/shop](../examples/shop/README.md).
+More, with what each produces: [Usage guide](usage.md). What the diagrams look like: [diagram types](diagram-types.md). Languages, palettes and the interactive viewer: [formats and themes](formats-and-themes.md). A finished sample: [examples/shop](../examples/shop/README.md).
 
 ## 4. What gets created
 

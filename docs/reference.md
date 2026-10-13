@@ -18,8 +18,13 @@ Created by `init` in the project root. Every key is optional.
 | `docLanguage` | `en` | Language of generated prose (file names, IDs and keys stay English) |
 | `codeRoot` | `.` | Where `scan` reads and where generated code goes |
 | `plantuml.url` | `http://127.0.0.1:8085` | PlantUML server |
-| `plantuml.previewPng` | `false` | Also write `.preview.png` next to each SVG |
 | `plantuml.timeoutMs` | `30000` | Request timeout |
+| `diagrams.language` | `plantuml` | `plantuml` or `mermaid`: language of the diagram sources and templates |
+| `diagrams.outputs` | `["svg"]` | Any of `svg`, `png` (previews, PlantUML only), `html` (interactive explorer) |
+| `theme.preset` | `default` | `default`, `ocean`, `forest`, `sunset`, `grape`, `mono`, `dark`, `high-contrast` |
+| `theme.colors` | `{}` | Overrides: `background`, `text`, `line`, `border`, `primary`, `secondary`, `accent`, `note` (`#RRGGBB`), `levels` (four colors) |
+| `theme.font`, `theme.fontSize`, `theme.roundCorner` | Verdana, 14, 6 | Typography and corners |
+| `mermaid.image` | pinned mermaid-cli image | Container that renders `.mmd` |
 | `ids.*` | `RF`, `RNF`, `UC`, `RN`, `DEC`, `TC` | Identifier prefixes |
 | `targetStack` | empty | `language`, `framework`, `persistence`, `testing` for code generation |
 | `traceTag` | `@rup` | Doc-comment tag that links code to the model |
@@ -39,13 +44,15 @@ node <skill-dir>/scripts/rup.mjs <command> [flags]
 | `init` | Creates the config and the skeleton. Never overwrites. |
 | `new use-case <camelName>` | Scaffolds requirements, analysis and design for a use case, next free ID, traceability row |
 | `scan [--write] [--limit n]` | Inventory: extensions, manifests, entities, entry points, services, persistence, tests, contracts |
-| `render [--path dir] [--force] [--preview-png]` | `.puml` → `.svg`; up-to-date files are skipped |
+| `render [--path dir] [--force] [--outputs svg,png,html] [--theme name]` | `.puml` and `.mmd` → themed `.svg`; up-to-date files are skipped, a theme change re-renders all |
+| `explore` | Build `explorer.html`, an interactive viewer of every rendered diagram |
+| `themes [--json]` | List the color presets |
 | `check [--strict]` | Diagram balance, missing SVGs, broken links, front matter, missing realizations, traceability gaps. `--strict` fails on warnings |
 | `server up\|down` | Start or stop the PlantUML container |
 | `health` | Render a test diagram through the configured server |
 | `config` | Print the resolved configuration |
 
-Flags: `--root <dir>`, `--out <dir>`, `--lang <code>`, `--project <name>`, `--code-root <dir>`, `--plantuml-url <url>`, `--preview-png`, `--force`. For `new use-case`: `--title`, `--actor`, `--requirement`, `--discipline requirements,analysis,design`, `--id`.
+Flags: `--root <dir>`, `--out <dir>`, `--lang <code>`, `--project <name>`, `--code-root <dir>`, `--plantuml-url <url>`, `--force`, `--diagram-language <plantuml|mermaid>`, `--outputs <list>`, `--preview-png`, `--theme <preset>`, `--font <name>`, `--font-size <n>`, `--color-<key> "#RRGGBB"` (see [formats and themes](formats-and-themes.md)). For `new use-case`: `--title`, `--actor`, `--requirement`, `--discipline requirements,analysis,design`, `--id`.
 
 Exit codes: `0` success; `1` errors (or warnings with `--strict`, or failed renders).
 

@@ -1,0 +1,11 @@
+flowchart TB
+  user(["Customer"])
+  screen["CheckoutScreen<br/>boundary"]
+  controller["CreateOrderController<br/>control"]
+  product["Product<br/>entity"]
+  order["Order<br/>entity"]
+
+  user -->|"1: confirms checkout"| screen
+  screen -->|"2: createOrder(lines, address)"| controller
+  controller -->|"3: checks and reserves stock"| product
+  controller -->|"4: creates with lines"| order

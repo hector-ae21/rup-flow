@@ -33,7 +33,27 @@ Pick one. Full step-by-step guides are linked.
 | Claude Code, without plugins | `git clone https://github.com/hector-ae21/rup-flow && cd rup-flow && node install.mjs` | same guide, option B |
 | **Claude on the web** | Upload `rup-flow-skill.zip` from the [latest release](https://github.com/hector-ae21/rup-flow/releases/latest) in **Customize → Skills** | [Install on the web](docs/install-claude-web.md) |
 
-Requirements: Node.js 18+. Docker is optional and only renders `.svg` diagrams (not available on the web: render locally).
+Requirements: Node.js 18+. Docker is optional and only renders `.svg` diagrams and builds the explorer (not available on the web: render locally).
+
+## What it looks like
+
+Diagrams in **PlantUML** or **Mermaid**, in any of eight color presets or your own palette, and an **interactive explorer** you can open by double-click.
+
+<p align="center"><img src="docs/images/explorer/explorer-overview.png" alt="Interactive explorer: selecting Order highlights its relations" width="860"></p>
+
+| ocean | forest | dark |
+| --- | --- | --- |
+| <img src="docs/images/themes/ocean.svg" width="230"> | <img src="docs/images/themes/forest.svg" width="230"> | <img src="docs/images/themes/dark.svg" width="230"> |
+
+| Use-case specification | Sequence | Mermaid domain model |
+| --- | --- | --- |
+| <img src="docs/images/diagrams/specification.svg" width="230"> | <img src="docs/images/diagrams/sequence.svg" width="230"> | <img src="docs/images/mermaid/domain-model.svg" width="230"> |
+
+All eleven diagram types explained with images: [diagram types](docs/diagram-types.md). Languages, outputs and palettes: [formats and themes](docs/formats-and-themes.md). The viewer: [explorer](docs/explorer.md).
+
+```bash
+node rup.mjs init --diagram-language mermaid --theme ocean --outputs svg,html
+```
 
 ## First use
 
@@ -65,7 +85,10 @@ Output folder, folder names, language, identifier prefixes and target stack are 
 | [Getting started](docs/getting-started.md) | The shortest path |
 | [Usage guide](docs/usage.md) | Every workflow with copy-paste prompts |
 | [Reference](docs/reference.md) | Configuration, CLI, artifacts, front matter |
-| [Rendering](docs/rendering.md) | The PlantUML Docker server |
+| [Diagram types](docs/diagram-types.md) | The eleven diagrams, with images |
+| [Formats and themes](docs/formats-and-themes.md) | PlantUML or Mermaid, outputs, palettes |
+| [Explorer](docs/explorer.md) | The interactive viewer |
+| [Rendering](docs/rendering.md) | The PlantUML and Mermaid Docker renderers |
 | [Troubleshooting](docs/troubleshooting.md) | Symptoms and fixes |
 | [Publishing](docs/publishing.md) | Releases and listing (maintainers) |
 | [Contributing](CONTRIBUTING.md) | Development and PRs |

@@ -64,9 +64,20 @@ Read-only. Returns a findings table (severity, evidence, impact, fix) covering c
 
 | Ask | Result |
 | --- | --- |
-| "Render the diagrams" | `.puml` → `.svg` for the whole tree |
+| "Render the diagrams" | `.puml` and `.mmd` → `.svg` for the whole tree |
+| "Use Mermaid instead of PlantUML" | Sources are written as `.mmd` (wireframes stay PlantUML) |
+| "Use the ocean theme" / "make the primary color #FFE4E6" | The palette changes and every diagram re-renders |
+| "Give me an interactive version" | Builds `explorer.html` |
 | "Fix the crossing lines in the domain model" | Applies layout rules (bands, hidden links, splitting) and re-renders |
 | "Split the design class diagram by module" | Several focused diagrams instead of one crowded one |
+
+## 8. Look and format
+
+```
+Use rup-flow with Mermaid diagrams, the forest theme and an interactive explorer.
+```
+
+See [diagram types](diagram-types.md) for what each diagram looks like, [formats and themes](formats-and-themes.md) for languages, outputs and palettes, and [the explorer](explorer.md).
 
 ## Prompts for the CLI (optional)
 
