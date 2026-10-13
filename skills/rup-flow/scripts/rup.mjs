@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { spawnSync } from 'node:child_process';
@@ -478,9 +479,11 @@ function cmdScan(root, config, flags) {
 function cmdServer(action, config) {
   const port = new URL(config.plantuml.url).port || '8085';
   const args = action === 'up' ? ['up', '-d'] : ['down'];
-  const result = spawnSync('docker', ['compose', '-f', COMPOSE_FILE, ...args], {
-    stdio: 'inherit', env: { ...process.env, PLANTUML_PORT: port },
-  });
+  const work = fs.mkdtempSync(path.join(os.tmpdir(), 'rup-server-'));
+  const envFile = path.join(work, 'compose.env');
+  fs.writeFileSync(envFile, `PLANTUML_PORT=${port}\n`);
+  const result = spawnSync('docker', ['compose', '--env-file', envFile, '-f', COMPOSE_FILE, ...args], { stdio: 'inherit' });
+  fs.rmSync(work, { recursive: true, force: true });
   if (result.status !== 0) fail('docker compose failed. Is Docker running?');
 }
 

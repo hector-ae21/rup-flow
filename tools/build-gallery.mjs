@@ -5,6 +5,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { PRESETS } from '../skills/rup-flow/scripts/lib/themes.mjs';
+import { makeReadable } from './svg-readable.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CLI = path.join(ROOT, 'skills', 'rup-flow', 'scripts', 'rup.mjs');
@@ -19,7 +20,8 @@ function rup(root, ...args) {
 function put(from, ...to) {
   const target = path.join(IMAGES, ...to);
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.copyFileSync(from, target);
+  if (target.endsWith('.svg')) fs.writeFileSync(target, makeReadable(fs.readFileSync(from, 'utf8')));
+  else fs.copyFileSync(from, target);
 }
 
 function findChrome() {
