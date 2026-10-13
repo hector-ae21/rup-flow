@@ -4,6 +4,19 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.1]
+
+### Added
+
+- Portable across agents: `install.mjs --target claude|agents|codex|all` (installs into `.claude` or the `.agents/skills` location used by Codex and similar clients) and `rup.mjs instructions --target ...` (marked, idempotent blocks for `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Copilot and Cursor).
+- `AGENTS.md` for agents working on the repository, `docs/other-agents.md` with a compatibility table, and `docs/architecture.md` with the layers and how to add a client.
+- `SKILL.md` frontmatter now carries `license`, `compatibility` and `metadata`, and validation enforces the Agent Skills naming rules and a single version across files.
+
+### Fixed
+
+- Directory validation holds that were avoidable: the Docker server command no longer forwards the whole environment, CI waits for the server through the CLI instead of `curl`, and gallery SVGs have short path lines.
+- Release title is the tag alone, and a deleted release can be recreated from its tag with `workflow_dispatch`.
+
 ## [0.1.0]
 
 ### Added

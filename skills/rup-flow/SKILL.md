@@ -1,6 +1,12 @@
 ---
 name: rup-flow
 description: Generate RUP docs (domain model, use cases, analysis, design, PlantUML) from requirements or code, and generate code from the models. Audits gaps and traceability.
+license: MIT
+compatibility: Needs Node.js 18+. Docker is optional and only renders diagrams and builds the explorer. Works with any agent that reads Agent Skills.
+metadata:
+  author: hector-ae21
+  version: "0.1.1"
+  repository: https://github.com/hector-ae21/rup-flow
 ---
 
 # rup-flow
@@ -53,6 +59,7 @@ All commands run from the project root. `RUP` below means `node <skill-dir>/scri
 | `RUP themes` | List the color presets. |
 | `RUP check [--strict]` | Structure, links, diagrams and traceability gaps. |
 | `RUP config` | Show the resolved configuration. |
+| `RUP instructions --target agents,cursor,...` | Add or refresh the rup-flow block in an agent instruction file (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Copilot, Cursor). |
 
 Flags override `rup.config.json`; `RUP_OUT_DIR`, `RUP_PLANTUML_URL` and `RUP_LANG` override the file.
 
@@ -66,4 +73,4 @@ Finish each run by reporting: files created or changed, open questions, checks t
 
 ## Subagents
 
-When available, delegate generation to `rup-architect` and an independent pass to `rup-reviewer`. Do not nest them.
+If the agent supports subagents (Claude Code does), delegate generation to `rup-architect` and an independent pass to `rup-reviewer`, and do not nest them. Without subagents, do the review as a separate pass after generating, following `references/quality.md`, and keep it read-only.

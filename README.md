@@ -32,6 +32,10 @@ Pick one. Full step-by-step guides are linked.
 | **Claude Code** (recommended) | `claude plugin marketplace add hector-ae21/rup-flow` then `claude plugin install rup-flow@rup-flow` | [Install in Claude Code](docs/install-claude-code.md) |
 | Claude Code, without plugins | `git clone https://github.com/hector-ae21/rup-flow && cd rup-flow && node install.mjs` | same guide, option B |
 | **Claude on the web** | Upload `rup-flow-skill.zip` from the [latest release](https://github.com/hector-ae21/rup-flow/releases/latest) in **Customize → Skills** | [Install on the web](docs/install-claude-web.md) |
+| **Codex and other Agent Skills clients** | `node install.mjs --target agents` (installs into `.agents/skills`) | [Other agents](docs/other-agents.md) |
+| Cursor, Copilot, Gemini CLI | `node <skill>/scripts/rup.mjs instructions --target agents,cursor,copilot,gemini` | [Other agents](docs/other-agents.md) |
+
+The skill is written once in the open [Agent Skills](https://agentskills.io/specification) format and adapted per client; Claude Code is the most tested, the others follow the vendors' documented layouts and are not yet tested (see the [compatibility table](docs/other-agents.md#compatibility)).
 
 Requirements: Node.js 18+. Docker is optional and only renders `.svg` diagrams and builds the explorer (not available on the web: render locally).
 
@@ -90,6 +94,8 @@ Output folder, folder names, language, identifier prefixes and target stack are 
 | [Explorer](docs/explorer.md) | The interactive viewer |
 | [Rendering](docs/rendering.md) | The PlantUML and Mermaid Docker renderers |
 | [Troubleshooting](docs/troubleshooting.md) | Symptoms and fixes |
+| [Other agents](docs/other-agents.md) | Codex, Cursor, Copilot, Gemini CLI |
+| [Architecture](docs/architecture.md) | Layers, adapters, how to add a client |
 | [Publishing](docs/publishing.md) | Releases and listing (maintainers) |
 | [Contributing](CONTRIBUTING.md) | Development and PRs |
 

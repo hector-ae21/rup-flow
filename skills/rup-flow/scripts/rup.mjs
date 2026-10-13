@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { PRESETS, applyPlantumlTheme, resolveTheme, themeHash } from './lib/themes.mjs';
 import { DEFAULT_MERMAID_IMAGE, renderMermaidBatch } from './lib/mermaid.mjs';
 import { buildExplorer, collectDiagrams } from './lib/explorer.mjs';
+import { INSTRUCTION_TARGETS, writeInstructions } from './lib/instructions.mjs';
 
 const DIAGRAM_SOURCE = /\.(puml|plantuml|mmd)$/;
 const RENDER_STATE = '.rup-render-state.json';
@@ -343,6 +344,25 @@ function cmdExplore(root, config, quiet = false) {
   return where;
 }
 
+function cmdInstructions(root, flags) {
+  if (flags.list || !flags.target) {
+    console.log('== instruction targets ==');
+    for (const [name, t] of Object.entries(INSTRUCTION_TARGETS)) console.log(`${name.padEnd(9)} ${t.file}  (${t.label})`);
+    if (!flags.target) return;
+  }
+  const names = String(flags.target).split(',').map((s) => s.trim()).filter(Boolean);
+  const written = [];
+  for (const name of names) {
+    try {
+      const result = writeInstructions(root, name, typeof flags['skill-path'] === 'string' ? flags['skill-path'] : undefined);
+      written.push(`${rel(root, result.file)} (${result.created ? 'created' : result.changed ? 'updated' : 'unchanged'})`);
+    } catch (error) {
+      fail(String(error.message ?? error));
+    }
+  }
+  report('instructions', { written });
+}
+
 function cmdThemes(flags) {
   const rows = Object.entries(PRESETS).map(([name, preset]) => ({ name, description: preset.description, ...preset.colors }));
   if (flags.json) { console.log(JSON.stringify(rows, null, 2)); return; }
@@ -518,6 +538,8 @@ const USAGE = `rup-flow CLI
   render                       .puml (PlantUML server) and .mmd (Mermaid container) -> .svg, themed
   explore                      build explorer.html: interactive viewer of every rendered diagram
   themes                       list the color presets
+  instructions --target <t>    add or refresh the rup-flow block in an agent instruction file
+                               (agents, claude, gemini, copilot, cursor; comma separated; --skill-path <dir>)
   check [--strict]             structure, links, diagrams and traceability
   scan [--write]               inventory of the code base (input for code -> RUP)
   server up|down               start or stop the PlantUML container
@@ -544,6 +566,7 @@ switch (command) {
   case 'render': await cmdRender(root, config, flags); break;
   case 'explore': cmdExplore(root, config); break;
   case 'themes': cmdThemes(flags); break;
+  case 'instructions': cmdInstructions(root, flags); break;
   case 'check': cmdCheck(root, config, flags); break;
   case 'scan': cmdScan(root, config, flags); break;
   case 'server': cmdServer(sub === 'down' ? 'down' : 'up', config); break;
