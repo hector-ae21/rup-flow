@@ -1,18 +1,28 @@
 ---
 id: {{ucId}}
 name: {{ucName}}
+title: {{ucTitle}}
+actor: {{actor}}
+package: {{ucPackage}}
 status: draft
 origin: requirements
 sourceOfTruth: model
 requirement: {{requirement}}
+includes: {{ucIncludes}}
+extends: {{ucExtends}}
 ---
 
 # {{ucId}} {{ucTitle}}
 
+{{navRequirements}}
+
+## Use-case information
+
 | Field | Value |
 | --- | --- |
 | Actor | {{actor}} |
-| Goal | |
+| Package | {{ucPackage}} |
+| Goal | {{ucGoal}} |
 | Type | Primary / Secondary, essential / real |
 | Level | Summary / User goal / Subfunction |
 | Requirement | {{requirement}} |

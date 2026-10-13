@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:380px;height:908px;background:#FFFFFF;" width="380px" height="908px" viewBox="0 0 380 908" zoomAndPan="magnify" preserveAspectRatio="none" contentStyleType="text/css"><?plantuml 1.2026.8?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><!--cluster Presentation--><g class="cluster" data-qualified-name="Presentation" id="ent0001" data-source-line="105"><path d="M14,11 
+
+L115.671,11 
+
+A4.5,4.5 0 0 1 118.671,14 
+
+L125.671,33.297 
+
+L362,33.297 
+
+A3,3 0 0 1 365,36.297 
+
+L365,105.3 
+
+A3,3 0 0 1 362,108.3 
+
+L14,108.3 
+
+A3,3 0 0 1 11,105.3 
+
+L11,14 
+
+A3,3 0 0 1 14,11" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="11" y1="33.297" x2="125.671" y2="33.297" style="stroke:#475569;stroke-width:1;"/><text x="15" y="25.995" fill="#1F2937" font-size="14" textLength="101.671" font-weight="700" font-family="Verdana">Presentation</text></g><!--cluster Application--><g class="cluster" data-qualified-name="Application" id="ent0004" data-source-line="110"><path d="M66,158.3 
+
+L155.298,158.3 
+
+A4.5,4.5 0 0 1 158.298,161.3 
+
+L165.298,180.597 
+
+L234,180.597 
+
+A3,3 0 0 1 237,183.597 
+
+L237,484.19 
+
+A3,3 0 0 1 234,487.19 
+
+L66,487.19 
+
+A3,3 0 0 1 63,484.19 
+
+L63,161.3 
+
+A3,3 0 0 1 66,158.3" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="63" y1="180.597" x2="165.298" y2="180.597" style="stroke:#475569;stroke-width:1;"/><text x="67" y="173.295" fill="#1F2937" font-size="14" textLength="89.298" font-weight="700" font-family="Verdana">Application</text></g><!--cluster Infrastructure--><g class="cluster" data-qualified-name="Infrastructure" id="ent0008" data-source-line="116"><path d="M89,673.19 
+
+L199.872,673.19 
+
+A4.5,4.5 0 0 1 202.872,676.19 
+
+L209.872,695.487 
+
+L295,695.487 
+
+A3,3 0 0 1 298,698.487 
+
+L298,890.78 
+
+A3,3 0 0 1 295,893.78 
+
+L89,893.78 
+
+A3,3 0 0 1 86,890.78 
+
+L86,676.19 
+
+A3,3 0 0 1 89,673.19" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="86" y1="695.487" x2="209.872" y2="695.487" style="stroke:#475569;stroke-width:1;"/><text x="90" y="688.185" fill="#1F2937" font-size="14" textLength="110.872" font-weight="700" font-family="Verdana">Infrastructure</text></g><!--entity storefront--><g class="entity" data-qualified-name="Presentation.storefront" id="ent0002" data-source-line="106"><rect x="26.54" y="46" width="110.923" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="117.463" y="51" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="115.463" y="53" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="115.463" y="57" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="41.54" y="78.995" fill="#1F2937" font-size="14" textLength="70.923" font-family="Verdana">Storefront</text></g><!--entity console--><g class="entity" data-qualified-name="Presentation.console" id="ent0003" data-source-line="107"><rect x="172.52" y="46" width="176.958" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="329.478" y="51" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="327.478" y="53" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="327.478" y="57" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="187.52" y="78.995" fill="#1F2937" font-size="14" textLength="136.958" font-family="Verdana">Warehouse console</text></g><!--entity api--><g class="entity" data-qualified-name="Application.api" id="ent0005" data-source-line="111"><rect x="93.04" y="193.3" width="113.924" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="186.964" y="198.3" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="184.964" y="200.3" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="184.964" y="204.3" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="108.04" y="226.295" fill="#1F2937" font-size="14" textLength="73.924" font-family="Verdana">Orders API</text></g><!--entity orders--><g class="entity" data-qualified-name="Application.orders" id="ent0006" data-source-line="112"><rect x="82.69" y="300.59" width="134.63" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="197.32" y="305.59" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="195.32" y="307.59" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="195.32" y="311.59" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="97.69" y="333.585" fill="#1F2937" font-size="14" textLength="94.63" font-family="Verdana">Order service</text></g><!--entity stock--><g class="entity" data-qualified-name="Application.stock" id="ent0007" data-source-line="113"><rect x="79.33" y="424.89" width="133.345" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="192.675" y="429.89" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="190.675" y="431.89" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="190.675" y="435.89" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="94.33" y="457.885" fill="#1F2937" font-size="14" textLength="93.345" font-family="Verdana">Stock service</text></g><!--entity adapter--><g class="entity" data-qualified-name="Infrastructure.adapter" id="ent0009" data-source-line="117"><rect x="102.09" y="708.19" width="179.815" height="46.297" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><rect x="261.905" y="713.19" width="15" height="10" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="259.905" y="715.19" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><rect x="259.905" y="719.19" width="4" height="2" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="117.09" y="741.185" fill="#1F2937" font-size="14" textLength="139.815" font-family="Verdana">Persistence adapter</text></g><!--entity db--><g class="entity" data-qualified-name="Infrastructure.db" id="ent0010" data-source-line="118"><path d="M141.62,842.48 
+
+C141.62,832.48 191.996,832.48 191.996,832.48 
+
+C191.996,832.48 242.373,832.48 242.373,842.48 
+
+L242.373,867.777 
+
+C242.373,877.777 191.996,877.777 191.996,877.777 
+
+C191.996,877.777 141.62,877.777 141.62,867.777 
+
+L141.62,842.48" style="stroke:#475569;stroke-width:1;" fill="#E8F0FA"/><path d="M141.62,842.48 C141.62,852.48 191.996,852.48 191.996,852.48 C191.996,852.48 242.373,852.48 242.373,842.48" style="stroke:#475569;stroke-width:1;" fill="none"/><text x="151.62" y="869.475" fill="#1F2937" font-size="14" textLength="80.753" font-family="Verdana">PostgreSQL</text></g><!--entity port--><g class="entity" data-qualified-name="port" id="ent0011" data-source-line="121"><ellipse cx="192" cy="580.19" rx="8" ry="8" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="157.858" y="610.185" fill="#1F2937" font-size="14" textLength="68.284" font-family="Verdana">OrderPort</text></g><!--link storefront to api--><g class="link" data-entity-1="ent0002" data-entity-2="ent0005" id="lnk12" data-source-line="123" data-link-type="dependency"><path d="M90.39,92.58 C98.32,113.76 109,142.3 109,142.3 C109,142.3 122.975,167.229 135.035,188.739" style="stroke:#475569;stroke-width:1;" fill="none" id="storefront-to-api"/><polygon points="137.48,193.1,136.568,183.293,135.035,188.739,129.59,187.206,137.48,193.1" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="110" y="138.295" fill="#1F2937" font-size="14" textLength="44.96" font-family="Verdana">HTTPS</text></g><!--link console to api--><g class="link" data-entity-1="ent0003" data-entity-2="ent0005" id="lnk13" data-source-line="124" data-link-type="dependency"><path d="M243.9,92.53 C222.98,119.92 190.815,162.017 169.975,189.297" style="stroke:#475569;stroke-width:1;" fill="none" id="console-to-api"/><polygon points="166.94,193.27,175.582,188.546,169.975,189.297,169.225,183.69,166.94,193.27" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="219.71" y="138.295" fill="#1F2937" font-size="14" textLength="44.96" font-family="Verdana">HTTPS</text></g><!--link api to orders--><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk14" data-source-line="125" data-link-type="dependency"><path d="M150,240.03 C150,257.8 150,277.43 150,295.19" style="stroke:#475569;stroke-width:1;" fill="none" id="api-to-orders"/><polygon points="150,300.19,154,291.19,150,295.19,146,291.19,150,300.19" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--link orders to stock--><g class="link" data-entity-1="ent0006" data-entity-2="ent0007" id="lnk15" data-source-line="126" data-link-type="dependency"><path d="M149.27,347.17 C148.54,369.24 147.613,397.733 146.893,419.753" style="stroke:#475569;stroke-width:1;" fill="none" id="orders-to-stock"/><polygon points="146.73,424.75,151.022,415.886,146.893,419.753,143.026,415.624,146.73,424.75" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="149.24" y="390.885" fill="#1F2937" font-size="14" textLength="105.109" font-family="Verdana">validates stock</text></g><!--link orders to port--><g class="link" data-entity-1="ent0006" data-entity-2="ent0011" id="lnk16" data-source-line="127" data-link-type="dependency"><path d="M198.04,347.31 
+
+C228.04,361.4 261,376.89 261,376.89 
+
+C261,376.89 261,394.89 261,394.89 
+
+C261,394.89 237,521.19 237,521.19 
+
+C237,521.19 213.146,551.93 200.946,567.65" style="stroke:#475569;stroke-width:1;" fill="none" id="orders-to-port"/><polygon points="197.88,571.6,206.558,566.942,200.946,567.65,200.238,562.038,197.88,571.6" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="256.13" y="453.035" fill="#1F2937" font-size="14" textLength="57.682" font-family="Verdana">requires</text></g><!--link stock to port--><g class="link" data-entity-1="ent0007" data-entity-2="ent0011" id="lnk17" data-source-line="128" data-link-type="dependency"><path d="M153.91,471.41 C164.39,501.06 180.682,547.186 187.552,566.606" style="stroke:#475569;stroke-width:1;" fill="none" id="stock-to-port"/><polygon points="189.22,571.32,189.989,561.501,187.552,566.606,182.447,564.169,189.22,571.32" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="171.38" y="517.185" fill="#1F2937" font-size="14" textLength="57.682" font-family="Verdana">requires</text></g><!--link port to adapter--><g class="link" data-entity-1="ent0011" data-entity-2="ent0009" id="lnk19" data-source-line="129" data-link-type="association"><path d="M192,588.79 C192,610.57 192,673.85 192,707.95" style="stroke:#475569;stroke-width:1;" fill="none" id="port-adapter"/><text x="193" y="653.185" fill="#1F2937" font-size="14" textLength="60.177" font-family="Verdana">provides</text></g><!--link adapter to db--><g class="link" data-entity-1="ent0009" data-entity-2="ent0010" id="lnk20" data-source-line="130" data-link-type="dependency"><path d="M192,754.96 C192,776.97 192,805.21 192,827.04" style="stroke:#475569;stroke-width:1;" fill="none" id="adapter-to-db"/><polygon points="192,832.04,196,823.04,192,827.04,188,823.04,192,832.04" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="193" y="798.475" fill="#1F2937" font-size="14" textLength="27.706" font-family="Verdana">SQL</text></g></g></svg>

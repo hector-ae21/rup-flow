@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:621px;height:344px;background:#FFFFFF;" width="621px" height="344px" viewBox="0 0 621 344" zoomAndPan="magnify" preserveAspectRatio="none" contentStyleType="text/css"><?plantuml 1.2026.8?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><!--cluster Online shop--><g class="cluster" data-qualified-name="Online shop" id="ent0003" data-source-line="109"><rect x="137.01" y="12" width="470.31" height="318" fill="#F3F4F6" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><text x="325.294" y="26.995" fill="#1F2937" font-size="14" textLength="93.741" font-weight="700" font-family="Verdana">Online shop</text></g><!--cluster Ordering--><g class="cluster" data-qualified-name="Online shop.Ordering" id="ent0004" data-source-line="110"><path d="M164.01,55 
+
+L234.024,55 
+
+A4.5,4.5 0 0 1 237.024,58 
+
+L244.024,77.297 
+
+L580.32,77.297 
+
+A3,3 0 0 1 583.32,80.297 
+
+L583.32,198 
+
+A3,3 0 0 1 580.32,201 
+
+L164.01,201 
+
+A3,3 0 0 1 161.01,198 
+
+L161.01,58 
+
+A3,3 0 0 1 164.01,55" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="161.01" y1="77.297" x2="244.024" y2="77.297" style="stroke:#475569;stroke-width:1;"/><text x="165.01" y="69.995" fill="#1F2937" font-size="14" textLength="70.014" font-weight="700" font-family="Verdana">Ordering</text></g><!--cluster Fulfilment--><g class="cluster" data-qualified-name="Online shop.Fulfilment" id="ent0008" data-source-line="115"><path d="M173.2,225 
+
+L253.96,225 
+
+A4.5,4.5 0 0 1 256.96,228 
+
+L263.96,247.297 
+
+L307.82,247.297 
+
+A3,3 0 0 1 310.82,250.297 
+
+L310.82,303 
+
+A3,3 0 0 1 307.82,306 
+
+L173.2,306 
+
+A3,3 0 0 1 170.2,303 
+
+L170.2,228 
+
+A3,3 0 0 1 173.2,225" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="170.2" y1="247.297" x2="263.96" y2="247.297" style="stroke:#475569;stroke-width:1;"/><text x="174.2" y="239.995" fill="#1F2937" font-size="14" textLength="80.76" font-weight="700" font-family="Verdana">Fulfilment</text></g><!--entity UC_createOrder--><g class="entity" data-qualified-name="Online shop.Ordering.UC_createOrder" id="ent0005" data-source-line="111"><ellipse cx="240.51" cy="104.996" rx="63.28" ry="15.056" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="196.083" y="109.644" fill="#1F2937" font-size="14" textLength="88.854" font-family="Verdana">Create order</text></g><!--entity UC_validateStock--><g class="entity" data-qualified-name="Online shop.Ordering.UC_validateStock" id="ent0006" data-source-line="112"><ellipse cx="500.172" cy="108" rx="67.152" ry="15.83" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="450.618" y="112.649" fill="#1F2937" font-size="14" textLength="99.107" font-family="Verdana">Validate stock</text></g><!--entity UC_cancelOrder--><g class="entity" data-qualified-name="Online shop.Ordering.UC_cancelOrder" id="ent0007" data-source-line="113"><ellipse cx="240.512" cy="170" rx="63.502" ry="15.1" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="195.784" y="174.649" fill="#1F2937" font-size="14" textLength="89.455" font-family="Verdana">Cancel order</text></g><!--entity UC_shipOrder--><g class="entity" data-qualified-name="Online shop.Fulfilment.UC_shipOrder" id="ent0009" data-source-line="116"><ellipse cx="240.51" cy="275.004" rx="54.31" ry="14.524" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="204.228" y="279.652" fill="#1F2937" font-size="14" textLength="72.563" font-family="Verdana">Ship order</text></g><!--entity A_Customer--><g class="entity" data-qualified-name="A_Customer" id="ent0001" data-source-line="106"><ellipse cx="50.502" cy="104.35" rx="8" ry="8" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><path d="M50.502,112.35 L50.502,139.35 M37.502,120.35 L63.502,120.35 M50.502,139.35 L37.502,154.35 M50.502,139.35 L63.502,154.35" style="stroke:#475569;stroke-width:1;" fill="none"/><text x="16.5" y="169.345" fill="#1F2937" font-size="14" textLength="68.004" font-family="Verdana">Customer</text></g><!--entity A_Warehouse--><g class="entity" data-qualified-name="A_Warehouse" id="ent0002" data-source-line="107"><ellipse cx="50.505" cy="245.35" rx="8" ry="8" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><path d="M50.505,253.35 L50.505,280.35 M37.505,261.35 L63.505,261.35 M50.505,280.35 L37.505,295.35 M50.505,280.35 L63.505,295.35" style="stroke:#475569;stroke-width:1;" fill="none"/><text x="11" y="310.345" fill="#1F2937" font-size="14" textLength="79.01" font-family="Verdana">Warehouse</text></g><!--link A_Customer to UC_createOrder--><g class="link" data-entity-1="ent0001" data-entity-2="ent0005" id="lnk10" data-source-line="120" data-link-type="dependency"><path d="M84.68,128.88 C112.83,124.54 148.788,118.992 181.478,113.952" style="stroke:#475569;stroke-width:1;" fill="none" id="A_Customer-to-UC_createOrder"/><polygon points="186.42,113.19,176.916,110.608,181.478,113.952,178.135,118.515,186.42,113.19" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--link A_Customer to UC_cancelOrder--><g class="link" data-entity-1="ent0001" data-entity-2="ent0007" id="lnk11" data-source-line="121" data-link-type="dependency"><path d="M84.68,140.35 C113.88,145.94 151.899,153.219 185.149,159.589" style="stroke:#475569;stroke-width:1;" fill="none" id="A_Customer-to-UC_cancelOrder"/><polygon points="190.06,160.53,181.973,154.908,185.149,159.589,180.468,162.765,190.06,160.53" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--link A_Warehouse to UC_shipOrder--><g class="link" data-entity-1="ent0002" data-entity-2="ent0009" id="lnk12" data-source-line="122" data-link-type="dependency"><path d="M90.46,275 C118.1,275 150.55,275 180.99,275" style="stroke:#475569;stroke-width:1;" fill="none" id="A_Warehouse-to-UC_shipOrder"/><polygon points="185.99,275,176.99,271,180.99,275,176.99,279,185.99,275" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--link UC_createOrder to UC_validateStock--><g class="link" data-entity-1="ent0005" data-entity-2="ent0006" id="lnk13" data-source-line="123" data-link-type="dependency"><path d="M304.21,105.73 C343.24,106.18 388.37,106.712 428.03,107.172" style="stroke:#475569;stroke-width:1;stroke-dasharray:7,7;" fill="none" id="UC_createOrder-to-UC_validateStock"/><polygon points="433.03,107.23,424.077,103.126,428.03,107.172,423.984,111.125,433.03,107.23" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="335.01" y="102.135" fill="#1F2937" font-size="14" textLength="67.854" font-family="Verdana">«include»</text></g></g></svg>

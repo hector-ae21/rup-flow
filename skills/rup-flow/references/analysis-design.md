@@ -16,6 +16,7 @@ Purpose: decide **how**, in the chosen stack.
 - `class-diagram.puml`: packages by layer or feature (as recorded in a decision), design classes with the operations they expose. Interfaces where a dependency must be inverted.
 - Per use case, `sequence.puml`: messages between concrete design elements, including the failure path and the transaction boundary.
 - `data-model/data-model.puml`: tables or collections, keys, relations, constraints; mapped from entities and listed with the mapping.
+- `components/components.puml`: components grouped by layer, the interfaces they provide and require, and which component implements each one. Dependencies point at interfaces, not at implementations.
 - `deployment/deployment.puml`: nodes, containers, external systems and protocols.
 - `project-configuration.md`: stack, build, run, environment variables.
 - Each non-obvious choice becomes a `DEC-xxx` in `05-quality/decisions/` from the decision template.

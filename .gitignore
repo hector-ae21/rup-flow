@@ -3,3 +3,4 @@ dist/
 *.tmp-*
 .DS_Store
 .rup-render-state.json
+examples/shop/docs/explorer.html

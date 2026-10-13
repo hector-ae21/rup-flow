@@ -18,29 +18,29 @@ rup-flow lets your AI coding agent turn requirements into RUP models and diagram
 
 - **One workflow, both directions.** Requirements to models to code, and code back to models. Documentation and implementation stop drifting apart because the same skill keeps both honest.
 - **It never makes things up.** Every statement is marked confirmed, observed in code (`path:line`), assumed or open. Unknown business rules become questions, not invented requirements.
-- **Diagrams that look designed.** PlantUML or Mermaid, eight palettes or your own colors, and a double-click interactive explorer with zoom, search and relation highlighting.
+- **Diagrams that look designed.** PlantUML or Mermaid, eight palettes or your own colors, and a double-click interactive explorer: search the text of every diagram, trace relations, read the cards, export PNG or SVG.
 - **The same structure every time.** Domain model ranked by importance, actors, use cases with behaviour specs and wireframes, analysis, design, traceability. You choose where it all goes.
 - **Works with the agent you already use.** Claude Code, Claude on the web, Codex and Gemini CLI are tested; Cursor and Copilot are supported through instruction files.
 - **Nothing to install but Node.** No dependencies. Docker is only needed to draw the diagrams.
 
 ## See it
 
-| Domain model by importance | Use-case specification | Design sequence |
+| Domain model by importance | Use cases by actor and package | Components |
 | --- | --- | --- |
-| <img src="docs/images/diagrams/domain-model.svg" width="250"> | <img src="docs/images/diagrams/specification.svg" width="250"> | <img src="docs/images/diagrams/sequence.svg" width="250"> |
+| <img src="docs/images/diagrams/domain-model.svg" width="250"> | <img src="docs/images/diagrams/use-case-overview.svg" width="250"> | <img src="docs/images/diagrams/components.svg" width="250"> |
 
 | Ocean | Forest | Dark |
 | --- | --- | --- |
 | <img src="docs/images/themes/ocean.svg" width="250"> | <img src="docs/images/themes/forest.svg" width="250"> | <img src="docs/images/themes/dark.svg" width="250"> |
 
-Eleven diagram types, all explained with images in the [diagram gallery](https://github.com/hector-ae21/rup-flow/wiki/Diagram-Types).
+Thirteen diagram types, all explained with images in the [diagram gallery](https://github.com/hector-ae21/rup-flow/wiki/Diagram-Types).
 
 ## What you can ask for
 
 | You say | You get |
 | --- | --- |
 | "Document this system: ..." | Domain model, actors, requirements, use cases, analysis, design and a traceability table |
-| "Add the use case cancelOrder" | The use case across every discipline, with the dictionary and traceability updated |
+| "Add the use case cancelOrder" | One card per discipline (requirements, analysis, design, implementation and tests) linked by a navigation table, the index and the use-case diagrams refreshed |
 | "Reverse engineer `src/`" | The same documentation derived from your code, each claim cited |
 | "Implement UC-001 from the design" | Code, tests and `@rup` trace links generated from the models |
 | "Does the code still match the docs?" | A table of differences: model ahead, code ahead, conflict, dead |

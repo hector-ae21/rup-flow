@@ -5,7 +5,7 @@ license: MIT
 compatibility: Needs Node.js 18+. Docker is optional and only renders diagrams and builds the explorer. Works with any agent that reads Agent Skills.
 metadata:
   author: hector-ae21
-  version: "0.2.0"
+  version: "0.3.0"
   repository: https://github.com/hector-ae21/rup-flow
 ---
 
@@ -51,7 +51,8 @@ All commands run from the project root. `RUP` below means `node <skill-dir>/scri
 | Command | Effect |
 | --- | --- |
 | `RUP init [--out docs/rup] [--lang es] [--project name] [--diagram-language mermaid] [--theme ocean]` | Create `rup.config.json` and the documentation skeleton. Never overwrites. |
-| `RUP new use-case createOrder --title "Create order" --actor Admin` | Scaffold the use case in requirements, analysis and design and add its traceability row. |
+| `RUP new use-case createOrder --title "Create order" --actor Admin --package Ordering --goal "..." [--includes a,b] [--extends c]` | Scaffold the use case (cards for requirements, analysis, design and implementation/tests), add its traceability row and refresh the index. |
+| `RUP index` | Regenerate the use-case index table and the use-case diagrams (general and per actor) from the cards. Run it after editing a card's front matter. |
 | `RUP scan [--code-root src] [--write]` | Inventory of the code base to start code → RUP. |
 | `RUP server up` / `down` / `health` | PlantUML server in Docker (default `http://127.0.0.1:8085`). |
 | `RUP render [--path dir] [--force] [--outputs svg,png,html] [--theme name]` | Render every `.puml` (PlantUML server) and `.mmd` (Mermaid container) to a themed `.svg`; optional PNG previews and explorer. |

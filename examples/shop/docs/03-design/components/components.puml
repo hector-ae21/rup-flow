@@ -1,0 +1,33 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+top to bottom direction
+
+package "Presentation" {
+  component "Storefront" as storefront
+  component "Warehouse console" as console
+}
+
+package "Application" {
+  component "Orders API" as api
+  component "Order service" as orders
+  component "Stock service" as stock
+}
+
+package "Infrastructure" {
+  component "Persistence adapter" as adapter
+  database "PostgreSQL" as db
+}
+
+interface "OrderPort" as port
+
+storefront -down-> api : HTTPS
+console -down-> api : HTTPS
+api -down-> orders
+orders -down-> stock : validates stock
+orders -down-> port : requires
+stock -down-> port : requires
+adapter -up- port : provides
+adapter -down-> db : SQL
+
+@enduml

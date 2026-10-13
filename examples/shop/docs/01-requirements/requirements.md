@@ -12,6 +12,8 @@ sourceOfTruth: model
 | ID | Requirement | Priority | Origin | Confirmed by | Use cases |
 | --- | --- | --- | --- | --- | --- |
 | RF-001 | A customer can place an order for one or more products | High | Sponsor interview | Product owner | UC-001 |
+| RF-002 | A customer can cancel an order that has not shipped | Medium | Sponsor interview | Pending | UC-003 |
+| RF-003 | The warehouse can mark a placed order as shipped | Medium | Sponsor interview | Pending | UC-004 |
 
 ## Non-functional
 

@@ -1,0 +1,25 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+hide empty description
+
+state "shipOrder" as shipOrder {
+  state " " as Start
+  state " " as Form
+  state " " as Validate
+  state " " as Done
+
+  [*] --> Start
+  Start --> Form : Actor opens the function
+  Form --> Validate : Actor submits data
+  Validate --> Form : System reports errors
+  Validate --> Done : System accepts the data
+  Done --> [*]
+
+  note on link
+    Actor: opens the function
+    System: shows the form
+  end note
+}
+
+@enduml

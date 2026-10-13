@@ -1,0 +1,18 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+skinparam responseMessageBelowArrow true
+
+actor "Customer" as actor
+participant "cancelOrderController" as controller
+participant "cancelOrderService" as service
+database "Repository" as repository
+
+actor -> controller : request
+controller -> service : execute(command)
+service -> repository : save(entity)
+repository --> service : entity
+service --> controller : result
+controller --> actor : response
+
+@enduml

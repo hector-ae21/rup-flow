@@ -15,6 +15,12 @@ Layered by feature: `api` (controllers), `application` (use-case services), `dom
 
 ![Design classes](./class-diagram.svg)
 
+## Components
+
+![Components](./components/components.svg)
+
+The API and the order and stock services reach persistence through a port; the adapter that implements it is the only component that knows the database.
+
 ## Data model
 
 ![Data model](./data-model/data-model.svg)

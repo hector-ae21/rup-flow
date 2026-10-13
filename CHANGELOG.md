@@ -4,6 +4,19 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Added
+
+- One card per discipline for every use case (requirements, analysis, design, implementation and tests), each starting with the same navigation table, plus the implementation card with code and tests tables.
+- `index` command and generated block in the requirements README: use-case table with links to every discipline, the general use-case diagram (actors outside the system boundary, use cases grouped in packages, `include` and `extend`) and one diagram per actor. `new use-case` takes `--package`, `--goal`, `--includes` and `--extends`; `check` warns when the index is stale.
+- Component diagram template (PlantUML and Mermaid) and its section in the design README.
+- Explorer: global search across the text of every diagram, grouping by discipline or by use case, previous and next navigation, links between the diagrams of one use case, a Document tab that renders the cards and follows their links, relation tracing with direct or all-reachable depth, PNG and SVG export, copy source and link, full screen, keyboard shortcuts and richer deep links.
+
+### Changed
+
+- The example shop now has four use cases in two packages and two actors, and a component diagram.
+
 ## [0.2.0]
 
 ### Changed

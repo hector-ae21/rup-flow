@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="DESCRIPTION" style="width:312px;height:174px;background:#FFFFFF;" width="312px" height="174px" viewBox="0 0 312 174" zoomAndPan="magnify" preserveAspectRatio="none" contentStyleType="text/css"><?plantuml 1.2026.8?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><!--cluster Online shop--><g class="cluster" data-qualified-name="Online shop" id="ent0002" data-source-line="108"><rect x="110.01" y="12" width="188.62" height="148" fill="#F3F4F6" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><text x="157.449" y="26.995" fill="#1F2937" font-size="14" textLength="93.741" font-weight="700" font-family="Verdana">Online shop</text></g><!--cluster Fulfilment--><g class="cluster" data-qualified-name="Online shop.Fulfilment" id="ent0003" data-source-line="109"><path d="M137.01,55 
+
+L217.77,55 
+
+A4.5,4.5 0 0 1 220.77,58 
+
+L227.77,77.297 
+
+L271.63,77.297 
+
+A3,3 0 0 1 274.63,80.297 
+
+L274.63,133 
+
+A3,3 0 0 1 271.63,136 
+
+L137.01,136 
+
+A3,3 0 0 1 134.01,133 
+
+L134.01,58 
+
+A3,3 0 0 1 137.01,55" style="stroke:#475569;stroke-width:1;" fill="#F3F4F6"/><line x1="134.01" y1="77.297" x2="227.77" y2="77.297" style="stroke:#475569;stroke-width:1;"/><text x="138.01" y="69.995" fill="#1F2937" font-size="14" textLength="80.76" font-weight="700" font-family="Verdana">Fulfilment</text></g><!--entity UC_shipOrder--><g class="entity" data-qualified-name="Online shop.Fulfilment.UC_shipOrder" id="ent0004" data-source-line="110"><ellipse cx="204.32" cy="105.004" rx="54.31" ry="14.524" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><text x="168.038" y="109.652" fill="#1F2937" font-size="14" textLength="72.563" font-family="Verdana">Ship order</text></g><!--entity A_Warehouse--><g class="entity" data-qualified-name="A_Warehouse" id="ent0001" data-source-line="106"><ellipse cx="50.505" cy="75.35" rx="8" ry="8" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;"/><path d="M50.505,83.35 L50.505,110.35 M37.505,91.35 L63.505,91.35 M50.505,110.35 L37.505,125.35 M50.505,110.35 L63.505,125.35" style="stroke:#475569;stroke-width:1;" fill="none"/><text x="11" y="140.345" fill="#1F2937" font-size="14" textLength="79.01" font-family="Verdana">Warehouse</text></g><!--link A_Warehouse to UC_shipOrder--><g class="link" data-entity-1="ent0001" data-entity-2="ent0004" id="lnk5" data-source-line="114" data-link-type="dependency"><path d="M90.21,105 C108.22,105 124.94,105 144.51,105" style="stroke:#475569;stroke-width:1;" fill="none" id="A_Warehouse-to-UC_shipOrder"/><polygon points="149.51,105,140.51,101,144.51,105,140.51,109,149.51,105" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g></g></svg>

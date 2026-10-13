@@ -9,5 +9,5 @@ sourceOfTruth: model
 
 | Actor | Type | Goal | Related use cases |
 | --- | --- | --- | --- |
-| Customer | Primary | Buy products and receive them | UC-001 |
-| Warehouse | Secondary | Ship placed orders | not modelled yet (see open questions) |
+| Customer | Primary | Buy products and receive them | UC-001, UC-002, UC-003 |
+| Warehouse | Secondary | Ship placed orders | UC-004 |

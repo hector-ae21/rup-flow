@@ -11,7 +11,9 @@
 │   ├── domain-model-simple.puml/.svg  entities and relations only
 │   └── entity-states/
 ├── 01-requirements/
-│   ├── README.md                      use-case index
+│   ├── README.md                      generated use-case index and diagrams
+│   ├── use-case-overview.puml/.svg    general use-case diagram (packages, actors)
+│   ├── use-cases-<actor>.puml/.svg    one per actor when there are several
 │   ├── actors.md
 │   ├── requirements.md                RF / RNF
 │   └── use-cases/<name>/
@@ -27,10 +29,12 @@
 │   ├── class-diagram.puml/.svg
 │   ├── project-configuration.md
 │   ├── data-model/data-model.puml/.svg
+│   ├── components/components.puml/.svg
 │   ├── deployment/deployment.puml/.svg
 │   └── use-cases/<name>/{README.md, sequence.puml/.svg}
 ├── 04-implementation/
 │   ├── README.md
+│   ├── use-cases/<name>/README.md     code and tests of one use case
 │   ├── code-map.md                    model element → code location
 │   └── code-inventory.json            from `scan --write`
 └── 05-quality/
@@ -92,10 +96,15 @@ Every Markdown artifact (except index READMEs) starts with:
 ---
 id: UC-001
 name: createOrder
+title: Create order
+actor: Customer
+package: Ordering
 status: draft
 origin: requirements
 sourceOfTruth: model
 requirement: RF-001
+includes: validateStock
+extends:
 ---
 ```
 
