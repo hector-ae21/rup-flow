@@ -120,7 +120,7 @@ Mermaid equivalent:
 | | PlantUML | Mermaid |
 | --- | --- | --- |
 | Renderer | PlantUML server (Docker) | mermaid-cli (Docker) |
-| Wireframes | Yes (salt) | No: stays PlantUML |
+| Wireframes | Yes (salt) | No: stay PlantUML, so the PlantUML server is still needed |
 | GitHub renders the source natively | No (you embed the SVG) | Yes in fenced code blocks, but rup-flow embeds the SVG so both look identical |
 | Level colours in the domain model | Packages per level | Classes tagged per level |
 | Best for | Statecharts, layered class diagrams, packages | Quick sequence, ER and flow diagrams |

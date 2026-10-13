@@ -31,6 +31,8 @@ A file with several `@start…/@end…` blocks produces `name-01.svg`, `name-02.
 
 Mermaid sources (`.mmd`) are rendered by the mermaid-cli container; there is nothing to start. The first render pulls the image (about 1 GB) and later renders reuse it. Docker must be running. All `.mmd` files of one run share a single container start.
 
+Wireframes are always PlantUML, so a Mermaid project still needs the PlantUML server (`server up`) to render `wireframes.puml`. Everything else renders without it.
+
 ## Themes and outputs
 
 Both renderers apply the project theme at render time. `--outputs svg,png,html` also writes PNG previews (PlantUML) and the interactive explorer. See [formats and themes](formats-and-themes.md).

@@ -111,6 +111,6 @@ See [the explorer](explorer.md).
 
 ## What stays fixed
 
-- Wireframes are PlantUML salt and are drawn without the theme.
+- Wireframes are PlantUML salt and are drawn without the theme. In a Mermaid project they still need the PlantUML server.
 - Folder names, file names and front matter do not depend on the language or theme.
 - Markdown always links `.svg` files, so documents read the same in either language.

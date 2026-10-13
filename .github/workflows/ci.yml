@@ -77,11 +77,25 @@ jobs:
   render-mermaid:
     name: Render with Mermaid and build the explorer
     runs-on: ubuntu-latest
+    services:
+      plantuml:
+        image: plantuml/plantuml-server:jetty
+        ports:
+          - 8085:8080
+        env:
+          PLANTUML_SECURITY_PROFILE: SANDBOX
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Wait for the PlantUML server (wireframes stay PlantUML)
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8085/ >/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
       - name: Mermaid project, themed, with explorer
         run: |
           RUP="node skills/rup-flow/scripts/rup.mjs --root $RUNNER_TEMP/mm"

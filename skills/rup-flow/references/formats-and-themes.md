@@ -38,7 +38,7 @@ Quote labels containing parentheses, colons or `<br/>`: `A -->|"2: createOrder(l
 ## Rendering
 
 - PlantUML: server in Docker (`server up`).
-- Mermaid: mermaid-cli in Docker, pulled on first use (about 1 GB); no `server up` needed. Docker must be running.
+- Mermaid: mermaid-cli in Docker, pulled on first use (about 1 GB). Docker must be running. `server up` is still needed in a Mermaid project because wireframes are PlantUML.
 - Changing the theme re-renders everything on the next `render`.
 
 ## Explorer
