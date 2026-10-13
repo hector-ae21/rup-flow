@@ -1,17 +1,29 @@
 ---
 id: UC-001
 name: createOrder
+title: Create order
+actor: Customer
+package: Ordering
 status: reviewed
 origin: requirements
 sourceOfTruth: model
 requirement: RF-001
+includes: validateStock
+extends:
 ---
 
 # UC-001 Create order
 
+| Overview | Requirements | Analysis | Design | Implementation | Tests |
+| --- | --- | --- | --- | --- | --- |
+| [Use cases](../../../01-requirements/use-case-overview.svg) | **Requirements** | [Analysis](../../../02-analysis/use-cases/createOrder/README.md) | [Design](../../../03-design/use-cases/createOrder/README.md) | [Implementation](../../../04-implementation/use-cases/createOrder/README.md) | [Tests](../../../04-implementation/use-cases/createOrder/README.md#tests) |
+
+## Use-case information
+
 | Field | Value |
 | --- | --- |
 | Actor | Customer |
+| Package | Ordering |
 | Goal | Place an order for the products in the basket |
 | Type | Primary, essential |
 | Level | User goal |

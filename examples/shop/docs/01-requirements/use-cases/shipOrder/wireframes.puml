@@ -1,0 +1,13 @@
+@startsalt
+{
+  {* File | Help }
+  ==
+  Title of the screen
+  --
+  {
+    Field one | "value        "
+    Field two | ^option^
+  }
+  [ Accept ] | [ Cancel ]
+}
+@endsalt

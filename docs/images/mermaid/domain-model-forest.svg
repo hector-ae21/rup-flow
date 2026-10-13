@@ -1,346 +1,231 @@
 <svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="classDiagram" style="max-width: 497.875px; background-color: white;" viewBox="4 4 497.875 800" role="graphics-document document" aria-roledescription="classDiagram"><style>#my-svg{font-family:Verdana,Arial,sans-serif;font-size:16px;fill:#1B3A24;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#my-svg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#my-svg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#my-svg .error-icon{fill:#E8F5E3;}#my-svg .error-text{fill:#1B3A24;stroke:#1B3A24;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#2E5E3A;stroke:#2E5E3A;}#my-svg .marker.cross{stroke:#2E5E3A;}#my-svg svg{font-family:Verdana,Arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg g.classGroup text{fill:#2E5E3A;stroke:none;font-family:Verdana,Arial,sans-serif;font-size:10px;}#my-svg g.classGroup text .title{font-weight:bolder;}#my-svg .cluster-label text{fill:#1B3A24;}#my-svg .cluster-label span{color:#1B3A24;}#my-svg .cluster-label span p{background-color:transparent;}#my-svg .cluster rect{fill:#E8F5E3;stroke:hsl(103.3333333333, 7.3684210526%, 82.5490196078%);stroke-width:1px;}#my-svg .cluster text{fill:#1B3A24;}#my-svg .cluster span{color:#1B3A24;}#my-svg .nodeLabel,#my-svg .edgeLabel{color:#1B3A24;}#my-svg .noteLabel .nodeLabel,#my-svg .noteLabel .edgeLabel{color:#1B3A24;}#my-svg .edgeLabel .label rect{fill:#D3EDCB;}#my-svg .label text{fill:#1B3A24;}#my-svg .labelBkg{background:#D3EDCB;}#my-svg .edgeLabel .label span{background:#D3EDCB;}#my-svg .classTitle{font-weight:bolder;}#my-svg .node rect,#my-svg .node circle,#my-svg .node ellipse,#my-svg .node polygon,#my-svg .node path{fill:#D3EDCB;stroke:#2E5E3A;stroke-width:1;}#my-svg .divider{stroke:#2E5E3A;stroke-width:1;}#my-svg g.clickable{cursor:pointer;}#my-svg g.classGroup rect{fill:#D3EDCB;stroke:#2E5E3A;}#my-svg g.classGroup line{stroke:#2E5E3A;stroke-width:1;}#my-svg .classLabel .box{stroke:none;stroke-width:0;fill:#D3EDCB;opacity:0.5;}#my-svg .classLabel .label{fill:#2E5E3A;font-size:10px;}#my-svg .relation{stroke:#2E5E3A;stroke-width:1;fill:none;}#my-svg .dashed-line{stroke-dasharray:3;}#my-svg .dotted-line{stroke-dasharray:1 2;}#my-svg [id$="-compositionStart"],#my-svg .composition{fill:#2E5E3A!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-compositionEnd"],#my-svg .composition{fill:#2E5E3A!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-dependencyStart"],#my-svg .dependency{fill:#2E5E3A!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-dependencyEnd"],#my-svg .dependency{fill:#2E5E3A!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-extensionStart"],#my-svg .extension{fill:transparent!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-extensionEnd"],#my-svg .extension{fill:transparent!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-aggregationStart"],#my-svg .aggregation{fill:transparent!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-aggregationEnd"],#my-svg .aggregation{fill:transparent!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-lollipopStart"],#my-svg .lollipop{fill:#D3EDCB!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg [id$="-lollipopEnd"],#my-svg .lollipop{fill:#D3EDCB!important;stroke:#2E5E3A!important;stroke-width:1;}#my-svg .edgeTerminals{font-size:11px;line-height:initial;}#my-svg .classTitleText{text-anchor:middle;font-size:18px;fill:#1B3A24;}#my-svg .edgeLabel[data-look="neo"]{background-color:#E8F5E3;text-align:center;}#my-svg .edgeLabel[data-look="neo"] p{background-color:#E8F5E3;}#my-svg .edgeLabel[data-look="neo"] rect{opacity:0.5;background-color:#E8F5E3;fill:#E8F5E3;}#my-svg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#my-svg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#my-svg .node .neo-node{stroke:#2E5E3A;}#my-svg [data-look="neo"].node rect,#my-svg [data-look="neo"].cluster rect,#my-svg [data-look="neo"].node polygon{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].swimlane.cluster rect{filter:none;}#my-svg [data-look="neo"].node path{stroke:url(#my-svg-gradient);stroke-width:1px;}#my-svg [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node .neo-line path{stroke:#2E5E3A;filter:none;}#my-svg [data-look="neo"].node circle{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].node circle .state-start{fill:#000000;}#my-svg [data-look="neo"].icon-shape .icon{fill:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg [data-look="neo"].icon-shape .icon-neo path{stroke:url(#my-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#my-svg .Order&gt;*{fill:rgb(191, 227, 180)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Order span{fill:rgb(191, 227, 180)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Customer&gt;*{fill:rgb(211, 237, 203)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Customer span{fill:rgb(211, 237, 203)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .OrderLine&gt;*{fill:rgb(211, 237, 203)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .OrderLine span{fill:rgb(211, 237, 203)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Product&gt;*{fill:rgb(228, 244, 222)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Product span{fill:rgb(228, 244, 222)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Address&gt;*{fill:rgb(241, 249, 238)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}#my-svg .Address span{fill:rgb(241, 249, 238)!important;stroke:rgb(46, 94, 58)!important;color:rgb(27, 58, 36)!important;}</style><g><defs><marker id="my-svg_classDiagram-aggregationStart" class="marker aggregation classDiagram" refX="18" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-aggregationEnd" class="marker aggregation classDiagram" refX="1" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-aggregationStart-margin" class="marker aggregation classDiagram" refX="15" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z" style="stroke-width: 2;"/></marker></defs><defs><marker id="my-svg_classDiagram-aggregationEnd-margin" class="marker aggregation classDiagram" refX="1" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z" style="stroke-width: 2;"/></marker></defs><defs><marker id="my-svg_classDiagram-extensionStart" class="marker extension classDiagram" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1,7 L18,13 V 1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-extensionEnd" class="marker extension classDiagram" refX="1" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1,1 V 13 L18,7 Z"/></marker></defs><marker id="my-svg_classDiagram-extensionStart-margin" class="marker extension classDiagram" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 20 14"><polygon points="10,7 18,13 18,1" style="stroke-width: 2; stroke-dasharray: 0;"/></marker><defs><marker id="my-svg_classDiagram-extensionEnd-margin" class="marker extension classDiagram" refX="9" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 20 14"><polygon points="10,1 10,13 18,7" style="stroke-width: 2; stroke-dasharray: 0;"/></marker></defs><defs><marker id="my-svg_classDiagram-compositionStart" class="marker composition classDiagram" refX="18" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-compositionEnd" class="marker composition classDiagram" refX="1" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-compositionStart-margin" class="marker composition classDiagram" refX="15" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path viewBox="0 0 15 15" d="M 18,7 L9,13 L1,7 L9,1 Z" style="stroke-width: 0;"/></marker></defs><defs><marker id="my-svg_classDiagram-compositionEnd-margin" class="marker composition classDiagram" refX="3.5" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L1,7 L9,1 Z" style="stroke-width: 0;"/></marker></defs><defs><marker id="my-svg_classDiagram-dependencyStart" class="marker dependency classDiagram" refX="6" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path d="M 5,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-dependencyEnd" class="marker dependency classDiagram" refX="13" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L14,7 L9,1 Z"/></marker></defs><defs><marker id="my-svg_classDiagram-dependencyStart-margin" class="marker dependency classDiagram" refX="4" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><path d="M 5,7 L9,13 L1,7 L9,1 Z" style="stroke-width: 0;"/></marker></defs><defs><marker id="my-svg_classDiagram-dependencyEnd-margin" class="marker dependency classDiagram" refX="16" refY="7" markerWidth="20" markerHeight="28" orient="auto" markerUnits="userSpaceOnUse"><path d="M 18,7 L9,13 L14,7 L9,1 Z" style="stroke-width: 0;"/></marker></defs><defs><marker id="my-svg_classDiagram-lollipopStart" class="marker lollipop classDiagram" refX="13" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><circle fill="transparent" cx="7" cy="7" r="6"/></marker></defs><defs><marker id="my-svg_classDiagram-lollipopEnd" class="marker lollipop classDiagram" refX="1" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><circle fill="transparent" cx="7" cy="7" r="6"/></marker></defs><defs><marker id="my-svg_classDiagram-lollipopStart-margin" class="marker lollipop classDiagram" refX="13" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><circle fill="transparent" cx="7" cy="7" r="6" stroke-width="2"/></marker></defs><defs><marker id="my-svg_classDiagram-lollipopEnd-margin" class="marker lollipop classDiagram" refX="1" refY="7" markerWidth="190" markerHeight="240" orient="auto" markerUnits="userSpaceOnUse"><circle fill="transparent" cx="7" cy="7" r="6" stroke-width="2"/></marker></defs><g class="root"><g class="clusters"/><g class="edges edgePaths"><path d="M222.20703125,221.25
 
-
 L222.20703125,222.625
-
 
 Q222.20703125,224 220.83203125,224
 
-
 L88.48903656186548,224
-
 
 Q81.41796875,224 81.41796875,231.07106781186548
 
-
 L81.41796875,332" id="my-svg-id_Order_OrderLine_1" class="edge-thickness-normal edge-pattern-solid relation" style="stroke-dasharray: 0 0 248.35684204101562 0; stroke-dashoffset: 0;;;;" data-edge="true" data-et="edge" data-id="id_Order_OrderLine_1" data-points="W3sieCI6MjIyLjIwNzAzMTI1LCJ5IjoyMDR9LHsieCI6MjIyLjIwNzAzMTI1LCJ5IjoyMjR9LHsieCI6ODEuNDE3OTY4NzUsInkiOjIyNH0seyJ4Ijo4MS40MTc5Njg3NSwieSI6MzMyfV0=" data-look="neo" marker-start="url(#my-svg_classDiagram-compositionStart-margin)"/><path d="M247.203125,204L247.203125,308" id="my-svg-id_Order_Customer_2" class="edge-thickness-normal edge-pattern-solid relation" style="stroke-dasharray: 0 0 104 0; stroke-dashoffset: 0;;;;" data-edge="true" data-et="edge" data-id="id_Order_Customer_2" data-points="W3sieCI6MjQ3LjIwMzEyNSwieSI6MjA0fSx7IngiOjI0Ny4yMDMxMjUsInkiOjMwOH1d" data-look="neo"/><path d="M81.41796875,476L81.41796875,598" id="my-svg-id_OrderLine_Product_3" class="edge-thickness-normal edge-pattern-solid relation" style="stroke-dasharray: 0 0 122 0; stroke-dashoffset: 0;;;;" data-edge="true" data-et="edge" data-id="id_OrderLine_Product_3" data-points="W3sieCI6ODEuNDE3OTY4NzUsInkiOjQ3Nn0seyJ4Ijo4MS40MTc5Njg3NSwieSI6NjA0fV0=" data-look="neo" marker-end="url(#my-svg_classDiagram-dependencyEnd-margin)"/><path d="M272.19921875,204
-
 
 L272.19921875,216.92893218813452
 
-
 Q272.19921875,224 279.2702865618655,224
-
 
 L411.6515884381345,224
 
-
 Q418.72265625,224 418.72265625,231.07106781186548
-
 
 L418.72265625,302" id="my-svg-id_Order_Address_4" class="edge-thickness-normal edge-pattern-solid relation" style="stroke-dasharray: 0 0 239.19515991210938 0; stroke-dashoffset: 0;;;;" data-edge="true" data-et="edge" data-id="id_Order_Address_4" data-points="W3sieCI6MjcyLjE5OTIxODc1LCJ5IjoyMDR9LHsieCI6MjcyLjE5OTIxODc1LCJ5IjoyMjR9LHsieCI6NDE4LjcyMjY1NjI1LCJ5IjoyMjR9LHsieCI6NDE4LjcyMjY1NjI1LCJ5IjozMDh9XQ==" data-look="neo" marker-end="url(#my-svg_classDiagram-dependencyEnd-margin)"/></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(81.30078125, 256)"><g class="label" data-id="id_Order_OrderLine_1" transform="translate(-41.8828125, -12)"><foreignObject width="83.765625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>is made of</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(202.70703098500002, 204.99999952000002)"><g class="inner" transform="translate(-3.5, -8.25)"><foreignObject width="7" height="16.5" style="width: 9px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>1</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(91.41796937499998, 309.50000053571426)"><g class="inner" transform="translate(-9.75, -8.25)"/><foreignObject width="19.5" height="16.5" style="width: 36px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>1..*</p></span></div></foreignObject></g><g class="edgeLabel" transform="translate(247.1640625, 256)"><g class="label" data-id="id_Order_Customer_2" transform="translate(-38.9609375, -12)"><foreignObject width="77.921875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>placed by</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(232.20312750000014, 221.50000214285714)"><g class="inner" transform="translate(-9.75, -8.25)"><foreignObject width="19.5" height="16.5" style="width: 36px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>0..*</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(257.2031274999998, 285.5000021428571)"><g class="inner" transform="translate(-3.5, -8.25)"/><foreignObject width="7" height="16.5" style="width: 9px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>1</p></span></div></foreignObject></g><g class="edgeLabel" transform="translate(81.12109375, 552)"><g class="label" data-id="id_OrderLine_Product_3" transform="translate(-17.703125, -12)"><foreignObject width="35.40625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>sells</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(66.41796937500001, 493.50000053571426)"><g class="inner" transform="translate(-9.75, -8.25)"><foreignObject width="19.5" height="16.5" style="width: 36px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>0..*</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(91.41796937499998, 581.5000005357143)"><g class="inner" transform="translate(-3.5, -8.25)"/><foreignObject width="7" height="16.5" style="width: 9px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>1</p></span></div></foreignObject></g><g class="edgeLabel" transform="translate(418.50390625, 256)"><g class="label" data-id="id_Order_Address_4" transform="translate(-31.28125, -12)"><foreignObject width="62.5625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>ships to</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(267.699219735, 223.00000047999998)"><g class="inner" transform="translate(-9.75, -8.25)"><foreignObject width="19.5" height="16.5" style="width: 36px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>0..*</p></span></div></foreignObject></g></g><g class="edgeTerminals" transform="translate(428.7226581249999, 285.50000160714285)"><g class="inner" transform="translate(-3.5, -8.25)"/><foreignObject width="7" height="16.5" style="width: 9px; height: 12px;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5;"><span class="edgeLabel"><p>1</p></span></div></foreignObject></g></g><g class="nodes"><g class="node default level1" id="my-svg-classId-Order-0" data-look="neo" transform="translate(247.203125, 108)"><g class="basic label-container outer-path"><path d="M-59.9921875 -96 L59.9921875 -96 L59.9921875 96 L-59.9921875 96" stroke="none" stroke-width="0" fill="#BFE3B4" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/><path d="M-59.9921875 -96 
 
-
-C-20.52672456726298 -96, 18.938738365474038 -96, 59.9921875 -96 
-
+C-32.56832648262238 -96, -5.144465465244757 -96, 59.9921875 -96 
 
 M-59.9921875 -96 
 
-
-C-16.657071621668557 -96, 26.678044256662886 -96, 59.9921875 -96 
-
+C-13.577849581622957 -96, 32.83648833675409 -96, 59.9921875 -96 
 
 M59.9921875 -96 
 
-
-C59.9921875 -29.2501397566391, 59.9921875 37.4997204867218, 59.9921875 96 
-
+C59.9921875 -54.959332377132974, 59.9921875 -13.918664754265947, 59.9921875 96 
 
 M59.9921875 -96 
 
-
-C59.9921875 -39.939435831194444, 59.9921875 16.12112833761111, 59.9921875 96 
-
+C59.9921875 -33.0724556492803, 59.9921875 29.8550887014394, 59.9921875 96 
 
 M59.9921875 96 
 
-
-C26.68226309823074 96, -6.627661303538517 96, -59.9921875 96 
-
+C14.853509512328245 96, -30.28516847534351 96, -59.9921875 96 
 
 M59.9921875 96 
 
-
-C15.05199636769509 96, -29.88819476460982 96, -59.9921875 96 
-
+C32.10133120938906 96, 4.210474918778125 96, -59.9921875 96 
 
 M-59.9921875 96 
 
-
-C-59.9921875 49.17648426210982, -59.9921875 2.3529685242196337, -59.9921875 -96 
-
+C-59.9921875 39.83480544328488, -59.9921875 -16.330389113430243, -59.9921875 -96 
 
 M-59.9921875 96 
 
+C-59.9921875 43.120107891942276, -59.9921875 -9.759784216115449, -59.9921875 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-25.84375, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="51.6875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 96px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>Order</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-47.9921875, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="62.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 113px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>number</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="70.140625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 120px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>placedAt</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="49.171875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 99px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>status</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="36.59375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 87px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>total</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-47.9921875, 96)"/><g class="divider" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><path d="M-59.9921875 -48 
 
-C-59.9921875 20.746566219803057, -59.9921875 -54.506867560393886, -59.9921875 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-25.84375, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="51.6875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 96px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>Order</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-47.9921875, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="62.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 113px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>number</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="70.140625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 120px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>placedAt</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="49.171875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 99px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>status</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="36.59375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 87px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><p>total</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-47.9921875, 96)"/><g class="divider" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><path d="M-59.9921875 -48 
-
-
-C-32.724447143264825 -47.99977273923911, -5.456706786529644 -47.99954547847823, 59.9921875 -47.999 
-
+C-15.015461420237067 -47.99962514514011, 29.961264659525867 -47.999250290280216, 59.9921875 -47.999 
 
 M-59.9921875 -48 
 
+C-19.776768028118482 -47.9996648278622, 20.438651443763035 -47.999329655724395, 59.9921875 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><path d="M-59.9921875 72 
 
-C-30.257665105579854 -47.99975218004516, -0.5231427111597071 -47.99950436009031, 59.9921875 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"><path d="M-59.9921875 72 
-
-
-C-24.289481296996286 72.00029756129665, 11.413224906007429 72.00059512259331, 59.9921875 72.001 
-
+C-12.566497889117684 72.00039526554696, 34.85919172176463 72.00079053109393, 59.9921875 72.001 
 
 M-59.9921875 72 
 
+C-22.433593060988493 72.00031302904598, 15.125001378023015 72.00062605809197, 59.9921875 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level2" id="my-svg-classId-Customer-1" data-look="neo" transform="translate(247.203125, 380)"><g class="basic label-container outer-path"><path d="M-56.3671875 -72 L56.3671875 -72 L56.3671875 72 L-56.3671875 72" stroke="none" stroke-width="0" fill="#D3EDCB" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/><path d="M-56.3671875 -72 
 
-C-17.253235595593154 72.0003562043133, 25.485716308813693 72.00071240862661, 59.9921875 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#BFE3B4;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level2" id="my-svg-classId-Customer-1" data-look="neo" transform="translate(247.203125, 380)"><g class="basic label-container outer-path"><path d="M-56.3671875 -72 L56.3671875 -72 L56.3671875 72 L-56.3671875 72" stroke="none" stroke-width="0" fill="#D3EDCB" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/><path d="M-56.3671875 -72 
-
-
-C-16.79951086438659 -72, 22.76816577122682 -72, 56.3671875 -72 
-
+C-33.43874392615915 -72, -10.510300352318296 -72, 56.3671875 -72 
 
 M-56.3671875 -72 
 
-
-C-31.771486439523976 -72, -7.1757853790479516 -72, 56.3671875 -72 
-
+C-32.70122519465209 -72, -9.035262889304178 -72, 56.3671875 -72 
 
 M56.3671875 -72 
 
-
-C56.3671875 -22.764216443391504, 56.3671875 26.47156711321699, 56.3671875 72 
-
+C56.3671875 -35.6755591627944, 56.3671875 0.6488816744112, 56.3671875 72 
 
 M56.3671875 -72 
 
-
-C56.3671875 -37.62709295375153, 56.3671875 -3.2541859075030573, 56.3671875 72 
-
+C56.3671875 -25.193587622384968, 56.3671875 21.612824755230065, 56.3671875 72 
 
 M56.3671875 72 
 
-
-C22.6273181479388 72, -11.112551204122397 72, -56.3671875 72 
-
+C12.304820533477233 72, -31.757546433045533 72, -56.3671875 72 
 
 M56.3671875 72 
 
-
-C20.343157331686932 72, -15.680872836626136 72, -56.3671875 72 
-
+C25.188448352695623 72, -5.990290794608754 72, -56.3671875 72 
 
 M-56.3671875 72 
 
-
-C-56.3671875 27.72209557354936, -56.3671875 -16.55580885290128, -56.3671875 -72 
-
+C-56.3671875 39.05831797112269, -56.3671875 6.116635942245381, -56.3671875 -72 
 
 M-56.3671875 72 
 
+C-56.3671875 18.162257780829258, -56.3671875 -35.675484438341485, -56.3671875 -72" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -48)"/><g class="label-group text" transform="translate(-43.359375, -48)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="86.71875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 128px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>Customer</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-44.3671875, 0)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="44.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 94px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>email</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="45.375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 95px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>name</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-44.3671875, 72)"/><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-56.3671875 -24 
 
-C-56.3671875 15.986226475187046, -56.3671875 -40.02754704962591, -56.3671875 -72" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -48)"/><g class="label-group text" transform="translate(-43.359375, -48)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="86.71875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 128px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>Customer</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-44.3671875, 0)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="44.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 94px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>email</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="45.375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 95px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>name</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-44.3671875, 72)"/><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-56.3671875 -24 
-
-
-C-29.659015920486897 -23.99976308759791, -2.950844340973795 -23.999526175195818, 56.3671875 -23.999 
-
+C-16.486533544360192 -23.999646242293394, 23.394120411279616 -23.99929248458679, 56.3671875 -23.999 
 
 M-56.3671875 -24 
 
+C-12.74746736957028 -23.99961307524763, 30.87225276085944 -23.99922615049526, 56.3671875 -23.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-56.3671875 48 
 
-C-16.415331511014458 -23.999645610702245, 23.536524477971085 -23.99929122140449, 56.3671875 -23.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-56.3671875 48 
-
-
-C-30.2005223983944 48.00023210901823, -4.033857296788803 48.00046421803645, 56.3671875 48.001 
-
+C-18.959339294136257 48.00033182290855, 18.448508911727487 48.00066364581709, 56.3671875 48.001 
 
 M-56.3671875 48 
 
+C-14.696304405050398 48.000369637771044, 26.974578689899204 48.00073927554209, 56.3671875 48.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level2" id="my-svg-classId-OrderLine-2" data-look="neo" transform="translate(81.41796875, 404)"><g class="basic label-container outer-path"><path d="M-69.41796875 -72 L69.41796875 -72 L69.41796875 72 L-69.41796875 72" stroke="none" stroke-width="0" fill="#D3EDCB" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/><path d="M-69.41796875 -72 
 
-C-33.23019994991569 48.0002052345396, -10.093212399831387 48.0004104690792, 56.3671875 48.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level2" id="my-svg-classId-OrderLine-2" data-look="neo" transform="translate(81.41796875, 404)"><g class="basic label-container outer-path"><path d="M-69.41796875 -72 L69.41796875 -72 L69.41796875 72 L-69.41796875 72" stroke="none" stroke-width="0" fill="#D3EDCB" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/><path d="M-69.41796875 -72 
-
-
-C-35.23450653086167 -72, -1.051044311723345 -72, 69.41796875 -72 
-
+C-22.165399005413605 -72, 25.08717073917279 -72, 69.41796875 -72 
 
 M-69.41796875 -72 
 
-
-C-40.21194859352097 -72, -11.005928437041945 -72, 69.41796875 -72 
-
+C-32.75622639041165 -72, 3.9055159691767045 -72, 69.41796875 -72 
 
 M69.41796875 -72 
 
-
-C69.41796875 -30.986582118828572, 69.41796875 10.026835762342856, 69.41796875 72 
-
+C69.41796875 -28.799988726234638, 69.41796875 14.400022547530725, 69.41796875 72 
 
 M69.41796875 -72 
 
-
-C69.41796875 -23.939606453268794, 69.41796875 24.12078709346241, 69.41796875 72 
-
+C69.41796875 -21.967368375949867, 69.41796875 28.065263248100266, 69.41796875 72 
 
 M69.41796875 72 
 
-
-C34.09460203779843 72, -1.2287646744031377 72, -69.41796875 72 
-
+C19.007858674517834 72, -31.40225140096433 72, -69.41796875 72 
 
 M69.41796875 72 
 
-
-C22.242585449020275 72, -24.93279785195945 72, -69.41796875 72 
-
+C37.0948114384159 72, 4.771654126831805 72, -69.41796875 72 
 
 M-69.41796875 72 
 
-
-C-69.41796875 40.38866499142874, -69.41796875 8.777329982857474, -69.41796875 -72 
-
+C-69.41796875 38.409680340928574, -69.41796875 4.819360681857148, -69.41796875 -72 
 
 M-69.41796875 72 
 
+C-69.41796875 42.418062171574654, -69.41796875 12.836124343149308, -69.41796875 -72" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -48)"/><g class="label-group text" transform="translate(-44.8046875, -48)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="89.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 129px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>OrderLine</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-57.41796875, 0)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="66.703125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 117px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>quantity</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="70.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 120px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>unitPrice</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-57.41796875, 72)"/><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-69.41796875 -24 
 
-C-69.41796875 39.81685655788453, -69.41796875 7.633713115769055, -69.41796875 -72" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -48)"/><g class="label-group text" transform="translate(-44.8046875, -48)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="89.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 129px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>OrderLine</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-57.41796875, 0)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="66.703125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 117px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>quantity</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="70.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 120px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><p>unitPrice</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-57.41796875, 72)"/><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-69.41796875 -24 
-
-
-C-41.62042225550478 -23.999799781331873, -13.822875761009549 -23.999599562663743, 69.41796875 -23.999 
-
+C-16.33491436713252 -23.999617656239884, 36.74814001573496 -23.99923531247977, 69.41796875 -23.999 
 
 M-69.41796875 -24 
 
+C-35.559343092500534 -23.99975612491789, -1.7007174350010672 -23.99951224983578, 69.41796875 -23.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-69.41796875 48 
 
-C-29.841999031069832 -23.999714944340553, 9.733970687860335 -23.999429888681107, 69.41796875 -23.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"><path d="M-69.41796875 48 
-
-
-C-31.753807503244055 48.00027128538853, 5.910353743511891 48.000542570777064, 69.41796875 48.001 
-
+C-41.09148024340603 48.00020402850311, -12.764991736812064 48.000408057006226, 69.41796875 48.001 
 
 M-69.41796875 48 
 
+C-40.17444263240519 48.00021063369214, -10.93091651481037 48.00042126738428, 69.41796875 48.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level3" id="my-svg-classId-Product-3" data-look="neo" transform="translate(81.41796875, 700)"><g class="basic label-container outer-path"><path d="M-52.3359375 -96 L52.3359375 -96 L52.3359375 96 L-52.3359375 96" stroke="none" stroke-width="0" fill="#E4F4DE" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/><path d="M-52.3359375 -96 
 
-C-23.36465869534006 48.00033171029694, 22.688651359319877 48.00066342059389, 69.41796875 48.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#D3EDCB;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level3" id="my-svg-classId-Product-3" data-look="neo" transform="translate(81.41796875, 700)"><g class="basic label-container outer-path"><path d="M-52.3359375 -96 L52.3359375 -96 L52.3359375 96 L-52.3359375 96" stroke="none" stroke-width="0" fill="#E4F4DE" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/><path d="M-52.3359375 -96 
-
-
-C-13.660000018197579 -96, 25.015937463604843 -96, 52.3359375 -96 
-
+C-26.63769097310945 -96, -0.9394444462189 -96, 52.3359375 -96 
 
 M-52.3359375 -96 
 
-
-C-16.378841887818204 -96, 19.57825372436359 -96, 52.3359375 -96 
-
+C-13.89768946063274 -96, 24.54055857873452 -96, 52.3359375 -96 
 
 M52.3359375 -96 
 
-
-C52.3359375 -51.30620560042594, 52.3359375 -6.612411200851881, 52.3359375 96 
-
+C52.3359375 -40.644985283515226, 52.3359375 14.710029432969549, 52.3359375 96 
 
 M52.3359375 -96 
 
-
-C52.3359375 -22.294035306452457, 52.3359375 51.411929387095086, 52.3359375 96 
-
+C52.3359375 -35.41937271989924, 52.3359375 25.161254560201513, 52.3359375 96 
 
 M52.3359375 96 
 
-
-C27.528313975962796 96, 2.7206904519255914 96, -52.3359375 96 
-
+C24.22157433083854 96, -3.8927888383229217 96, -52.3359375 96 
 
 M52.3359375 96 
 
-
-C14.72788748417976 96, -22.88016253164048 96, -52.3359375 96 
-
+C29.2169875234313 96, 6.098037546862599 96, -52.3359375 96 
 
 M-52.3359375 96 
 
-
-C-52.3359375 28.04574982593995, -52.3359375 -39.9085003481201, -52.3359375 -96 
-
+C-52.3359375 55.78770427590267, -52.3359375 15.575408551805339, -52.3359375 -96 
 
 M-52.3359375 96 
 
+C-52.3359375 49.14679727027438, -52.3359375 2.293594540548753, -52.3359375 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-35.296875, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="70.59375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 111px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>Product</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-40.3359375, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="27.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 77px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>sku</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="45.375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 95px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>name</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="39.828125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 90px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>price</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="42.46875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 93px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>stock</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-40.3359375, 96)"/><g class="divider" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><path d="M-52.3359375 -48 
 
-C-52.3359375 21.166486593591998, -52.3359375 -53.667026812816005, -52.3359375 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-35.296875, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="70.59375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 111px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>Product</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-40.3359375, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="27.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 77px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>sku</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="45.375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 95px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>name</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="39.828125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 90px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>price</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="42.46875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 93px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><p>stock</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-40.3359375, 96)"/><g class="divider" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><path d="M-52.3359375 -48 
-
-
-C-14.205547919843482 -47.999635715042075, 23.924841660313035 -47.99927143008416, 52.3359375 -47.999 
-
+C-15.539361979088397 -47.999648457854406, 21.257213541823205 -47.99929691570881, 52.3359375 -47.999 
 
 M-52.3359375 -48 
 
+C-21.655407095317063 -47.9997068884989, 9.025123309365874 -47.99941377699779, 52.3359375 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><path d="M-52.3359375 72 
 
-C-16.73500218367466 -47.999659880600056, 18.86593313265068 -47.999319761200105, 52.3359375 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"><path d="M-52.3359375 72 
-
-
-C-15.257498696670858 72.00035423497289, 21.820940106658284 72.00070846994579, 52.3359375 72.001 
-
+C-12.651001037294243 72.00037913657765, 27.033935425411514 72.00075827315528, 52.3359375 72.001 
 
 M-52.3359375 72 
 
+C-20.115727223491795 72.00030782108638, 12.10448305301641 72.00061564217278, 52.3359375 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level4" id="my-svg-classId-Address-4" data-look="neo" transform="translate(418.72265625, 404)"><g class="basic label-container outer-path"><path d="M-75.15234375 -96 L75.15234375 -96 L75.15234375 96 L-75.15234375 96" stroke="none" stroke-width="0" fill="#F1F9EE" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/><path d="M-75.15234375 -96 
 
-C-28.064425688115183 72.00023188188625, -3.792913876230365 72.00046376377249, 52.3359375 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#E4F4DE;stroke:#2E5E3A;color:#1B3A24"/></g></g><g class="node default level4" id="my-svg-classId-Address-4" data-look="neo" transform="translate(418.72265625, 404)"><g class="basic label-container outer-path"><path d="M-75.15234375 -96 L75.15234375 -96 L75.15234375 96 L-75.15234375 96" stroke="none" stroke-width="0" fill="#F1F9EE" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/><path d="M-75.15234375 -96 
-
-
-C-20.23996988358583 -96, 34.67240398282834 -96, 75.15234375 -96 
-
+C-43.656872890004195 -96, -12.16140203000839 -96, 75.15234375 -96 
 
 M-75.15234375 -96 
 
-
-C-28.46842873090624 -96, 18.21548628818752 -96, 75.15234375 -96 
-
+C-19.88125147222067 -96, 35.38984080555866 -96, 75.15234375 -96 
 
 M75.15234375 -96 
 
-
-C75.15234375 -50.90753116566247, 75.15234375 -5.815062331324938, 75.15234375 96 
-
+C75.15234375 -36.043764538934944, 75.15234375 23.91247092213011, 75.15234375 96 
 
 M75.15234375 -96 
 
-
-C75.15234375 -21.08456323820667, 75.15234375 53.83087352358666, 75.15234375 96 
-
+C75.15234375 -47.10142767239799, 75.15234375 1.797144655204022, 75.15234375 96 
 
 M75.15234375 96 
 
-
-C41.00213616807711 96, 6.851928586154216 96, -75.15234375 96 
-
+C16.05447321420408 96, -43.04339732159184 96, -75.15234375 96 
 
 M75.15234375 96 
 
-
-C29.456441490660502 96, -16.239460768678995 96, -75.15234375 96 
-
+C30.526156517251707 96, -14.100030715496587 96, -75.15234375 96 
 
 M-75.15234375 96 
 
-
-C-75.15234375 22.698916616948367, -75.15234375 -50.60216676610327, -75.15234375 -96 
-
+C-75.15234375 44.66517111678971, -75.15234375 -6.669657766420585, -75.15234375 -96 
 
 M-75.15234375 96 
 
+C-75.15234375 43.13143084626393, -75.15234375 -9.737138307472136, -75.15234375 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-36.5390625, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="73.078125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 114px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>Address</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-63.15234375, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="46.796875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 97px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>street</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="28.984375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 79px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>city</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="89.765625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 140px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>postalCode</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="61.1875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 111px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>country</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-63.15234375, 96)"/><g class="divider" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><path d="M-75.15234375 -48 
 
-C-75.15234375 56.42825631859583, -75.15234375 16.856512637191656, -75.15234375 -96" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="annotation-group text" transform="translate(0, -72)"/><g class="label-group text" transform="translate(-36.5390625, -72)"><g class="label" style="font-weight: bolder" transform="translate(0,-12)"><foreignObject width="73.078125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 114px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>Address</p></span></div></foreignObject></g></g><g class="members-group text" transform="translate(-63.15234375, -24)"><g class="label" style="" transform="translate(0,-12)"><foreignObject width="46.796875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 97px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>street</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,12)"><foreignObject width="28.984375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 79px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>city</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,36)"><foreignObject width="89.765625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 140px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>postalCode</p></span></div></foreignObject></g><g class="label" style="" transform="translate(0,60)"><foreignObject width="61.1875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 111px; text-align: center;"><span class="nodeLabel markdown-node-label" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><p>country</p></span></div></foreignObject></g></g><g class="methods-group text" transform="translate(-63.15234375, 96)"/><g class="divider" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><path d="M-75.15234375 -48 
-
-
-C-33.09307737159089 -47.99972017328882, 8.966189006818226 -47.999440346577636, 75.15234375 -47.999 
-
+C-15.281172006457098 -47.999601667966985, 44.589999737085805 -47.99920333593397, 75.15234375 -47.999 
 
 M-75.15234375 -48 
 
+C-21.819301757919234 -47.99964516714097, 31.51374023416153 -47.99929033428193, 75.15234375 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><path d="M-75.15234375 72 
 
-C-38.92345902043223 -47.999758963706775, -2.694574290864466 -47.99951792741355, 75.15234375 -47.999" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g><g class="divider" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"><path d="M-75.15234375 72 
-
-
-C-17.1325568540068 72.00038601448738, 40.8872300419864 72.00077202897477, 75.15234375 72.001 
-
+C-38.28089299002995 72.00024531138298, -1.409442230059895 72.00049062276598, 75.15234375 72.001 
 
 M-75.15234375 72 
 
-
-C-35.22630654115768 72.00026563401231, 4.6997306676846335 72.00053126802462, 75.15234375 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2E5E3A" stop-opacity="1"/><stop offset="100%" stop-color="#2E5E3A" stop-opacity="1"/></linearGradient></svg>
+C-37.87259258998402 72.0002480278678, -0.5928414299680469 72.0004960557356, 75.15234375 72.001" stroke="#2E5E3A" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style="fill:#F1F9EE;stroke:#2E5E3A;color:#1B3A24"/></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2E5E3A" stop-opacity="1"/><stop offset="100%" stop-color="#2E5E3A" stop-opacity="1"/></linearGradient></svg>

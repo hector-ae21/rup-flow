@@ -14,9 +14,10 @@ sourceOfTruth: model
 
 ## Use cases
 
-| ID | Use case | Actor | Level | Requirement | Status |
-| --- | --- | --- | --- | --- | --- |
-| | | | | | |
+<!-- rup-flow:use-cases:start -->
+<!-- rup-flow:use-cases:end -->
+
+The index and its diagrams are generated from the use-case cards by the `index` command. Edit the cards (front matter: `actor`, `package`, `includes`, `extends`), not this block.
 
 ## Conventions
 

@@ -9,6 +9,7 @@ import { DEFAULT_MERMAID_IMAGE, renderMermaidBatch } from './lib/mermaid.mjs';
 import { buildExplorer, collectDiagrams } from './lib/explorer.mjs';
 import { INSTRUCTION_TARGETS, writeInstructions } from './lib/instructions.mjs';
 import { fetchDiagram } from './lib/plantuml.mjs';
+import { applyIndex, indexBlock, navigation, overviewFiles, readUseCases } from './lib/usecases.mjs';
 
 const DIAGRAM_SOURCE = /\.(puml|plantuml|mmd)$/;
 const RENDER_STATE = '.rup-render-state.json';
@@ -174,6 +175,7 @@ function cmdInit(root, config) {
     ['design/README.md', 'design', 'README.md'],
     ['design/class-diagram.puml', 'design', 'class-diagram.puml'],
     ['design/data-model.puml', 'design', 'data-model/data-model.puml'],
+    ['design/components.puml', 'design', 'components/components.puml'],
     ['design/deployment.puml', 'design', 'deployment/deployment.puml'],
     ['design/project-configuration.md', 'design', 'project-configuration.md'],
     ['implementation/README.md', 'implementation', 'README.md'],
@@ -206,18 +208,26 @@ function nextUseCaseId(root, config) {
 
 function cmdNewUseCase(root, config, name, flags) {
   if (!name || !/^[A-Za-z][A-Za-z0-9]*$/.test(name)) fail('Use a camelCase name made of letters and digits, e.g. createOrder.');
-  const wanted = String(flags.discipline ?? 'requirements,analysis,design').split(',');
+  const wanted = String(flags.discipline ?? 'requirements,analysis,design,implementation').split(',');
   const ucId = flags.id ?? nextUseCaseId(root, config);
   const vars = templateVars(root, config, {
     ucName: name, ucId, ucTitle: flags.title ?? name, actor: flags.actor ?? 'Actor',
+    ucPackage: flags.package ?? 'General', ucGoal: flags.goal ?? '',
+    ucIncludes: flags.includes ?? '', ucExtends: flags.extends ?? '',
     requirement: flags.requirement ?? `${config.ids.requirement}-001`,
     requirementsLink: `../../../${config.paths.requirements}/${config.useCaseDir}/${name}`,
     analysisLink: `../../../${config.paths.analysis}/${config.useCaseDir}/${name}`,
+    designLink: `../../../${config.paths.design}/${config.useCaseDir}/${name}`,
+    navRequirements: navigation(config, name, 'requirements'),
+    navAnalysis: navigation(config, name, 'analysis'),
+    navDesign: navigation(config, name, 'design'),
+    navImplementation: navigation(config, name, 'implementation'),
   });
   const plan = {
     requirements: [['use-case/requirements.md', 'README.md'], ['use-case/specification.puml', 'specification.puml'], ['use-case/wireframes.puml', 'wireframes.puml']],
     analysis: [['use-case/analysis.md', 'README.md'], ['use-case/collaboration.puml', 'collaboration.puml']],
     design: [['use-case/design.md', 'README.md'], ['use-case/sequence.puml', 'sequence.puml']],
+    implementation: [['use-case/implementation.md', 'README.md']],
   };
   const created = [];
   const skipped = [];
@@ -232,7 +242,26 @@ function cmdNewUseCase(root, config, name, flags) {
     const row =`${vars.requirement},${ucId},${name},${rel(root, path.join(dirOf(root, config, 'analysis'), config.useCaseDir, name))},${rel(root, path.join(dirOf(root, config, 'design'), config.useCaseDir, name))},,\n`;
     fs.appendFileSync(traceFile, row);
   }
-  report('new use-case', { id: ucId, created: created.map((f) => rel(root, f)), skipped: skipped.map((f) => rel(root, f)) });
+  const indexed = writeIndex(root, config);
+  report('new use-case', { id: ucId, created: created.map((f) => rel(root, f)), skipped: skipped.map((f) => rel(root, f)), index: indexed });
+}
+
+function writeIndex(root, config) {
+  const base = path.resolve(root, config.outDir);
+  const cases = readUseCases(base, config);
+  const reqDir = dirOf(root, config, 'requirements');
+  const readmeFile = path.join(reqDir, 'README.md');
+  if (!fs.existsSync(readmeFile)) return 'requirements README not found; run init';
+  const files = cases.length ? overviewFiles(cases, config.project, config.diagrams.language) : [];
+  const keep = new Set(files.map((f) => f.name));
+  for (const stale of fs.readdirSync(reqDir).filter((f) => /^use-case(-overview|s-[a-z0-9_]+)\.(puml|mmd)$/.test(f) && !keep.has(f))) fs.rmSync(path.join(reqDir, stale));
+  for (const file of files) fs.writeFileSync(path.join(reqDir, file.name), file.content);
+  fs.writeFileSync(readmeFile, applyIndex(fs.readFileSync(readmeFile, 'utf8'), indexBlock(cases, config, 'use-case-overview')));
+  return `${cases.length} use case(s), ${files.length} diagram source(s)`;
+}
+
+function cmdIndex(root, config) {
+  report('index', { updated: writeIndex(root, config) });
 }
 
 function planNames(source) {
@@ -300,10 +329,10 @@ async function cmdRender(root, config, flags) {
 function cmdExplore(root, config, quiet = false) {
   const outRoot = path.resolve(root, config.outDir);
   const sources = filesUnder(outRoot, (f) => DIAGRAM_SOURCE.test(f));
-  const items = collectDiagrams(outRoot, sources);
+  const data = collectDiagrams(outRoot, sources);
   const target = path.join(outRoot, 'explorer.html');
-  fs.writeFileSync(target, buildExplorer({ project: config.project, theme: resolveTheme(config.theme), items }));
-  const where = `${rel(root, target)} (${items.length} diagrams)`;
+  fs.writeFileSync(target, buildExplorer({ project: config.project, theme: resolveTheme(config.theme), data }));
+  const where = `${rel(root, target)} (${data.items.length} diagrams)`;
   if (!quiet) report('explore', { written: where });
   return where;
 }
@@ -356,7 +385,7 @@ function cmdCheck(root, config, flags) {
   const warnings = [];
   if (!fs.existsSync(base)) fail(`Output directory not found: ${config.outDir}. Run init first.`);
 
-  const mermaidStart = /^\s*(?:%%\{[\s\S]*?\}%%\s*)?(classDiagram|stateDiagram(-v2)?|sequenceDiagram|erDiagram|flowchart|graph|journey|gantt|pie|mindmap|timeline|requirementDiagram|C4Context|block-beta|architecture-beta)\b/;
+  const mermaidStart = /^\s*(?:%%[^\n]*\n\s*)*(classDiagram|stateDiagram(-v2)?|sequenceDiagram|erDiagram|flowchart|graph|journey|gantt|pie|mindmap|timeline|requirementDiagram|C4Context|block-beta|architecture-beta)\b/;
   for (const file of filesUnder(base, (f) => DIAGRAM_SOURCE.test(f))) {
     const text = fs.readFileSync(file, 'utf8');
     if (file.endsWith('.mmd')) {
@@ -386,7 +415,14 @@ function cmdCheck(root, config, flags) {
   }
 
   const useCases = {};
-  for (const discipline of ['requirements', 'analysis', 'design']) {
+  const requirementsReadme = path.join(dirOf(root, config, 'requirements'), 'README.md');
+  if (fs.existsSync(requirementsReadme)) {
+    const cases = readUseCases(path.resolve(root, config.outDir), config);
+    const expected = indexBlock(cases, config, 'use-case-overview');
+    const actual = fs.readFileSync(requirementsReadme, 'utf8');
+    if (cases.length && !actual.replace(/\r\n/g, '\n').includes(expected.replace(/\r\n/g, '\n'))) warnings.push(`${rel(root, requirementsReadme)}: use-case index is stale, run "index"`);
+  }
+  for (const discipline of ['requirements', 'analysis', 'design', 'implementation']) {
     const dir = path.join(dirOf(root, config, discipline), config.useCaseDir);
     if (!fs.existsSync(dir)) continue;
     for (const entry of fs.readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory())) {
@@ -500,6 +536,7 @@ const USAGE = `rup-flow CLI
   init                         create config and the documentation skeleton
   new use-case <camelName>     scaffold a use case across requirements/analysis/design
   render                       .puml (PlantUML server) and .mmd (Mermaid container) -> .svg, themed
+  index                        regenerate the use-case index table and the use-case diagrams from the cards
   explore                      build explorer.html: interactive viewer of every rendered diagram
   themes                       list the color presets
   instructions --target <t>    add or refresh the rup-flow block in an agent instruction file
@@ -514,7 +551,8 @@ Common flags: --root <dir> --out <docs dir> --lang <code> --project <name>
               --code-root <dir> --plantuml-url <url> --force
 Diagrams:     --diagram-language plantuml|mermaid  --outputs svg,png,html  --preview-png
 Theme:        --theme <preset> --font <name> --font-size <n> --color-<name> "#RRGGBB"
-New use case: --title <text> --actor <name> --requirement <id> --discipline <list>`;
+New use case: --title <text> --actor <names> --package <name> --goal <text> --requirement <id>
+              --includes <useCaseNames> --extends <useCaseNames> --discipline <list>`;
 
 const { positional, flags } = parseArgs(process.argv.slice(2));
 const [command, sub] = positional;
@@ -529,6 +567,7 @@ switch (command) {
     break;
   case 'render': await cmdRender(root, config, flags); break;
   case 'explore': cmdExplore(root, config); break;
+  case 'index': cmdIndex(root, config); break;
   case 'themes': cmdThemes(flags); break;
   case 'instructions': cmdInstructions(root, flags); break;
   case 'check': cmdCheck(root, config, flags); break;

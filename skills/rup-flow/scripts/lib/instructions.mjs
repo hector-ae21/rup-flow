@@ -29,7 +29,7 @@ export function instructionBlock(skillPath) {
     `For requirements, use cases, domain model, UML diagrams, analysis and design documentation, and for code-to-docs or docs-to-code work, follow \`${skillPath}/SKILL.md\` and load its \`references/\` files on demand.`,
     '',
     '- Settings live in `rup.config.json`; documentation goes to its `outDir`. A path given in the request overrides it for that run.',
-    `- CLI: \`node ${skillPath}/scripts/rup.mjs <init | new use-case | scan | render | explore | check | themes>\`.`,
+    `- CLI: \`node ${skillPath}/scripts/rup.mjs <init | new use-case | index | scan | render | explore | check | themes>\`.`,
     '- Mark every statement as confirmed, observed (`path:line`), assumed or open. Do not invent business rules; unknowns go to `05-quality/open-questions.md`.',
     '- Do not claim a diagram was rendered or visually checked unless you ran the render and looked at it.',
     BLOCK_END,

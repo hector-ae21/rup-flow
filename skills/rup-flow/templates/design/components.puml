@@ -1,0 +1,28 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+top to bottom direction
+
+package "Presentation" {
+  component "Web client" as web
+}
+
+package "Application" {
+  component "Orders API" as api
+  component "Order service" as service
+}
+
+package "Infrastructure" {
+  component "Persistence adapter" as adapter
+  database "Database" as db
+}
+
+interface "OrderPort" as port
+
+web -down-> api : HTTPS
+api -down-> service
+service -down-> port : requires
+adapter -up- port : provides
+adapter -down-> db : SQL
+
+@enduml

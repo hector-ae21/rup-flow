@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="CLASS" style="width:274px;height:430px;background:#FFFFFF;" width="274px" height="430px" viewBox="0 0 274 430" zoomAndPan="magnify" preserveAspectRatio="none" contentStyleType="text/css"><?plantuml 1.2026.8?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><!--class user--><g class="entity" data-qualified-name="user" id="ent0001" data-source-line="106"><rect x="60.06" y="12" width="96.004" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="73.06" cy="33.297" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M75.451,38 
+Q74.966,38.25 74.435,38.375 
+Q73.919,38.5 73.341,38.5 
+Q71.279,38.5 70.185,37.141 
+Q69.107,35.781 69.107,33.203 
+Q69.107,30.625 70.185,29.266 
+Q71.279,27.906 73.341,27.906 
+Q73.919,27.906 74.451,28.031 
+Q74.982,28.156 75.451,28.391 
+L75.451,30.641 
+Q74.935,30.156 74.435,29.938 
+Q73.951,29.719 73.435,29.719 
+Q72.326,29.719 71.763,30.594 
+Q71.201,31.469 71.201,33.203 
+Q71.201,34.922 71.763,35.813 
+Q72.326,36.688 73.435,36.688 
+Q73.951,36.688 74.435,36.469 
+Q74.935,36.234 75.451,35.766 
+L75.451,38 
+Z " fill="#1F2937"/><text x="92.453" y="29.995" fill="#000" font-size="14" textLength="53.218" font-style="italic" font-family="Verdana">«actor»</text><text x="85.06" y="46.292" fill="#1F2937" font-size="14" textLength="68.004" font-family="Verdana">Customer</text></g><!--class screen--><g class="entity" data-qualified-name="screen" id="ent0002" data-source-line="107"><rect x="22.37" y="132.6" width="171.397" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="35.37" cy="153.897" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M37.761,158.6 
+Q37.276,158.85 36.745,158.975 
+Q36.229,159.1 35.651,159.1 
+Q33.589,159.1 32.495,157.741 
+Q31.417,156.381 31.417,153.803 
+Q31.417,151.225 32.495,149.866 
+Q33.589,148.506 35.651,148.506 
+Q36.229,148.506 36.761,148.631 
+Q37.292,148.756 37.761,148.991 
+L37.761,151.241 
+Q37.245,150.756 36.745,150.538 
+Q36.261,150.319 35.745,150.319 
+Q34.636,150.319 34.073,151.194 
+Q33.511,152.069 33.511,153.803 
+Q33.511,155.522 34.073,156.413 
+Q34.636,157.288 35.745,157.288 
+Q36.261,157.288 36.745,157.069 
+Q37.245,156.834 37.761,156.366 
+L37.761,158.6 
+Z " fill="#1F2937"/><text x="77.151" y="150.595" fill="#000" font-size="14" textLength="83.836" font-style="italic" font-family="Verdana">«boundary»</text><text x="47.37" y="166.892" fill="#1F2937" font-size="14" textLength="143.397" font-family="Verdana">validateStockScreen</text></g><!--class controller--><g class="entity" data-qualified-name="controller" id="ent0003" data-source-line="108"><rect x="12" y="253.19" width="192.131" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="25" cy="274.487" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M27.391,279.19 
+Q26.906,279.44 26.375,279.565 
+Q25.859,279.69 25.281,279.69 
+Q23.219,279.69 22.125,278.331 
+Q21.047,276.971 21.047,274.393 
+Q21.047,271.815 22.125,270.456 
+Q23.219,269.096 25.281,269.096 
+Q25.859,269.096 26.391,269.221 
+Q26.922,269.346 27.391,269.581 
+L27.391,271.831 
+Q26.875,271.346 26.375,271.128 
+Q25.891,270.909 25.375,270.909 
+Q24.266,270.909 23.703,271.784 
+Q23.141,272.659 23.141,274.393 
+Q23.141,276.112 23.703,277.003 
+Q24.266,277.878 25.375,277.878 
+Q25.891,277.878 26.375,277.659 
+Q26.875,277.424 27.391,276.956 
+L27.391,279.19 
+Z " fill="#1F2937"/><text x="86.082" y="271.185" fill="#000" font-size="14" textLength="65.967" font-style="italic" font-family="Verdana">«control»</text><text x="37" y="287.482" fill="#1F2937" font-size="14" textLength="164.131" font-family="Verdana">validateStockController</text></g><!--class entity--><g class="entity" data-qualified-name="entity" id="ent0004" data-source-line="109"><rect x="67.18" y="373.79" width="81.771" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="80.18" cy="395.087" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M82.571,399.79 
+Q82.086,400.04 81.555,400.165 
+Q81.039,400.29 80.461,400.29 
+Q78.399,400.29 77.305,398.931 
+Q76.227,397.571 76.227,394.993 
+Q76.227,392.415 77.305,391.056 
+Q78.399,389.696 80.461,389.696 
+Q81.039,389.696 81.571,389.821 
+Q82.102,389.946 82.571,390.181 
+L82.571,392.431 
+Q82.055,391.946 81.555,391.727 
+Q81.071,391.509 80.555,391.509 
+Q79.446,391.509 78.883,392.384 
+Q78.321,393.259 78.321,394.993 
+Q78.321,396.712 78.883,397.602 
+Q79.446,398.477 80.555,398.477 
+Q81.071,398.477 81.555,398.259 
+Q82.055,398.024 82.571,397.556 
+L82.571,399.79 
+Z " fill="#1F2937"/><text x="90.18" y="391.785" fill="#000" font-size="14" textLength="57.771" font-style="italic" font-family="Verdana">«entity»</text><text x="98.629" y="408.082" fill="#1F2937" font-size="14" textLength="40.872" font-family="Verdana">Entity</text></g><!--link user to screen--><g class="link" data-entity-1="ent0001" data-entity-2="ent0002" id="lnk5" data-source-line="111" data-link-type="dependency"><path d="M108.07,54.96 C108.07,76.73 108.07,105.8 108.07,127.47" style="stroke:#475569;stroke-width:1;" fill="none" id="user-to-screen" codeLine="111"/><polygon points="108.07,132.47,112.07,123.47,108.07,127.47,104.07,123.47,108.07,132.47" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="109.07" y="98.595" fill="#1F2937" font-size="14" textLength="47.134" font-family="Verdana">1: acts</text></g><!--link screen to controller--><g class="link" data-entity-1="ent0002" data-entity-2="ent0003" id="lnk6" data-source-line="112" data-link-type="dependency"><path d="M108.07,175.55 C108.07,197.32 108.07,226.39 108.07,248.07" style="stroke:#475569;stroke-width:1;" fill="none" id="screen-to-controller" codeLine="112"/><polygon points="108.07,253.07,112.07,244.07,108.07,248.07,104.07,244.07,108.07,253.07" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="109.07" y="219.185" fill="#1F2937" font-size="14" textLength="78.894" font-family="Verdana">2: requests</text></g><!--link controller to entity--><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" id="lnk7" data-source-line="113" data-link-type="dependency"><path d="M108.07,296.15 C108.07,317.91 108.07,346.99 108.07,368.66" style="stroke:#475569;stroke-width:1;" fill="none" id="controller-to-entity" codeLine="113"/><polygon points="108.07,373.66,112.07,364.66,108.07,368.66,104.07,364.66,108.07,373.66" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="109.07" y="339.785" fill="#1F2937" font-size="14" textLength="149.064" font-family="Verdana">3: reads and updates</text></g></g></svg>

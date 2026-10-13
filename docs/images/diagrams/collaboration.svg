@@ -1,286 +1,191 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" data-diagram-type="CLASS" style="width:426px;height:430px;background:#FFFFFF;" width="426px" height="430px" viewBox="0 0 426 430" zoomAndPan="magnify" preserveAspectRatio="none" contentStyleType="text/css"><?plantuml 1.2026.8?><defs/><g font-family="sans-serif" lengthAdjust="spacing"><!--class user--><g class="entity" data-qualified-name="user" id="ent0001" data-source-line="106"><rect x="95.88" y="12" width="96.004" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="108.88" cy="33.297" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M111.271,38 
 
-
 Q110.786,38.25 110.255,38.375 
-
 
 Q109.739,38.5 109.161,38.5 
 
-
 Q107.099,38.5 106.005,37.141 
-
 
 Q104.927,35.781 104.927,33.203 
 
-
 Q104.927,30.625 106.005,29.266 
-
 
 Q107.099,27.906 109.161,27.906 
 
-
 Q109.739,27.906 110.271,28.031 
-
 
 Q110.802,28.156 111.271,28.391 
 
-
 L111.271,30.641 
-
 
 Q110.755,30.156 110.255,29.938 
 
-
 Q109.771,29.719 109.255,29.719 
-
 
 Q108.146,29.719 107.583,30.594 
 
-
 Q107.021,31.469 107.021,33.203 
-
 
 Q107.021,34.922 107.583,35.813 
 
-
 Q108.146,36.688 109.255,36.688 
-
 
 Q109.771,36.688 110.255,36.469 
 
-
 Q110.755,36.234 111.271,35.766 
-
 
 L111.271,38 
 
-
 Z " fill="#1F2937"/><text x="128.273" y="29.995" fill="#000" font-size="14" textLength="53.218" font-style="italic" font-family="Verdana">«actor»</text><text x="120.88" y="46.292" fill="#1F2937" font-size="14" textLength="68.004" font-family="Verdana">Customer</text></g><!--class screen--><g class="entity" data-qualified-name="screen" id="ent0002" data-source-line="107"><rect x="72.67" y="132.6" width="142.434" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="85.67" cy="153.897" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M88.061,158.6 
-
 
 Q87.576,158.85 87.045,158.975 
 
-
 Q86.529,159.1 85.951,159.1 
-
 
 Q83.889,159.1 82.795,157.741 
 
-
 Q81.717,156.381 81.717,153.803 
-
 
 Q81.717,151.225 82.795,149.866 
 
-
 Q83.889,148.506 85.951,148.506 
-
 
 Q86.529,148.506 87.061,148.631 
 
-
 Q87.592,148.756 88.061,148.991 
-
 
 L88.061,151.241 
 
-
 Q87.545,150.756 87.045,150.538 
-
 
 Q86.561,150.319 86.045,150.319 
 
-
 Q84.936,150.319 84.373,151.194 
-
 
 Q83.811,152.069 83.811,153.803 
 
-
 Q83.811,155.522 84.373,156.413 
-
 
 Q84.936,157.288 86.045,157.288 
 
-
 Q86.561,157.288 87.045,157.069 
-
 
 Q87.545,156.834 88.061,156.366 
 
-
 L88.061,158.6 
-
 
 Z " fill="#1F2937"/><text x="112.969" y="150.595" fill="#000" font-size="14" textLength="83.836" font-style="italic" font-family="Verdana">«boundary»</text><text x="97.67" y="166.892" fill="#1F2937" font-size="14" textLength="114.434" font-family="Verdana">CheckoutScreen</text></g><!--class controller--><g class="entity" data-qualified-name="controller" id="ent0003" data-source-line="108"><rect x="51.87" y="253.19" width="184.03" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="64.87" cy="274.487" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M67.261,279.19 
 
-
 Q66.776,279.44 66.245,279.565 
-
 
 Q65.729,279.69 65.151,279.69 
 
-
 Q63.089,279.69 61.995,278.331 
-
 
 Q60.917,276.971 60.917,274.393 
 
-
 Q60.917,271.815 61.995,270.456 
-
 
 Q63.089,269.096 65.151,269.096 
 
-
 Q65.729,269.096 66.261,269.221 
-
 
 Q66.792,269.346 67.261,269.581 
 
-
 L67.261,271.831 
-
 
 Q66.745,271.346 66.245,271.128 
 
-
 Q65.761,270.909 65.245,270.909 
-
 
 Q64.136,270.909 63.573,271.784 
 
-
 Q63.011,272.659 63.011,274.393 
-
 
 Q63.011,276.112 63.573,277.003 
 
-
 Q64.136,277.878 65.245,277.878 
-
 
 Q65.761,277.878 66.245,277.659 
 
-
 Q66.745,277.424 67.261,276.956 
-
 
 L67.261,279.19 
 
-
 Z " fill="#1F2937"/><text x="121.902" y="271.185" fill="#000" font-size="14" textLength="65.967" font-style="italic" font-family="Verdana">«control»</text><text x="76.87" y="287.482" fill="#1F2937" font-size="14" textLength="156.03" font-family="Verdana">CreateOrderController</text></g><!--class order--><g class="entity" data-qualified-name="order" id="ent0004" data-source-line="109"><rect x="12" y="373.79" width="81.771" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="25" cy="395.087" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M27.391,399.79 
-
 
 Q26.906,400.04 26.375,400.165 
 
-
 Q25.859,400.29 25.281,400.29 
-
 
 Q23.219,400.29 22.125,398.931 
 
-
 Q21.047,397.571 21.047,394.993 
-
 
 Q21.047,392.415 22.125,391.056 
 
-
 Q23.219,389.696 25.281,389.696 
-
 
 Q25.859,389.696 26.391,389.821 
 
-
 Q26.922,389.946 27.391,390.181 
-
 
 L27.391,392.431 
 
-
 Q26.875,391.946 26.375,391.727 
-
 
 Q25.891,391.509 25.375,391.509 
 
-
 Q24.266,391.509 23.703,392.384 
-
 
 Q23.141,393.259 23.141,394.993 
 
-
 Q23.141,396.712 23.703,397.602 
-
 
 Q24.266,398.477 25.375,398.477 
 
-
 Q25.891,398.477 26.375,398.259 
-
 
 Q26.875,398.024 27.391,397.556 
 
-
 L27.391,399.79 
-
 
 Z " fill="#1F2937"/><text x="35" y="391.785" fill="#000" font-size="14" textLength="57.771" font-style="italic" font-family="Verdana">«entity»</text><text x="43.87" y="408.082" fill="#1F2937" font-size="14" textLength="40.031" font-family="Verdana">Order</text></g><!--class product--><g class="entity" data-qualified-name="product" id="ent0005" data-source-line="110"><rect x="195" y="373.79" width="81.771" height="42.594" fill="#E8F0FA" style="stroke:#475569;stroke-width:1;" rx="3" ry="3"/><ellipse cx="208" cy="395.087" rx="9" ry="9" fill="#FFF" style="stroke:#000;stroke-width:1;"/><path d="M210.391,399.79 
 
-
 Q209.906,400.04 209.375,400.165 
-
 
 Q208.859,400.29 208.281,400.29 
 
-
 Q206.219,400.29 205.125,398.931 
-
 
 Q204.047,397.571 204.047,394.993 
 
-
 Q204.047,392.415 205.125,391.056 
-
 
 Q206.219,389.696 208.281,389.696 
 
-
 Q208.859,389.696 209.391,389.821 
-
 
 Q209.922,389.946 210.391,390.181 
 
-
 L210.391,392.431 
-
 
 Q209.875,391.946 209.375,391.727 
 
-
 Q208.891,391.509 208.375,391.509 
-
 
 Q207.266,391.509 206.703,392.384 
 
-
 Q206.141,393.259 206.141,394.993 
-
 
 Q206.141,396.712 206.703,397.602 
 
-
 Q207.266,398.477 208.375,398.477 
-
 
 Q208.891,398.477 209.375,398.259 
 
-
 Q209.875,398.024 210.391,397.556 
 
-
 L210.391,399.79 
-
 
 Z " fill="#1F2937"/><text x="218" y="391.785" fill="#000" font-size="14" textLength="57.771" font-style="italic" font-family="Verdana">«entity»</text><text x="220.03" y="408.082" fill="#1F2937" font-size="14" textLength="53.71" font-family="Verdana">Product</text></g><!--link user to screen--><g class="link" data-entity-1="ent0001" data-entity-2="ent0002" id="lnk6" data-source-line="112" data-link-type="dependency"><path d="M143.89,54.96 C143.89,76.73 143.89,105.8 143.89,127.47" style="stroke:#475569;stroke-width:1;" fill="none" id="user-to-screen" codeLine="112"/><polygon points="143.89,132.47,147.89,123.47,143.89,127.47,139.89,123.47,143.89,132.47" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="144.89" y="98.595" fill="#1F2937" font-size="14" textLength="147.082" font-family="Verdana">1: confirms checkout</text></g><!--link screen to controller--><g class="link" data-entity-1="ent0002" data-entity-2="ent0003" id="lnk7" data-source-line="113" data-link-type="dependency"><path d="M143.89,175.55 C143.89,197.32 143.89,226.39 143.89,248.07" style="stroke:#475569;stroke-width:1;" fill="none" id="screen-to-controller" codeLine="113"/><polygon points="143.89,253.07,147.89,244.07,143.89,248.07,139.89,244.07,143.89,253.07" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="144.89" y="219.185" fill="#1F2937" font-size="14" textLength="210.547" font-family="Verdana">2: createOrder(lines, address)</text></g><!--link controller to product--><g class="link" data-entity-1="ent0003" data-entity-2="ent0005" id="lnk8" data-source-line="114" data-link-type="dependency"><path d="M165.75,296.24 C180.35,310.09 196.89,325.79 196.89,325.79 C196.89,325.79 210.222,349.127 221.702,369.247" style="stroke:#475569;stroke-width:1;" fill="none" id="controller-to-product" codeLine="114"/><polygon points="224.18,373.59,223.194,363.791,221.702,369.247,216.246,367.755,224.18,373.59" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="207.31" y="339.785" fill="#1F2937" font-size="14" textLength="203.424" font-family="Verdana">3: checks and reserves stock</text></g><!--link controller to order--><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" id="lnk9" data-source-line="115" data-link-type="dependency"><path d="M105.11,296.24 C79.22,310.09 49.89,325.79 49.89,325.79 C49.89,325.79 49.89,343.79 49.89,343.79 C49.89,343.79 50.521,354.489 51.351,368.349" style="stroke:#475569;stroke-width:1;" fill="none" id="controller-to-order" codeLine="115"/><polygon points="51.65,373.34,55.105,364.117,51.351,368.349,47.119,364.595,51.65,373.34" fill="#475569" style="stroke:#475569;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text x="50.89" y="339.785" fill="#1F2937" font-size="14" textLength="141.278" font-family="Verdana">4: creates with lines</text></g></g></svg>

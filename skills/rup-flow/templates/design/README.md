@@ -15,6 +15,12 @@ Style, packages or layers, and the reason for each choice. Decisions are recorde
 
 ![Design classes](./class-diagram.svg)
 
+## Components
+
+![Components](./components/components.svg)
+
+The components, the interfaces they offer and require, and which one implements which. Deployment shows where they run; this diagram shows how they are assembled.
+
 ## Data model
 
 ![Data model](./data-model/data-model.svg)

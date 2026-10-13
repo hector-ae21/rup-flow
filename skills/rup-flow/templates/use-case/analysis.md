@@ -1,12 +1,15 @@
 ---
 id: {{ucId}}
 name: {{ucName}}
+title: {{ucTitle}}
 status: draft
 origin: requirements
 sourceOfTruth: model
 ---
 
 # {{ucId}} {{ucTitle}} — analysis realization
+
+{{navAnalysis}}
 
 Requirements: [README]({{requirementsLink}}/README.md)
 

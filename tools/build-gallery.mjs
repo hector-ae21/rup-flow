@@ -87,6 +87,9 @@ try {
     sequence: d('03-design/use-cases/createOrder/sequence.svg'),
     'data-model': d('03-design/data-model/data-model.svg'),
     deployment: d('03-design/deployment/deployment.svg'),
+    components: d('03-design/components/components.svg'),
+    'use-case-overview': d('01-requirements/use-case-overview.svg'),
+    'use-cases-customer': d('01-requirements/use-cases-customer.svg'),
   };
   for (const [name, file] of Object.entries(types)) put(file, 'diagrams', `${name}.svg`);
 
@@ -108,6 +111,9 @@ try {
       'explorer-specification': '#d=01-requirements%2Fuse-cases%2FcreateOrder%2Fspecification.svg',
       'explorer-search': '#d=03-design%2Fclass-diagram.svg&find=Service',
       'explorer-source': '#d=01-requirements%2Fuse-cases%2FcreateOrder%2Fsequence.svg&tab=source',
+      'explorer-usecases': '#d=01-requirements%2Fuse-case-overview.svg',
+      'explorer-document': '#d=01-requirements%2Fuse-cases%2FcreateOrder%2Fspecification.svg&tab=doc',
+      'explorer-global-search': '#q=stock&group=usecase',
       'explorer-dark': '#d=03-design%2Fuse-cases%2FcreateOrder%2Fsequence.svg&dark=1',
     };
     for (const [name, hash] of Object.entries(shots)) {

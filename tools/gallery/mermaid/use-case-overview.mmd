@@ -1,0 +1,17 @@
+flowchart LR
+  A_Customer(["Customer"])
+  A_Warehouse(["Warehouse"])
+  subgraph SYS ["Online shop"]
+    subgraph P_Ordering ["Ordering"]
+      UC_createOrder("Create order")
+      UC_validateStock("Validate stock")
+      UC_cancelOrder("Cancel order")
+    end
+    subgraph P_Fulfilment ["Fulfilment"]
+      UC_shipOrder("Ship order")
+    end
+  end
+  A_Customer --> UC_createOrder
+  A_Customer --> UC_cancelOrder
+  A_Warehouse --> UC_shipOrder
+  UC_createOrder -.->|include| UC_validateStock

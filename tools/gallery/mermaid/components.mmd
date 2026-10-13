@@ -1,0 +1,24 @@
+flowchart TB
+  subgraph presentation [Presentation]
+    storefront["Storefront"]
+    console["Warehouse console"]
+  end
+  subgraph application [Application]
+    api["Orders API"]
+    orders["Order service"]
+    stock["Stock service"]
+  end
+  subgraph infrastructure [Infrastructure]
+    adapter["Persistence adapter"]
+    db[("PostgreSQL")]
+  end
+  port{{"OrderPort"}}
+
+  storefront -->|HTTPS| api
+  console -->|HTTPS| api
+  api --> orders
+  orders -->|validates stock| stock
+  orders -->|requires| port
+  stock -->|requires| port
+  adapter -.->|provides| port
+  adapter -->|SQL| db

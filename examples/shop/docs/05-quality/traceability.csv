@@ -1,2 +1,5 @@
 requirement,use_case,name,analysis,design,code,test
 RF-001,UC-001,createOrder,docs/02-analysis/use-cases/createOrder,docs/03-design/use-cases/createOrder,,
+RF-001,UC-002,validateStock,docs/02-analysis/use-cases/validateStock,docs/03-design/use-cases/validateStock,,
+RF-002,UC-003,cancelOrder,docs/02-analysis/use-cases/cancelOrder,docs/03-design/use-cases/cancelOrder,,
+RF-003,UC-004,shipOrder,docs/02-analysis/use-cases/shipOrder,docs/03-design/use-cases/shipOrder,,
