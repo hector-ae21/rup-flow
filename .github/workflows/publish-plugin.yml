@@ -1,0 +1,55 @@
+name: Publish claude-plugin branch
+
+# The directory and the marketplace read the plugin from the `claude-plugin` branch, which holds
+# only the skill, its agents and the manifests. It is regenerated from each release tag.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to publish (for example v0.3.1)
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-plugin
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish the claude-plugin branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: npm run check
+      - name: Build the plugin payload
+        run: node tools/build-plugin.mjs --out "$RUNNER_TEMP/plugin"
+      - name: Commit it to the claude-plugin branch
+        run: |
+          label="${{ inputs.tag || github.ref_name }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin claude-plugin >/dev/null 2>&1; then
+            git fetch origin claude-plugin
+            git switch -C claude-plugin FETCH_HEAD
+          else
+            git switch --orphan claude-plugin
+          fi
+          git rm -rq --ignore-unmatch .
+          cp -r "$RUNNER_TEMP/plugin/." .
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The claude-plugin branch is already up to date"
+            exit 0
+          fi
+          git commit -m "release: ${label}" -m "Generated from ${label} by the publish-plugin workflow."
+          git push origin claude-plugin

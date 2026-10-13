@@ -1,7 +1,7 @@
 {
   "name": "rup-flow",
   "displayName": "RUP Flow",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Generate RUP documentation, PlantUML diagrams and code in both directions: requirements to models to code, and code back to models.",
   "author": {
     "name": "hector-ae21",

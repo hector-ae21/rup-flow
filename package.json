@@ -1,6 +1,6 @@
 {
   "name": "rup-flow",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "Claude skill that moves a project between requirements, RUP documentation and code",
   "type": "module",

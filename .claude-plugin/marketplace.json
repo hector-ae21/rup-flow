@@ -8,7 +8,11 @@
   "plugins": [
     {
       "name": "rup-flow",
-      "source": "./",
+      "source": {
+        "source": "github",
+        "repo": "hector-ae21/rup-flow",
+        "ref": "claude-plugin"
+      },
       "description": "Generate RUP documentation, PlantUML diagrams and code in both directions."
     }
   ]

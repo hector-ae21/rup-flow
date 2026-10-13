@@ -59,7 +59,7 @@ for (const field of ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl
 const binaries = walk(ROOT).filter((f) => /\.(png|jpe?g|gif|webp|ico|woff2?|ttf|otf)$/i.test(f) && !f.includes(`${path.sep}node_modules${path.sep}`) && !f.includes(`${path.sep}.git${path.sep}`) && !f.includes(`${path.sep}dist${path.sep}`));
 if (binaries.length) fail(`binary files in the plugin tree are held for manual review by the directory: ${binaries.map((f) => path.relative(ROOT, f)).join(', ')}`);
 
-const markdown = [...walk(ROOT)].filter((f) => f.endsWith('.md') && !f.includes('node_modules') && !f.includes(`${path.sep}.git${path.sep}`));
+const markdown = [...walk(ROOT)].filter((f) => f.endsWith('.md') && !/(^|[\\/])(node_modules|\.git|dist)[\\/]/.test(path.relative(ROOT, f)));
 const linkPattern = /\]\(([^)\s]+)\)/g;
 for (const file of markdown) {
   const text = fs.readFileSync(file, 'utf8');
