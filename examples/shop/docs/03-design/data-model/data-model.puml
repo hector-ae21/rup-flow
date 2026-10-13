@@ -1,0 +1,38 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype polyline
+top to bottom direction
+
+entity "order" as order {
+  * id : uuid <<PK>>
+  --
+  number : varchar(20)
+  customer_id : uuid <<FK>>
+  status : varchar(12)
+  placed_at : timestamptz
+  total : numeric(12,2)
+}
+
+entity "order_line" as line {
+  * id : uuid <<PK>>
+  --
+  order_id : uuid <<FK>>
+  product_id : uuid <<FK>>
+  quantity : int
+  unit_price : numeric(12,2)
+}
+
+entity "product" as product {
+  * id : uuid <<PK>>
+  --
+  sku : varchar(40)
+  name : varchar(120)
+  price : numeric(12,2)
+  stock : int
+}
+
+order ||--o{ line
+product ||--o{ line
+
+@enduml

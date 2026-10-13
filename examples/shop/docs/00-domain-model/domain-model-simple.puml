@@ -1,0 +1,19 @@
+@startuml
+!theme plain
+hide empty members
+hide circle
+skinparam linetype polyline
+top to bottom direction
+
+class Order
+class Customer
+class OrderLine
+class Product
+class Address
+
+Order *-- OrderLine
+Customer -- Order
+OrderLine --> Product
+Order --> Address
+
+@enduml
