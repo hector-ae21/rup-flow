@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
       - run: npm run validate
@@ -38,7 +38,7 @@ jobs:
         node: [18, 22]
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
       - run: npm test
@@ -55,7 +55,7 @@ jobs:
           PLANTUML_SECURITY_PROFILE: SANDBOX
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: Wait for the server
@@ -86,7 +86,7 @@ jobs:
           PLANTUML_SECURITY_PROFILE: SANDBOX
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: Wait for the PlantUML server (wireframes stay PlantUML)
