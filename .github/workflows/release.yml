@@ -3,9 +3,17 @@ name: Release
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build the release from (for example v0.1.0)
+        required: true
 
 permissions:
   contents: write
+
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
 
 jobs:
   release:
@@ -13,19 +21,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: Tag must match the package version
         run: |
           version=$(node -p "require('./package.json').version")
-          [ "${GITHUB_REF_NAME}" = "v${version}" ] || { echo "tag ${GITHUB_REF_NAME} does not match version ${version}"; exit 1; }
+          [ "${TAG}" = "v${version}" ] || { echo "tag ${TAG} does not match version ${version}"; exit 1; }
       - run: npm run check
       - run: node tools/package-web.mjs
       - name: Create the GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" dist/rup-flow-skill.zip \
-            --title "rup-flow ${GITHUB_REF_NAME}" \
-            --notes-file <(awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md)
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists"; exit 1
+          fi
+          gh release create "${TAG}" dist/rup-flow-skill.zip \
+            --title "${TAG}" \
+            --notes-file <(awk -v v="${TAG#v}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md)
