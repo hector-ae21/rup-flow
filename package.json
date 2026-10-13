@@ -9,7 +9,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test",
     "validate": "node tools/validate.mjs",
     "icon": "node tools/make-icon.mjs",
     "package:web": "node tools/package-web.mjs",
