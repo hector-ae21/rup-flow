@@ -52,8 +52,8 @@ if (skill.compatibility && skill.compatibility.length > 500) fail('SKILL.md: com
 if (!skill.license) fail('SKILL.md: license is required for portable distribution');
 if (plugin.name !== marketplace.plugins[0].name) fail('plugin.json and marketplace.json disagree on the plugin name');
 if (plugin.version !== pkg.version) fail(`plugin.json version ${plugin.version} differs from package.json ${pkg.version}`);
-for (const key of ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl']) {
-  if (key in plugin) fail(`plugin.json: "${key}" is read only by the directory and shows up as a finding; set it in the submission portal instead`);
+for (const field of ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl']) {
+  if (field in plugin) fail(`plugin.json: "${field}" is read only by the directory and shows up as a finding; set it in the submission portal instead`);
 }
 const binaries = walk(ROOT).filter((f) => /\.(png|jpe?g|gif|webp|ico|woff2?|ttf|otf)$/i.test(f) && !f.includes(`${path.sep}node_modules${path.sep}`) && !f.includes(`${path.sep}.git${path.sep}`) && !f.includes(`${path.sep}dist${path.sep}`));
 if (binaries.length) fail(`binary files in the plugin tree are held for manual review by the directory: ${binaries.map((f) => path.relative(ROOT, f)).join(', ')}`);

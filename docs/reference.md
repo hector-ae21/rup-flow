@@ -53,7 +53,7 @@ node <skill-dir>/scripts/rup.mjs <command> [flags]
 | `health` | Render a test diagram through the configured server |
 | `config` | Print the resolved configuration |
 
-Flags: `--root <dir>`, `--out <dir>`, `--lang <code>`, `--project <name>`, `--code-root <dir>`, `--plantuml-url <url>`, `--force`, `--diagram-language <plantuml|mermaid>`, `--outputs <list>`, `--preview-png`, `--theme <preset>`, `--font <name>`, `--font-size <n>`, `--color-<key> "#RRGGBB"` (see [formats and themes](formats-and-themes.md)). For `new use-case`: `--title`, `--actor`, `--requirement`, `--discipline requirements,analysis,design`, `--id`.
+Flags: `--root <dir>`, `--out <dir>`, `--lang <code>`, `--project <name>`, `--code-root <dir>`, `--plantuml-url <url>`, `--force`, `--diagram-language <plantuml|mermaid>`, `--outputs <list>`, `--preview-png`, `--theme <preset>`, `--font <name>`, `--font-size <n>`, `--color-<name> "#RRGGBB"` (see [formats and themes](formats-and-themes.md)). For `new use-case`: `--title`, `--actor`, `--requirement`, `--discipline requirements,analysis,design`, `--id`.
 
 Exit codes: `0` success; `1` errors (or warnings with `--strict`, or failed renders).
 

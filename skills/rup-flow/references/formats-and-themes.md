@@ -12,7 +12,7 @@ Read this when the user mentions Mermaid, a color palette, a theme, fonts, inter
 | `theme.colors` | `background`, `text`, `line`, `border`, `primary`, `secondary`, `accent`, `note` as `#RRGGBB`; `levels` as four `#RRGGBB` | Overrides on top of the preset |
 | `theme.font`, `theme.fontSize`, `theme.roundCorner` | font family, number, number | Typography and corners |
 
-Flags with the same meaning: `--diagram-language`, `--outputs`, `--theme`, `--color-<key>`, `--font`, `--font-size`. Ask the user once, at `init`, which language and theme they want if it is not already in the config or the prompt.
+Flags with the same meaning: `--diagram-language`, `--outputs`, `--theme`, `--color-<name>`, `--font`, `--font-size`. Ask the user once, at `init`, which language and theme they want if it is not already in the config or the prompt.
 
 ## Writing sources
 

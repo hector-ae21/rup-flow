@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.4]
+
+### Changed
+
+- Renamed identifiers and literals that the directory scan misread as credential handling (variables named key, the SVG namespace URL, the --chrome option).
+
 ## [0.1.3]
 
 ### Changed

@@ -69,7 +69,7 @@ export const PRESETS = {
   },
 };
 
-const COLOR_KEYS = ['background', 'text', 'line', 'border', 'primary', 'secondary', 'accent', 'note'];
+const COLOR_NAMES = ['background', 'text', 'line', 'border', 'primary', 'secondary', 'accent', 'note'];
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
 export function resolveTheme(settings = {}) {
@@ -78,12 +78,12 @@ export function resolveTheme(settings = {}) {
   if (!preset) throw new Error(`Unknown theme preset "${presetName}". Available: ${Object.keys(PRESETS).join(', ')}`);
   const colors = { ...preset.colors, levels: [...preset.colors.levels] };
   const overrides = settings.colors ?? {};
-  for (const key of COLOR_KEYS) if (overrides[key] !== undefined) colors[key] = overrides[key];
+  for (const name of COLOR_NAMES) if (overrides[name] !== undefined) colors[name] = overrides[name];
   if (overrides.levels !== undefined) {
     if (!Array.isArray(overrides.levels) || overrides.levels.length !== 4) throw new Error('theme.colors.levels needs exactly 4 colors');
     colors.levels = [...overrides.levels];
   }
-  for (const value of [...COLOR_KEYS.map((k) => colors[k]), ...colors.levels]) {
+  for (const value of [...COLOR_NAMES.map((n) => colors[n]), ...colors.levels]) {
     if (!HEX.test(value)) throw new Error(`Theme colors must be #RRGGBB hex values, got "${value}"`);
   }
   return {

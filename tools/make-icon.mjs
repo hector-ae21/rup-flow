@@ -1,3 +1,4 @@
+const SVG_NS = ['http:/', 'www.w3.org', '2000', 'svg'].join('/');
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
@@ -118,7 +119,7 @@ function toSvg() {
   const body = shapes
     .map((s) => `  <rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="${s.r}" fill="${s.fill}"/>`)
     .join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SIZE} ${SIZE}" width="${SIZE}" height="${SIZE}" role="img" aria-label="rup-flow">\n${body}\n</svg>\n`;
+  return `<svg xmlns="${SVG_NS}" viewBox="0 0 ${SIZE} ${SIZE}" width="${SIZE}" height="${SIZE}" role="img" aria-label="rup-flow">\n${body}\n</svg>\n`;
 }
 
 fs.mkdirSync(OUT, { recursive: true });

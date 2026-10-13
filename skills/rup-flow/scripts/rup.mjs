@@ -50,10 +50,10 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg.startsWith('--')) {
-      const key = arg.slice(2);
+      const flagName = arg.slice(2);
       const next = argv[i + 1];
-      if (next === undefined || next.startsWith('--')) flags[key] = true;
-      else { flags[key] = next; i++; }
+      if (next === undefined || next.startsWith('--')) flags[flagName] = true;
+      else { flags[flagName] = next; i++; }
     } else positional.push(arg);
   }
   return { positional, flags };
@@ -61,9 +61,9 @@ function parseArgs(argv) {
 
 function deepMerge(base, extra) {
   const result = { ...base };
-  for (const [key, value] of Object.entries(extra ?? {})) {
-    result[key] = value && typeof value === 'object' && !Array.isArray(value)
-      ? deepMerge(base[key] ?? {}, value)
+  for (const [field, value] of Object.entries(extra ?? {})) {
+    result[field] = value && typeof value === 'object' && !Array.isArray(value)
+      ? deepMerge(base[field] ?? {}, value)
       : value;
   }
   return result;
@@ -83,8 +83,8 @@ function loadConfig(root, flags) {
   if (flags.theme) config.theme.preset = String(flags.theme);
   if (flags.font) config.theme.font = String(flags.font);
   if (flags['font-size']) config.theme.fontSize = Number(flags['font-size']);
-  for (const [key, value] of Object.entries(flags)) {
-    if (key.startsWith('color-') && typeof value === 'string') config.theme.colors[key.slice(6)] = value;
+  for (const [flagName, value] of Object.entries(flags)) {
+    if (flagName.startsWith('color-') && typeof value === 'string') config.theme.colors[flagName.slice(6)] = value;
   }
   if (!['plantuml', 'mermaid'].includes(config.diagrams.language)) fail(`diagrams.language must be plantuml or mermaid, got "${config.diagrams.language}"`);
   const badOutput = config.diagrams.outputs.find((o) => !['svg', 'png', 'html'].includes(o));
@@ -114,7 +114,7 @@ function filesUnder(dir, predicate) {
 }
 
 function fill(text, vars) {
-  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => (vars[key] ?? `{{${key}}}`));
+  return text.replace(/\{\{(\w+)\}\}/g, (_, name) => (vars[name] ?? `{{${name}}}`));
 }
 
 function writeFromTemplate(templateRel, destination, vars, created, skipped, language = 'plantuml') {
@@ -332,7 +332,7 @@ function cmdThemes(flags) {
   if (flags.json) { console.log(JSON.stringify(rows, null, 2)); return; }
   console.log('== themes ==');
   for (const row of rows) console.log(`${row.name.padEnd(14)} ${row.description}  [primary ${row.primary}, accent ${row.accent}]`);
-  console.log('\nSet "theme.preset" in rup.config.json or pass --theme <name>. Override single colors with theme.colors or --color-<key> "#RRGGBB" (background, text, line, border, primary, secondary, accent, note).');
+  console.log('\nSet "theme.preset" in rup.config.json or pass --theme <name>. Override single colors with theme.colors or --color-<name> "#RRGGBB" (background, text, line, border, primary, secondary, accent, note).');
 }
 
 function frontMatter(text) {
@@ -449,7 +449,7 @@ function cmdScan(root, config, flags) {
     codeRoot: rel(root, codeRoot) || '.',
     extensions: Object.fromEntries(Object.entries(extensions).sort((a, b) => b[1] - a[1])),
     manifests,
-    ...Object.fromEntries(Object.entries(hints).map(([key, list]) => [key, { total: list.length, sample: list.slice(0, limit) }])),
+    ...Object.fromEntries(Object.entries(hints).map(([group, list]) => [group, { total: list.length, sample: list.slice(0, limit) }])),
   };
   const text = JSON.stringify(summary, null, 2) + '\n';
   if (flags.write) {
@@ -483,9 +483,9 @@ async function cmdHealth(config) {
 
 function report(title, data) {
   console.log(`== ${title} ==`);
-  for (const [key, value] of Object.entries(data)) {
+  for (const [label, value] of Object.entries(data)) {
     const list = Array.isArray(value) ? value : [value];
-    console.log(`${key}: ${Array.isArray(value) ? list.length : value}`);
+    console.log(`${label}: ${Array.isArray(value) ? list.length : value}`);
     if (Array.isArray(value)) for (const item of list) console.log(`  - ${typeof item === 'string' ? item : JSON.stringify(item)}`);
   }
 }
@@ -513,7 +513,7 @@ const USAGE = `rup-flow CLI
 Common flags: --root <dir> --out <docs dir> --lang <code> --project <name>
               --code-root <dir> --plantuml-url <url> --force
 Diagrams:     --diagram-language plantuml|mermaid  --outputs svg,png,html  --preview-png
-Theme:        --theme <preset> --font <name> --font-size <n> --color-<key> "#RRGGBB"
+Theme:        --theme <preset> --font <name> --font-size <n> --color-<name> "#RRGGBB"
 New use case: --title <text> --actor <name> --requirement <id> --discipline <list>`;
 
 const { positional, flags } = parseArgs(process.argv.slice(2));

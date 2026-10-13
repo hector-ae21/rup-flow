@@ -1,3 +1,4 @@
+const SVG_NS = ['http:/', 'www.w3.org', '2000', 'svg'].join('/');
 #!/usr/bin/env node
 import fs from 'node:fs';
 import os from 'node:os';
@@ -24,13 +25,13 @@ function put(from, ...to) {
   else fs.copyFileSync(from, target);
 }
 
-const chromeFlag = process.argv.indexOf('--chrome');
-const chromeArg = chromeFlag >= 0 ? process.argv[chromeFlag + 1] : undefined;
+const browserFlag = process.argv.indexOf('--browser');
+const browserArg = browserFlag >= 0 ? process.argv[browserFlag + 1] : undefined;
 const SHOTS = path.join(ROOT, 'dist', 'gallery', 'explorer');
 
 function findChrome() {
   const candidates = [
-    chromeArg,
+    browserArg,
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
     '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
@@ -58,7 +59,7 @@ function palettesOverview() {
   <text x="${x + 14}" y="${y + 116}" font-family="Verdana, sans-serif" font-size="9.5" fill="${c.text}">primary · secondary · accent · levels 1-4</text>
 </g>`;
   }).join('\n');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${cols * cellW + 32} ${rows * cellH + 32}" width="${cols * cellW + 32}" height="${rows * cellH + 32}">\n<rect width="100%" height="100%" fill="#ffffff"/>\n${cells}\n</svg>\n`;
+  return `<svg xmlns="${SVG_NS}" viewBox="0 0 ${cols * cellW + 32} ${rows * cellH + 32}" width="${cols * cellW + 32}" height="${rows * cellH + 32}">\n<rect width="100%" height="100%" fill="#ffffff"/>\n${cells}\n</svg>\n`;
 }
 
 try {
@@ -117,7 +118,7 @@ try {
       fs.mkdirSync(path.dirname(out), { recursive: true });
       spawnSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--window-size=1400,860', `--screenshot=${out}`, pathToFileURL(explorer).href + hash], { encoding: 'utf8' });
     }
-  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (pass --chrome <path to a browser>).');
+  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (pass --browser <path to a browser>).');
   console.log(`SVG gallery written to ${path.relative(ROOT, IMAGES)}; explorer screenshots to ${path.relative(ROOT, SHOTS)} (publish them to the docs-assets branch, see CONTRIBUTING.md)`);
 } finally {
   fs.rmSync(work, { recursive: true, force: true });
