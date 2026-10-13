@@ -534,7 +534,7 @@ function fail(message) {
 const USAGE = `rup-flow CLI
 
   init                         create config and the documentation skeleton
-  new use-case <camelName>     scaffold a use case across requirements/analysis/design
+  new use-case <camelName>     scaffold the four cards of a use case and refresh the index
   render                       .puml (PlantUML server) and .mmd (Mermaid container) -> .svg, themed
   index                        regenerate the use-case index table and the use-case diagrams from the cards
   explore                      build explorer.html: interactive viewer of every rendered diagram

@@ -49,6 +49,16 @@ Also keep environment reads and sensitive-looking names (see `RISKY` in `tools/v
 - Keep the version equal in `package.json`, `.claude-plugin/plugin.json` and `SKILL.md` (`metadata.version`).
 - Keep agent-specific behaviour out of `skills/rup-flow/`; adapters are listed in [the wiki page Architecture](https://github.com/hector-ae21/rup-flow/wiki/Architecture), which also explains how to add a client.
 
+## Branches
+
+| Branch | What it is | Who writes it |
+| --- | --- | --- |
+| `main` | The source of truth; protected, changes arrive through pull requests with `CI complete` | Pull requests |
+| `claude-plugin` | The plugin payload the marketplace and the directory read | The release workflow, on every `vX.Y.Z` tag. Never by hand |
+| `docs-assets` | Screenshots and the PNG icon that the wiki and README link to | You, with the steps below, when images change |
+
+Every other branch is temporary: GitHub deletes it when its pull request is merged, and you delete the local copy (`git branch -D <name>`, then `git fetch --prune`). Tags `v*` and the two generated branches cannot be force-pushed or deleted; this is enforced by the repository rules in the account's governance configuration.
+
 ## Pull requests
 
 Work on a branch, use [Conventional Commits](https://www.conventionalcommits.org/) (`feat(cli): ...`), and open a pull request. CI must pass (`CI complete`). Describe the why in the body.
