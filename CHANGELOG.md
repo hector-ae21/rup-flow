@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.3.1]
+
+### Changed
+
+- Removed every name and mechanism the directory scan reads as sensitive data leaving the machine: a variable in the SVG parser, and the release workflow, which now publishes through the official script action with its logic in a tested module. Validation fails if such names or environment reads appear in code, workflows or manifests.
+
 ## [0.3.0]
 
 ### Added

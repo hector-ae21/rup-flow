@@ -75,6 +75,15 @@ for (const file of markdown) {
   }
 }
 
+// Names the directory scan reads as sensitive data that could leave the machine.
+// Spelled in pieces so this file does not trip the rule it enforces.
+const RISKY = new RegExp(['tok' + 'ens?', 'sec' + 'rets?', 'pass' + 'words?', 'pass' + 'wd', 'creden' + 'tials?', 'api[_-]?' + 'keys?', 'cook' + 'ies?', 'bear' + 'er', 'authori' + 'zation', 'process\\.' + 'env'].map((w) => `\\b${w}\\b`).join('|'), 'i');
+const checked = walk(ROOT).filter((f) => /\.(mjs|cjs|js|json|ya?ml|html)$/i.test(f) && !/(^|[\\/])(node_modules|\.git|dist|examples|images)[\\/]/.test(path.relative(ROOT, f)) && !f.endsWith('package-lock.json'));
+for (const file of checked) {
+  const found = fs.readFileSync(file, 'utf8').split('\n').map((line, index) => ({ line, number: index + 1 })).filter(({ line }) => RISKY.test(line));
+  for (const { line, number } of found.slice(0, 3)) fail(`${path.relative(ROOT, file)}:${number}: sensitive-looking name or environment read (${line.trim().slice(0, 60)}); the directory scan reports these`);
+}
+
 for (const script of walk(ROOT).filter((f) => f.endsWith('.mjs') && !f.includes(`${path.sep}node_modules${path.sep}`) && !f.includes(`${path.sep}.git${path.sep}`) && !f.includes(`${path.sep}dist${path.sep}`))) {
   const check = spawnSync(process.execPath, ['--check', script], { encoding: 'utf8' });
   if (check.status !== 0) fail(`${path.relative(ROOT, script)}: syntax error\n${check.stderr.split('\n').slice(0, 4).join('\n')}`);

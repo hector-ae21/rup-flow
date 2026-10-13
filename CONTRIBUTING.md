@@ -26,7 +26,7 @@ cd dist/docs-assets && git add -A && git commit -m "docs: refresh images" && git
 ```
 
 Do not add `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` or `termsOfServiceUrl` to `plugin.json`: Claude Code does not read them and the scan reports each as a finding. Set them in the submission portal.
-Also keep `process.env` out of the code in `skills/`: the scan treats environment reads as credential reads.
+Also keep environment reads and sensitive-looking names (see `RISKY` in `tools/validate.mjs`) out of code, workflows and manifests: the directory scan reads them as a credential that could leave the machine, and `npm run validate` fails on them.
 
 ## Layout
 
