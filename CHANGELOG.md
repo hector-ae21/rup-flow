@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.3.2]
+
+### Changed
+
+- The plugin is published from its own branch, `claude-plugin`, generated on every release tag. It holds only the skill, the two agents and the manifests, so the directory scan no longer reads the installer, tests, workflows or tooling. The repository marketplace installs from that branch. New `tools/build-plugin.mjs` and a publish workflow, with tests.
+
 ## [0.3.1]
 
 ### Changed
