@@ -13,7 +13,7 @@ Or set `"diagrams": { "outputs": ["svg", "html"] }` once and every `render` refr
 
 ## What you can do
 
-![Explorer overview](images/explorer/explorer-overview.png)
+![Explorer overview](https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-overview.png)
 
 | Action | How |
 | --- | --- |
@@ -33,19 +33,19 @@ Highlighting uses the relations PlantUML records in its SVG. In Mermaid diagrams
 
 ### Specification and sequence diagrams
 
-![Specification in the explorer](images/explorer/explorer-specification.png)
+![Specification in the explorer](https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-specification.png)
 
 ### Searching inside a diagram
 
-![Search in the explorer](images/explorer/explorer-search.png)
+![Search in the explorer](https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-search.png)
 
 ### The source tab
 
-![Source tab](images/explorer/explorer-source.png)
+![Source tab](https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-source.png)
 
 ### Dark view
 
-![Dark view](images/explorer/explorer-dark.png)
+![Dark view](https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-dark.png)
 
 ## Deep links
 

@@ -6,12 +6,27 @@ Node.js 18+ is the only requirement; there are no dependencies to install. Docke
 
 ```bash
 npm run check        # skill/plugin validation + CLI tests
-node tools/make-icon.mjs
+node tools/make-icon.mjs --png dist/icon-512.png   # SVG into assets/, PNG only where you ask for it
 node tools/package-web.mjs
 node tools/build-gallery.mjs   # regenerates docs/images (needs Docker and, for screenshots, Chrome or Edge)
 ```
 
-Run the gallery build whenever templates, themes or the explorer change, and commit the images.
+Run the gallery build whenever templates, themes or the explorer change and commit the SVGs.
+
+## No binary files in the plugin tree
+
+The directory scan holds a plugin for manual review when its tree has PNG, JPEG or font files, so the repository keeps none (`npm run validate` fails on them). The explorer screenshots and the PNG icon live on the orphan branch `docs-assets` and the docs link to them by URL. To refresh them:
+
+```bash
+node tools/build-gallery.mjs            # screenshots land in dist/gallery/explorer
+node tools/make-icon.mjs --png dist/icon-512.png
+git clone --branch docs-assets --single-branch https://github.com/hector-ae21/rup-flow.git dist/docs-assets
+cp dist/gallery/explorer/*.png dist/docs-assets/explorer/ && cp dist/icon-512.png dist/docs-assets/icon.png
+cd dist/docs-assets && git add -A && git commit -m "docs: refresh images" && git push
+```
+
+Do not add `icon`, `documentationUrl`, `supportUrl`, `privacyPolicyUrl` or `termsOfServiceUrl` to `plugin.json`: Claude Code does not read them and the scan reports each as a finding. Set them in the submission portal.
+Also keep `process.env` out of the code in `skills/`: the scan treats environment reads as credential reads.
 
 ## Layout
 

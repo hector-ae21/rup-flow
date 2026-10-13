@@ -2,13 +2,13 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import zlib from 'node:zlib';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { PRESETS, applyPlantumlTheme, resolveTheme, themeHash } from './lib/themes.mjs';
 import { DEFAULT_MERMAID_IMAGE, renderMermaidBatch } from './lib/mermaid.mjs';
 import { buildExplorer, collectDiagrams } from './lib/explorer.mjs';
 import { INSTRUCTION_TARGETS, writeInstructions } from './lib/instructions.mjs';
+import { fetchDiagram } from './lib/plantuml.mjs';
 
 const DIAGRAM_SOURCE = /\.(puml|plantuml|mmd)$/;
 const RENDER_STATE = '.rup-render-state.json';
@@ -72,10 +72,6 @@ function deepMerge(base, extra) {
 function loadConfig(root, flags) {
   const file = path.join(root, CONFIG_NAME);
   const config = deepMerge(DEFAULTS, fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {});
-  const env = process.env;
-  if (env.RUP_OUT_DIR) config.outDir = env.RUP_OUT_DIR;
-  if (env.RUP_PLANTUML_URL) config.plantuml.url = env.RUP_PLANTUML_URL;
-  if (env.RUP_LANG) config.docLanguage = env.RUP_LANG;
   if (flags.out) config.outDir = flags.out;
   if (flags.lang) config.docLanguage = flags.lang;
   if (flags['plantuml-url']) config.plantuml.url = flags['plantuml-url'];
@@ -245,38 +241,6 @@ function planNames(source) {
   let match;
   while ((match = re.exec(source)) !== null) blocks.push(match[0]);
   return blocks;
-}
-
-function encodePlantUml(text) {
-  const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_';
-  const bytes = zlib.deflateRawSync(Buffer.from(text, 'utf8'));
-  let out = '';
-  for (let i = 0; i < bytes.length; i += 3) {
-    const b1 = bytes[i];
-    const b2 = bytes[i + 1] ?? 0;
-    const b3 = bytes[i + 2] ?? 0;
-    out += alphabet[b1 >> 2] + alphabet[((b1 & 3) << 4) | (b2 >> 4)] + alphabet[((b2 & 15) << 2) | (b3 >> 6)] + alphabet[b3 & 63];
-  }
-  return out;
-}
-
-async function fetchDiagram(config, source, format) {
-  const base = config.plantuml.url.replace(/\/$/, '');
-  const options = { signal: AbortSignal.timeout(config.plantuml.timeoutMs) };
-  let response = await fetch(`${base}/${format}`, {
-    ...options, method: 'POST', headers: { 'Content-Type': 'text/plain; charset=utf-8' }, body: source,
-  }).catch(() => null);
-  if (!response || response.status === 404 || response.status === 405) {
-    response = await fetch(`${base}/${format}/${encodePlantUml(source)}`, options);
-  }
-  const body = Buffer.from(await response.arrayBuffer());
-  if (!response.ok) throw new Error(`PlantUML server answered ${response.status}`);
-  if (format === 'svg') {
-    const text = body.toString('utf8');
-    if (!/<svg[\s>]/.test(text)) throw new Error('response is not an SVG');
-    if (/Syntax Error\?|>Error<|Cannot find font/.test(text)) throw new Error('PlantUML reported a syntax error in this diagram');
-  }
-  return body;
 }
 
 function atomicWrite(file, content) {

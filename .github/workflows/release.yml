@@ -28,7 +28,7 @@ jobs:
           node-version: 22
       - name: Tag must match the package version
         run: |
-          version=$(node -p "require('./package.json').version")
+          version=$(grep -m1 '"version"' package.json | cut -d'"' -f4)
           [ "${TAG}" = "v${version}" ] || { echo "tag ${TAG} does not match version ${version}"; exit 1; }
       - run: npm run check
       - run: node tools/package-web.mjs

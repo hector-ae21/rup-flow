@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/icon.png" alt="rup-flow" width="120"></p>
+<p align="center"><img src="assets/icon.svg" alt="rup-flow" width="120"></p>
 
 <h1 align="center">rup-flow</h1>
 
@@ -43,7 +43,7 @@ Requirements: Node.js 18+. Docker is optional and only renders `.svg` diagrams a
 
 Diagrams in **PlantUML** or **Mermaid**, in any of eight color presets or your own palette, and an **interactive explorer** you can open by double-click.
 
-<p align="center"><img src="docs/images/explorer/explorer-overview.png" alt="Interactive explorer: selecting Order highlights its relations" width="860"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/explorer/explorer-overview.png" alt="Interactive explorer: selecting Order highlights its relations" width="860"></p>
 
 | ocean | forest | dark |
 | --- | --- | --- |

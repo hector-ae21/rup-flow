@@ -24,9 +24,13 @@ function put(from, ...to) {
   else fs.copyFileSync(from, target);
 }
 
+const chromeFlag = process.argv.indexOf('--chrome');
+const chromeArg = chromeFlag >= 0 ? process.argv[chromeFlag + 1] : undefined;
+const SHOTS = path.join(ROOT, 'dist', 'gallery', 'explorer');
+
 function findChrome() {
   const candidates = [
-    process.env.CHROME,
+    chromeArg,
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
     '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
@@ -109,12 +113,12 @@ try {
       'explorer-dark': '#d=03-design%2Fuse-cases%2FcreateOrder%2Fsequence.svg&dark=1',
     };
     for (const [name, hash] of Object.entries(shots)) {
-      const out = path.join(IMAGES, 'explorer', `${name}.png`);
+      const out = path.join(SHOTS, `${name}.png`);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       spawnSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--window-size=1400,860', `--screenshot=${out}`, pathToFileURL(explorer).href + hash], { encoding: 'utf8' });
     }
-  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (set CHROME to a browser binary).');
-  console.log(`Gallery written to ${path.relative(ROOT, IMAGES)}`);
+  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (pass --chrome <path to a browser>).');
+  console.log(`SVG gallery written to ${path.relative(ROOT, IMAGES)}; explorer screenshots to ${path.relative(ROOT, SHOTS)} (publish them to the docs-assets branch, see CONTRIBUTING.md)`);
 } finally {
   fs.rmSync(work, { recursive: true, force: true });
 }

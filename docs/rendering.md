@@ -39,7 +39,7 @@ Both renderers apply the project theme at render time. `--outputs svg,png,html` 
 
 ## Another port or an existing server
 
-Set `plantuml.url` in `rup.config.json`, or use `--plantuml-url`, or `RUP_PLANTUML_URL`. For a different host port when starting: `server up --plantuml-url http://127.0.0.1:9000`.
+Set `plantuml.url` in `rup.config.json`, or use `--plantuml-url`. For a different host port when starting: `server up --plantuml-url http://127.0.0.1:9000`.
 
 ## Security
 

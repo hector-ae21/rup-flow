@@ -5,7 +5,7 @@ license: MIT
 compatibility: Needs Node.js 18+. Docker is optional and only renders diagrams and builds the explorer. Works with any agent that reads Agent Skills.
 metadata:
   author: hector-ae21
-  version: "0.1.2"
+  version: "0.1.3"
   repository: https://github.com/hector-ae21/rup-flow
 ---
 
@@ -61,7 +61,7 @@ All commands run from the project root. `RUP` below means `node <skill-dir>/scri
 | `RUP config` | Show the resolved configuration. |
 | `RUP instructions --target agents,cursor,...` | Add or refresh the rup-flow block in an agent instruction file (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Copilot, Cursor). |
 
-Flags override `rup.config.json`; `RUP_OUT_DIR`, `RUP_PLANTUML_URL` and `RUP_LANG` override the file.
+Flags override `rup.config.json`.
 
 ## Standard loop
 
