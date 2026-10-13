@@ -356,32 +356,32 @@ e-14
 
 C2.5063301029115803 0.07235340736121111, 2.50633010291158 -0.07235340736122292, 2.5 0" stroke="#475569" stroke-width="2" fill="none" stroke-dasharray="0 0" style=""/></g></g></g><g class="node statediagram-note" id="my-svg-state-Checkout----note-6" data-look="neo" transform="translate(468, 929)"><g class="basic label-container outer-path"><path d="M-75 -87 L75 -87 L75 87 L-75 87" stroke="none" stroke-width="0" fill="#FEF9C3" style=""/><path d="M-75 -87 
 
-C-20.454641240506263 -87, 34.090717518987475 -87, 75 -87 
+C-30.050543563783854 -87, 14.898912872432291 -87, 75 -87 
 
 M-75 -87 
 
-C-41.616738859298295 -87, -8.233477718596589 -87, 75 -87 
+C-17.096683477767264 -87, 40.80663304446547 -87, 75 -87 
 
 M75 -87 
 
-C75 -24.44853526026582, 75 38.10292947946836, 75 87 
+C75 -37.592282306537776, 75 11.815435386924449, 75 87 
 
 M75 -87 
 
-C75 -22.378277307604904, 75 42.24344538479019, 75 87 
+C75 -19.80522171983155, 75 47.3895565603369, 75 87 
 
 M75 87 
 
-C38.51192907979226 87, 2.0238581595845204 87, -75 87 
+C17.355172978143244 87, -40.28965404371351 87, -75 87 
 
 M75 87 
 
-C26.442659806664437 87, -22.114680386671125 87, -75 87 
+C15.940894485253907 87, -43.11821102949219 87, -75 87 
 
 M-75 87 
 
-C-75 44.5825522265418, -75 2.1651044530836003, -75 -87 
+C-75 43.3324808258768, -75 -0.33503834824639966, -75 -87 
 
 M-75 87 
 
-C-75 22.893418565585293, -75 -41.213162868829414, -75 -87" stroke="#475569" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style=""/></g><g class="label noteLabel" style="" transform="translate(-60, -72)"><rect/><foreignObject width="120" height="144"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel markdown-node-label"><p>Actor: asks to check out<br />System: shows lines, totals and the address form</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#475569" stop-opacity="1"/><stop offset="100%" stop-color="#475569" stop-opacity="1"/></linearGradient></svg>
+C-75 42.795753403345444, -75 -1.4084931933091127, -75 -87" stroke="#475569" stroke-width="1.3" fill="none" stroke-dasharray="0 0" style=""/></g><g class="label noteLabel" style="" transform="translate(-60, -72)"><rect/><foreignObject width="120" height="144"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel markdown-node-label"><p>Actor: asks to check out<br />System: shows lines, totals and the address form</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="my-svg-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><defs><filter id="my-svg-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"/></filter></defs><linearGradient id="my-svg-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#475569" stop-opacity="1"/><stop offset="100%" stop-color="#475569" stop-opacity="1"/></linearGradient></svg>
