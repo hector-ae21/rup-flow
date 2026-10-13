@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -72,6 +73,11 @@ for (const file of markdown) {
       if (!pendingDiagram) fail(`${path.relative(ROOT, file)}: broken link ${match[1]}`);
     }
   }
+}
+
+for (const script of walk(ROOT).filter((f) => f.endsWith('.mjs') && !f.includes(`${path.sep}node_modules${path.sep}`) && !f.includes(`${path.sep}.git${path.sep}`) && !f.includes(`${path.sep}dist${path.sep}`))) {
+  const check = spawnSync(process.execPath, ['--check', script], { encoding: 'utf8' });
+  if (check.status !== 0) fail(`${path.relative(ROOT, script)}: syntax error\n${check.stderr.split('\n').slice(0, 4).join('\n')}`);
 }
 
 if (errors.length) {

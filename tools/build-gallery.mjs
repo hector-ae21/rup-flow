@@ -1,10 +1,10 @@
-const SVG_NS = ['http:/', 'www.w3.org', '2000', 'svg'].join('/');
 #!/usr/bin/env node
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+const SVG_NS = ["http:/", "www.w3.org", "2000", "svg"].join("/");
 import { PRESETS } from '../skills/rup-flow/scripts/lib/themes.mjs';
 import { makeReadable } from './svg-readable.mjs';
 
@@ -25,13 +25,10 @@ function put(from, ...to) {
   else fs.copyFileSync(from, target);
 }
 
-const browserFlag = process.argv.indexOf('--browser');
-const browserArg = browserFlag >= 0 ? process.argv[browserFlag + 1] : undefined;
 const SHOTS = path.join(ROOT, 'dist', 'gallery', 'explorer');
 
 function findChrome() {
   const candidates = [
-    browserArg,
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
     '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
@@ -118,7 +115,7 @@ try {
       fs.mkdirSync(path.dirname(out), { recursive: true });
       spawnSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--window-size=1400,860', `--screenshot=${out}`, pathToFileURL(explorer).href + hash], { encoding: 'utf8' });
     }
-  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (pass --browser <path to a browser>).');
+  } else console.warn('No Chrome or Edge found: explorer screenshots skipped (install Chrome or Edge in a standard location).');
   console.log(`SVG gallery written to ${path.relative(ROOT, IMAGES)}; explorer screenshots to ${path.relative(ROOT, SHOTS)} (publish them to the docs-assets branch, see CONTRIBUTING.md)`);
 } finally {
   fs.rmSync(work, { recursive: true, force: true });
