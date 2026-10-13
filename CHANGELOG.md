@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.2.0]
+
+### Changed
+
+- The user documentation moved to the GitHub wiki; the README is now a short pitch with install steps that links to it. The repository keeps only the gallery images.
+
 ## [0.1.5]
 
 ### Changed

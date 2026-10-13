@@ -35,7 +35,7 @@ Also keep `process.env` out of the code in `skills/`: the scan treats environmen
 | `skills/rup-flow/` | The skill: `SKILL.md`, `references/`, `templates/`, `scripts/rup.mjs`, `runtime/compose.yaml` |
 | `agents/` | `rup-architect` and `rup-reviewer` |
 | `.claude-plugin/` | Plugin and marketplace manifests |
-| `docs/` | User documentation |
+| `docs/images/` | Gallery images; the user documentation lives in the [wiki](https://github.com/hector-ae21/rup-flow/wiki) |
 | `examples/` | Generated sample documentation |
 | `tools/` | Repository tooling (icon, web package, validation) |
 | `test/` | CLI tests |
@@ -47,7 +47,7 @@ Also keep `process.env` out of the code in `skills/`: the scan treats environmen
 - A new template needs an entry in `init` or `new use-case` in `rup.mjs` and a test.
 - Templates and references are written in English. Generated documentation language is the user's `docLanguage`.
 - Keep the version equal in `package.json`, `.claude-plugin/plugin.json` and `SKILL.md` (`metadata.version`).
-- Keep agent-specific behaviour out of `skills/rup-flow/`; adapters are listed in [docs/architecture.md](docs/architecture.md), which also explains how to add a client.
+- Keep agent-specific behaviour out of `skills/rup-flow/`; adapters are listed in [the wiki page Architecture](https://github.com/hector-ae21/rup-flow/wiki/Architecture), which also explains how to add a client.
 
 ## Pull requests
 

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Instructions for coding agents (Codex, Claude Code, Cursor, Copilot, Gemini CLI and others) working **on this repository**. To *use* the skill in your own project, read [docs/other-agents.md](docs/other-agents.md).
+Instructions for coding agents (Codex, Claude Code, Cursor, Copilot, Gemini CLI and others) working **on this repository**. To *use* the skill in your own project, read [the wiki page Other Agents](https://github.com/hector-ae21/rup-flow/wiki/Other-Agents).
 
 ## What this repository is
 
@@ -16,7 +16,7 @@ Instructions for coding agents (Codex, Claude Code, Cursor, Copilot, Gemini CLI 
 | `.claude-plugin/` | Claude Code plugin and marketplace manifests |
 | `install.mjs` | Installer for Claude Code and for `.agents/skills` clients |
 | `tools/` | Repository tooling: validation, web ZIP, icon, gallery |
-| `docs/`, `examples/` | User documentation and a rendered example |
+| `docs/images/`, `examples/` | Gallery images used by the wiki and a rendered example. The user documentation lives in the [wiki](https://github.com/hector-ae21/rup-flow/wiki) |
 | `test/` | `node:test` suites |
 
 ## Commands
@@ -38,7 +38,7 @@ There are no runtime dependencies and nothing to install.
 - `SKILL.md` frontmatter follows the Agent Skills spec: `name` equals the folder name, `description` is at most 200 characters (the claude.ai limit; the spec allows 1024), `license` is present. `npm run validate` enforces this.
 - The same version appears in `package.json`, `.claude-plugin/plugin.json` and `SKILL.md` (`metadata.version`).
 - The theme is applied at render time: never write colors or theme blocks into diagram sources.
-- Keep behaviour that is specific to one agent out of `skills/rup-flow/`. Put it in an adapter (`agents/`, `.claude-plugin/`, `install.mjs` targets, `instructions.mjs` targets) and document it in `docs/other-agents.md`.
+- Keep behaviour that is specific to one agent out of `skills/rup-flow/`. Put it in an adapter (`agents/`, `.claude-plugin/`, `install.mjs` targets, `instructions.mjs` targets) and document it in the wiki page Other Agents.
 - Templates and references are written in English; generated documentation follows the user's `docLanguage`.
 - Add or update a test for every CLI behaviour change.
 
