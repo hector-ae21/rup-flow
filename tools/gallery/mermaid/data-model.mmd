@@ -1,0 +1,26 @@
+erDiagram
+  ORDER ||--o{ ORDER_LINE : contains
+  PRODUCT ||--o{ ORDER_LINE : "is sold in"
+
+  ORDER {
+    uuid id PK
+    varchar number
+    uuid customer_id FK
+    varchar status
+    timestamptz placed_at
+    numeric total
+  }
+  ORDER_LINE {
+    uuid id PK
+    uuid order_id FK
+    uuid product_id FK
+    int quantity
+    numeric unit_price
+  }
+  PRODUCT {
+    uuid id PK
+    varchar sku
+    varchar name
+    numeric price
+    int stock
+  }

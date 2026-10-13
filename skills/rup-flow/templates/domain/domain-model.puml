@@ -7,18 +7,18 @@ skinparam nodesep 60
 skinparam ranksep 70
 top to bottom direction
 
-package "Level 1 - Core" {
+package "Level 1 - Core" <<level1>> {
   class CoreEntity {
     id
     name
   }
 }
 
-package "Level 2 - Structural" {
+package "Level 2 - Structural" <<level2>> {
   class StructuralEntity
 }
 
-package "Level 3 - Detail" {
+package "Level 3 - Detail" <<level3>> {
   class DetailEntity
 }
 

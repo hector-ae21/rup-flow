@@ -1,0 +1,14 @@
+flowchart TB
+  customer(["Customer browser"])
+  subgraph app [Application node]
+    api["orders api"]
+    worker["fulfilment worker"]
+  end
+  db[("PostgreSQL")]
+  queue{{"Message broker"}}
+
+  customer -->|HTTPS| api
+  api --> db
+  api -->|order.placed| queue
+  queue --> worker
+  worker --> db

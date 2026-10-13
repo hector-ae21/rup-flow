@@ -1,0 +1,34 @@
+classDiagram
+  direction TB
+
+  class Order:::level1 {
+    number
+    placedAt
+    status
+    total
+  }
+  class Customer:::level2 {
+    email
+    name
+  }
+  class OrderLine:::level2 {
+    quantity
+    unitPrice
+  }
+  class Product:::level3 {
+    sku
+    name
+    price
+    stock
+  }
+  class Address:::level4 {
+    street
+    city
+    postalCode
+    country
+  }
+
+  Order "1" *-- "1..*" OrderLine : is made of
+  Order "0..*" -- "1" Customer : placed by
+  OrderLine "0..*" --> "1" Product : sells
+  Order "0..*" --> "1" Address : ships to

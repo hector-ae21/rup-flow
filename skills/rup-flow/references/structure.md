@@ -60,7 +60,9 @@ A use case is named in camelCase (`createOrder`) and keeps the same folder name 
     "quality": "05-quality"
   },
   "useCaseDir": "use-cases",
-  "plantuml": { "url": "http://127.0.0.1:8085", "previewPng": false, "timeoutMs": 30000 },
+  "plantuml": { "url": "http://127.0.0.1:8085", "timeoutMs": 30000 },
+  "diagrams": { "language": "plantuml", "outputs": ["svg"] },
+  "theme": { "preset": "default", "colors": {}, "font": "", "fontSize": 14, "roundCorner": 6 },
   "ids": { "requirement": "RF", "nonFunctional": "RNF", "useCase": "UC", "rule": "RN", "decision": "DEC", "test": "TC" },
   "targetStack": { "language": "", "framework": "", "persistence": "", "testing": "" },
   "traceTag": "@rup"
@@ -75,6 +77,9 @@ A use case is named in camelCase (`createOrder`) and keeps the same folder name 
 | `codeRoot` | Where `scan` looks and where generated code goes unless the user says otherwise |
 | `targetStack` | Stack used by RUP → code; ask when empty |
 | `traceTag` | Doc-comment tag that links code to a model element |
+| `diagrams.language` | `plantuml` or `mermaid`: language of diagram sources (see [formats-and-themes](formats-and-themes.md)) |
+| `diagrams.outputs` | `svg`, `png`, `html` |
+| `theme` | Palette preset, color overrides, font; applied at render time |
 | `ids.*` | Prefixes of the stable identifiers |
 
 Changing `paths` or `outDir` on an existing project means moving the folders and fixing links; do it as one explicit step.

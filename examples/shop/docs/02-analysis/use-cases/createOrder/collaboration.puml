@@ -2,7 +2,7 @@
 !theme plain
 hide empty members
 skinparam linetype polyline
-left to right direction
+top to bottom direction
 
 class "Customer" as user <<actor>>
 class "CheckoutScreen" as screen <<boundary>>

@@ -1,0 +1,15 @@
+classDiagram
+  direction TB
+
+  class ExampleScreen {
+    <<boundary>>
+  }
+  class ExampleController {
+    <<control>>
+  }
+  class ExampleEntity {
+    <<entity>>
+  }
+
+  ExampleScreen --> ExampleController
+  ExampleController --> ExampleEntity

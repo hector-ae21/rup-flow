@@ -74,14 +74,47 @@ jobs:
           $RUP render
           $RUP check
 
+  render-mermaid:
+    name: Render with Mermaid and build the explorer
+    runs-on: ubuntu-latest
+    services:
+      plantuml:
+        image: plantuml/plantuml-server:jetty
+        ports:
+          - 8085:8080
+        env:
+          PLANTUML_SECURITY_PROFILE: SANDBOX
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Wait for the PlantUML server (wireframes stay PlantUML)
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8085/ >/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
+      - name: Mermaid project, themed, with explorer
+        run: |
+          RUP="node skills/rup-flow/scripts/rup.mjs --root $RUNNER_TEMP/mm"
+          mkdir -p "$RUNNER_TEMP/mm"
+          $RUP init --diagram-language mermaid --theme ocean --outputs svg,html
+          $RUP new use-case createOrder
+          $RUP render --theme forest
+          $RUP check
+          test -s "$RUNNER_TEMP/mm/docs/rup/explorer.html"
+
   complete:
     name: CI complete
     if: always()
-    needs: [validate, test, render]
+    needs: [validate, test, render, render-mermaid]
     runs-on: ubuntu-latest
     steps:
       - name: Require every job to pass
         run: |
           [ "${{ needs.validate.result }}" = "success" ] &&
           [ "${{ needs.test.result }}" = "success" ] &&
-          [ "${{ needs.render.result }}" = "success" ]
+          [ "${{ needs.render.result }}" = "success" ] &&
+          [ "${{ needs.render-mermaid.result }}" = "success" ]

@@ -4,7 +4,12 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { PRESETS, applyPlantumlTheme, resolveTheme, themeHash } from './lib/themes.mjs';
+import { DEFAULT_MERMAID_IMAGE, renderMermaidBatch } from './lib/mermaid.mjs';
+import { buildExplorer, collectDiagrams } from './lib/explorer.mjs';
 
+const DIAGRAM_SOURCE = /\.(puml|plantuml|mmd)$/;
+const RENDER_STATE = '.rup-render-state.json';
 const SKILL_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TEMPLATES = path.join(SKILL_DIR, 'templates');
 const COMPOSE_FILE = path.join(SKILL_DIR, 'runtime', 'compose.yaml');
@@ -28,7 +33,10 @@ const DEFAULTS = {
     quality: '05-quality',
   },
   useCaseDir: 'use-cases',
-  plantuml: { url: 'http://127.0.0.1:8085', previewPng: false, timeoutMs: 30000 },
+  plantuml: { url: 'http://127.0.0.1:8085', timeoutMs: 30000 },
+  diagrams: { language: 'plantuml', outputs: ['svg'] },
+  theme: { preset: 'default', colors: {}, font: '', fontSize: 14, roundCorner: 6 },
+  mermaid: { image: DEFAULT_MERMAID_IMAGE, timeoutMs: 180000 },
   ids: { requirement: 'RF', nonFunctional: 'RNF', useCase: 'UC', rule: 'RN', decision: 'DEC', test: 'TC' },
   targetStack: { language: '', framework: '', persistence: '', testing: '' },
   traceTag: '@rup',
@@ -61,8 +69,7 @@ function deepMerge(base, extra) {
 
 function loadConfig(root, flags) {
   const file = path.join(root, CONFIG_NAME);
-  let config = DEFAULTS;
-  if (fs.existsSync(file)) config = deepMerge(DEFAULTS, JSON.parse(fs.readFileSync(file, 'utf8')));
+  const config = deepMerge(DEFAULTS, fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {});
   const env = process.env;
   if (env.RUP_OUT_DIR) config.outDir = env.RUP_OUT_DIR;
   if (env.RUP_PLANTUML_URL) config.plantuml.url = env.RUP_PLANTUML_URL;
@@ -72,7 +79,18 @@ function loadConfig(root, flags) {
   if (flags['plantuml-url']) config.plantuml.url = flags['plantuml-url'];
   if (flags.project) config.project = flags.project;
   if (flags['code-root']) config.codeRoot = flags['code-root'];
-  if (flags['preview-png']) config.plantuml.previewPng = true;
+  if (flags['diagram-language']) config.diagrams.language = String(flags['diagram-language']);
+  if (flags.outputs) config.diagrams.outputs = String(flags.outputs).split(',').map((s) => s.trim()).filter(Boolean);
+  if (flags['preview-png'] && !config.diagrams.outputs.includes('png')) config.diagrams.outputs = [...config.diagrams.outputs, 'png'];
+  if (flags.theme) config.theme.preset = String(flags.theme);
+  if (flags.font) config.theme.font = String(flags.font);
+  if (flags['font-size']) config.theme.fontSize = Number(flags['font-size']);
+  for (const [key, value] of Object.entries(flags)) {
+    if (key.startsWith('color-') && typeof value === 'string') config.theme.colors[key.slice(6)] = value;
+  }
+  if (!['plantuml', 'mermaid'].includes(config.diagrams.language)) fail(`diagrams.language must be plantuml or mermaid, got "${config.diagrams.language}"`);
+  const badOutput = config.diagrams.outputs.find((o) => !['svg', 'png', 'html'].includes(o));
+  if (badOutput) fail(`diagrams.outputs accepts svg, png and html, got "${badOutput}"`);
   if (!config.project) config.project = path.basename(root);
   return config;
 }
@@ -101,7 +119,12 @@ function fill(text, vars) {
   return text.replace(/\{\{(\w+)\}\}/g, (_, key) => (vars[key] ?? `{{${key}}}`));
 }
 
-function writeFromTemplate(templateRel, destination, vars, created, skipped) {
+function writeFromTemplate(templateRel, destination, vars, created, skipped, language = 'plantuml') {
+  const useMermaid = language === 'mermaid' && templateRel.endsWith('.puml') && !templateRel.endsWith('wireframes.puml');
+  if (useMermaid) {
+    templateRel = `mermaid/${templateRel.replace(/\.puml$/, '.mmd')}`;
+    destination = destination.replace(/\.puml$/, '.mmd');
+  }
   if (fs.existsSync(destination)) { skipped.push(destination); return; }
   const source = fs.readFileSync(path.join(TEMPLATES, templateRel), 'utf8');
   fs.mkdirSync(path.dirname(destination), { recursive: true });
@@ -119,6 +142,7 @@ function templateVars(root, config, extra = {}) {
     date: new Date().toISOString().slice(0, 10),
     language: config.docLanguage,
     outDir: config.outDir,
+    specFile: config.diagrams.language === 'mermaid' ? 'specification.mmd' : 'specification.puml',
     ...extra,
   };
 }
@@ -132,7 +156,8 @@ function cmdInit(root, config) {
     fs.writeFileSync(configFile, JSON.stringify({
       project: config.project, outDir: config.outDir, docLanguage: config.docLanguage,
       codeRoot: config.codeRoot, paths: config.paths, useCaseDir: config.useCaseDir,
-      plantuml: config.plantuml, ids: config.ids, targetStack: config.targetStack,
+      plantuml: config.plantuml, diagrams: config.diagrams, theme: config.theme,
+      ids: config.ids, targetStack: config.targetStack,
     }, null, 2) + '\n');
     created.push(configFile);
   } else skipped.push(configFile);
@@ -163,7 +188,7 @@ function cmdInit(root, config) {
   ];
   for (const [tpl, discipline, dest] of plan) {
     const base = discipline ? dirOf(root, config, discipline) : path.resolve(root, config.outDir);
-    writeFromTemplate(tpl, path.join(base, dest), vars, created, skipped);
+    writeFromTemplate(tpl, path.join(base, dest), vars, created, skipped, config.diagrams.language);
   }
   fs.mkdirSync(path.join(dirOf(root, config, 'quality'), 'decisions'), { recursive: true });
   report('init', { created: created.map((f) => rel(root, f)), skipped: skipped.map((f) => rel(root, f)) });
@@ -201,7 +226,7 @@ function cmdNewUseCase(root, config, name, flags) {
   for (const discipline of wanted) {
     for (const [tpl, dest] of plan[discipline] ?? []) {
       const target = path.join(dirOf(root, config, discipline), config.useCaseDir, name, dest);
-      writeFromTemplate(tpl, target, vars, created, skipped);
+      writeFromTemplate(tpl, target, vars, created, skipped, config.diagrams.language);
     }
   }
   const traceFile = path.join(dirOf(root, config, 'quality'), 'traceability.csv');
@@ -260,30 +285,69 @@ function atomicWrite(file, content) {
 
 async function cmdRender(root, config, flags) {
   const base = path.resolve(root, flags.path ?? config.outDir);
-  const sources = filesUnder(base, (f) => /\.(puml|plantuml)$/.test(f));
+  const outRoot = path.resolve(root, config.outDir);
+  const theme = resolveTheme(config.theme);
+  const stateFile = path.join(outRoot, RENDER_STATE);
+  const previous = fs.existsSync(stateFile) ? JSON.parse(fs.readFileSync(stateFile, 'utf8')) : {};
+  const hash = themeHash(theme);
+  const force = Boolean(flags.force) || previous.theme !== hash;
+  const wantPng = config.diagrams.outputs.includes('png');
+  const sources = filesUnder(base, (f) => DIAGRAM_SOURCE.test(f));
   const results = { rendered: [], skipped: [], failed: [] };
+  const mermaidJobs = [];
+
   for (const file of sources) {
     const text = fs.readFileSync(file, 'utf8');
-    const blocks = planNames(text);
-    if (blocks.length === 0) { results.failed.push({ file: rel(root, file), error: 'no @start/@end block found' }); continue; }
-    const stem = file.replace(/\.(puml|plantuml)$/, '');
+    const isMermaid = file.endsWith('.mmd');
+    const blocks = isMermaid ? (text.trim() ? [text] : []) : planNames(text);
+    if (blocks.length === 0) { results.failed.push({ file: rel(root, file), error: isMermaid ? 'empty Mermaid source' : 'no @start/@end block found' }); continue; }
+    const stem = file.replace(DIAGRAM_SOURCE, '');
     for (let i = 0; i < blocks.length; i++) {
       const target = blocks.length === 1 ? `${stem}.svg` : `${stem}-${String(i + 1).padStart(2, '0')}.svg`;
       const upToDate = fs.existsSync(target) && fs.statSync(target).mtimeMs >= fs.statSync(file).mtimeMs;
-      if (upToDate && !flags.force) { results.skipped.push(rel(root, target)); continue; }
+      if (upToDate && !force) { results.skipped.push(rel(root, target)); continue; }
+      if (isMermaid) { mermaidJobs.push({ id: target, source: blocks[i], file }); continue; }
       try {
-        atomicWrite(target, await fetchDiagram(config, blocks[i], 'svg'));
+        const themed = applyPlantumlTheme(blocks[i], theme);
+        atomicWrite(target, await fetchDiagram(config, themed, 'svg'));
         results.rendered.push(rel(root, target));
-        if (config.plantuml.previewPng) {
-          atomicWrite(target.replace(/\.svg$/, '.preview.png'), await fetchDiagram(config, blocks[i], 'png'));
-        }
+        if (wantPng) atomicWrite(target.replace(/\.svg$/, '.preview.png'), await fetchDiagram(config, themed, 'png'));
       } catch (error) {
         results.failed.push({ file: rel(root, file), error: String(error.message ?? error) });
       }
     }
   }
+
+  const mermaidResults = renderMermaidBatch(mermaidJobs, theme, config.mermaid);
+  for (const job of mermaidJobs) {
+    const outcome = mermaidResults.get(job.id);
+    if (outcome?.svg) { atomicWrite(job.id, outcome.svg); results.rendered.push(rel(root, job.id)); }
+    else results.failed.push({ file: rel(root, job.file), error: outcome?.error ?? 'Mermaid produced no output' });
+  }
+
+  if (!results.failed.length && fs.existsSync(outRoot)) fs.writeFileSync(stateFile, JSON.stringify({ theme: hash }) + '\n');
+  if (config.diagrams.outputs.includes('html')) results.explorer = [cmdExplore(root, config, true)];
   report('render', results);
   if (results.failed.length) process.exitCode = 1;
+}
+
+function cmdExplore(root, config, quiet = false) {
+  const outRoot = path.resolve(root, config.outDir);
+  const sources = filesUnder(outRoot, (f) => DIAGRAM_SOURCE.test(f));
+  const items = collectDiagrams(outRoot, sources);
+  const target = path.join(outRoot, 'explorer.html');
+  fs.writeFileSync(target, buildExplorer({ project: config.project, theme: resolveTheme(config.theme), items }));
+  const where = `${rel(root, target)} (${items.length} diagrams)`;
+  if (!quiet) report('explore', { written: where });
+  return where;
+}
+
+function cmdThemes(flags) {
+  const rows = Object.entries(PRESETS).map(([name, preset]) => ({ name, description: preset.description, ...preset.colors }));
+  if (flags.json) { console.log(JSON.stringify(rows, null, 2)); return; }
+  console.log('== themes ==');
+  for (const row of rows) console.log(`${row.name.padEnd(14)} ${row.description}  [primary ${row.primary}, accent ${row.accent}]`);
+  console.log('\nSet "theme.preset" in rup.config.json or pass --theme <name>. Override single colors with theme.colors or --color-<key> "#RRGGBB" (background, text, line, border, primary, secondary, accent, note).');
 }
 
 function frontMatter(text) {
@@ -307,12 +371,17 @@ function cmdCheck(root, config, flags) {
   const warnings = [];
   if (!fs.existsSync(base)) fail(`Output directory not found: ${config.outDir}. Run init first.`);
 
-  for (const file of filesUnder(base, (f) => /\.(puml|plantuml)$/.test(f))) {
+  const mermaidStart = /^\s*(?:%%\{[\s\S]*?\}%%\s*)?(classDiagram|stateDiagram(-v2)?|sequenceDiagram|erDiagram|flowchart|graph|journey|gantt|pie|mindmap|timeline|requirementDiagram|C4Context|block-beta|architecture-beta)\b/;
+  for (const file of filesUnder(base, (f) => DIAGRAM_SOURCE.test(f))) {
     const text = fs.readFileSync(file, 'utf8');
-    const starts = (text.match(/@start\w+/g) ?? []).length;
-    const ends = (text.match(/@end\w+/g) ?? []).length;
-    if (starts === 0 || starts !== ends) errors.push(`${rel(root, file)}: unbalanced @start/@end`);
-    const stem = file.replace(/\.(puml|plantuml)$/, '');
+    if (file.endsWith('.mmd')) {
+      if (!mermaidStart.test(text)) errors.push(`${rel(root, file)}: not a recognised Mermaid diagram type`);
+    } else {
+      const starts = (text.match(/@start\w+/g) ?? []).length;
+      const ends = (text.match(/@end\w+/g) ?? []).length;
+      if (starts === 0 || starts !== ends) errors.push(`${rel(root, file)}: unbalanced @start/@end`);
+    }
+    const stem = file.replace(DIAGRAM_SOURCE, '');
     if (!fs.existsSync(`${stem}.svg`) && !fs.existsSync(`${stem}-01.svg`)) warnings.push(`${rel(root, file)}: no rendered SVG`);
   }
 
@@ -325,7 +394,7 @@ function cmdCheck(root, config, flags) {
       if (!target || /^[a-z]+:/i.test(target) || target.startsWith('{{')) continue;
       const resolved = path.resolve(path.dirname(file), decodeURI(target));
       if (fs.existsSync(resolved)) continue;
-      const pendingRender = /\.(svg|png)$/.test(resolved) && fs.existsSync(resolved.replace(/(\.preview)?\.(svg|png)$/, '.puml'));
+      const pendingRender = /\.(svg|png)$/.test(resolved) && ['.puml', '.mmd'].some((ext) => fs.existsSync(resolved.replace(/(\.preview)?\.(svg|png)$/, ext)));
       (pendingRender ? warnings : errors).push(`${rel(root, file)}: ${pendingRender ? 'diagram not rendered yet' : 'broken link'} ${match[1]}`);
     }
     if (text.includes('{{')) warnings.push(`${rel(root, file)}: unresolved template placeholder`);
@@ -443,7 +512,9 @@ const USAGE = `rup-flow CLI
 
   init                         create config and the documentation skeleton
   new use-case <camelName>     scaffold a use case across requirements/analysis/design
-  render                       .puml -> .svg through the PlantUML server
+  render                       .puml (PlantUML server) and .mmd (Mermaid container) -> .svg, themed
+  explore                      build explorer.html: interactive viewer of every rendered diagram
+  themes                       list the color presets
   check [--strict]             structure, links, diagrams and traceability
   scan [--write]               inventory of the code base (input for code -> RUP)
   server up|down               start or stop the PlantUML container
@@ -451,7 +522,9 @@ const USAGE = `rup-flow CLI
   config                       print the resolved configuration
 
 Common flags: --root <dir> --out <docs dir> --lang <code> --project <name>
-              --code-root <dir> --plantuml-url <url> --preview-png --force
+              --code-root <dir> --plantuml-url <url> --force
+Diagrams:     --diagram-language plantuml|mermaid  --outputs svg,png,html  --preview-png
+Theme:        --theme <preset> --font <name> --font-size <n> --color-<key> "#RRGGBB"
 New use case: --title <text> --actor <name> --requirement <id> --discipline <list>`;
 
 const { positional, flags } = parseArgs(process.argv.slice(2));
@@ -466,6 +539,8 @@ switch (command) {
     cmdNewUseCase(root, config, positional[2], flags);
     break;
   case 'render': await cmdRender(root, config, flags); break;
+  case 'explore': cmdExplore(root, config); break;
+  case 'themes': cmdThemes(flags); break;
   case 'check': cmdCheck(root, config, flags); break;
   case 'scan': cmdScan(root, config, flags); break;
   case 'server': cmdServer(sub === 'down' ? 'down' : 'up', config); break;

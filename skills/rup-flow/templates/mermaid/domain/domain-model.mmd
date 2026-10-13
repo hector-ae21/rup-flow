@@ -1,0 +1,12 @@
+classDiagram
+  direction TB
+
+  class CoreEntity:::level1 {
+    id
+    name
+  }
+  class StructuralEntity:::level2
+  class DetailEntity:::level3
+
+  CoreEntity "1" *-- "0..*" StructuralEntity : contains
+  StructuralEntity "1" o-- "0..*" DetailEntity : qualifies

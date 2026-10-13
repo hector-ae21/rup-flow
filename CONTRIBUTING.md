@@ -8,7 +8,10 @@ Node.js 18+ is the only requirement; there are no dependencies to install. Docke
 npm run check        # skill/plugin validation + CLI tests
 node tools/make-icon.mjs
 node tools/package-web.mjs
+node tools/build-gallery.mjs   # regenerates docs/images (needs Docker and, for screenshots, Chrome or Edge)
 ```
+
+Run the gallery build whenever templates, themes or the explorer change, and commit the images.
 
 ## Layout
 

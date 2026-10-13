@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — diagram explorer</title>
+<style>
+:root { {{VARS}} }
+:root[data-mode="dark"] { --page-bg:#0b1020; --page-panel:#131a2e; --page-text:#e5e7eb; --page-muted:#94a3b8; --page-line:#27304a; }
+:root:not([data-mode="dark"]) { --page-bg:#f4f6fa; --page-panel:#ffffff; --page-text:#1f2937; --page-muted:#64748b; --page-line:#d9dee8; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { font-family: var(--font), system-ui, sans-serif; background: var(--page-bg); color: var(--page-text); display: grid; grid-template-rows: auto 1fr; }
+header { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--page-panel); border-bottom: 1px solid var(--page-line); flex-wrap: wrap; }
+header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+header .sub { color: var(--page-muted); font-size: 12px; }
+.swatches { display: flex; gap: 3px; margin-left: auto; align-items: center; }
+.swatches i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--page-line); display: inline-block; }
+button, input { font: inherit; color: inherit; }
+button { background: var(--page-panel); border: 1px solid var(--page-line); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+input[type="search"] { background: var(--page-bg); border: 1px solid var(--page-line); border-radius: 6px; padding: 6px 10px; width: 100%; }
+main { display: grid; grid-template-columns: 280px 1fr; min-height: 0; }
+aside { background: var(--page-panel); border-right: 1px solid var(--page-line); display: flex; flex-direction: column; min-height: 0; }
+aside .search { padding: 10px; }
+nav { overflow: auto; padding: 0 6px 12px; }
+nav h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--page-muted); margin: 14px 8px 4px; }
+nav a { display: block; padding: 6px 8px; border-radius: 6px; color: inherit; text-decoration: none; font-size: 13px; cursor: pointer; }
+nav a:hover { background: var(--page-bg); }
+nav a[aria-current="true"] { background: var(--accent); color: #fff; }
+nav a small { opacity: .7; margin-left: 6px; }
+section { display: grid; grid-template-rows: auto 1fr; min-width: 0; min-height: 0; }
+.toolbar { display: flex; gap: 8px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--page-line); background: var(--page-panel); flex-wrap: wrap; }
+.toolbar a { color: inherit; text-decoration: none; }
+.toolbar .title { font-weight: 600; margin-right: auto; }
+.toolbar input[type="search"] { width: 190px; }
+.stage { position: relative; min-height: 0; overflow: hidden; }
+#viewport { position: absolute; inset: 0; cursor: grab; touch-action: none; overflow: hidden; }
+#viewport.dragging { cursor: grabbing; }
+#canvas { transform-origin: 0 0; position: absolute; left: 0; top: 0; }
+#canvas svg { display: block; max-width: none; }
+#source { position: absolute; inset: 0; margin: 0; padding: 16px; overflow: auto; background: var(--page-panel); font: 12px/1.5 ui-monospace, Consolas, monospace; white-space: pre; display: none; }
+.dim { opacity: .14; transition: opacity .15s; }
+.sel > rect, .sel > path, .sel > ellipse, .sel > polygon { stroke: var(--accent) !important; stroke-width: 3 !important; }
+.hit { fill: var(--accent) !important; color: var(--accent) !important; font-weight: 700; }
+#info { position: absolute; right: 12px; bottom: 12px; max-width: 320px; background: var(--page-panel); border: 1px solid var(--page-line); border-radius: 8px; padding: 10px 12px; font-size: 13px; display: none; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+#info b { display: block; margin-bottom: 4px; }
+#hint { position: absolute; left: 12px; bottom: 12px; color: var(--page-muted); font-size: 12px; background: var(--page-panel); border: 1px solid var(--page-line); border-radius: 8px; padding: 6px 10px; }
+.empty { padding: 40px; color: var(--page-muted); }
+@media (max-width: 760px) { main { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--page-line); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>{{TITLE}}</h1>
+  <span class="sub">diagram explorer · theme: {{PRESET}}</span>
+  <span class="swatches" title="Theme palette">{{SWATCHES}}</span>
+  <button id="mode" aria-pressed="false" title="Toggle dark page and diagram">Dark</button>
+</header>
+<main>
+  <aside>
+    <div class="search"><input id="filter" type="search" placeholder="Filter diagrams (press /)"></div>
+    <nav id="list"></nav>
+  </aside>
+  <section>
+    <div class="toolbar">
+      <span class="title" id="title"></span>
+      <button id="tab-diagram" aria-pressed="true">Diagram</button>
+      <button id="tab-source" aria-pressed="false">Source</button>
+      <button id="zoom-out" title="Zoom out">−</button>
+      <button id="zoom-in" title="Zoom in">+</button>
+      <button id="fit" title="Fit to window (f)">Fit</button>
+      <button id="actual" title="Actual size">100%</button>
+      <input id="find" type="search" placeholder="Find in diagram">
+      <button id="download">Download SVG</button>
+      <a id="doc" href="#" style="display:none"><button type="button">Open document</button></a>
+    </div>
+    <div class="stage">
+      <div id="viewport"><div id="canvas"></div></div>
+      <pre id="source"></pre>
+      <div id="hint">Drag to pan · wheel to zoom · click an element to highlight its relations · Esc clears</div>
+      <div id="info"></div>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="data">{{DATA}}</script>
+<script>
+(function () {
+  var items = JSON.parse(document.getElementById('data').textContent);
+  var listEl = document.getElementById('list');
+  var canvas = document.getElementById('canvas');
+  var viewport = document.getElementById('viewport');
+  var sourceEl = document.getElementById('source');
+  var infoEl = document.getElementById('info');
+  var current = -1, view = { x: 0, y: 0, k: 1 }, selected = null, size = { w: 1, h: 1 };
+
+  function qs(s, r) { return (r || document).querySelector(s); }
+  function qsa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function text(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim(); }
+
+  function buildList(filter) {
+    listEl.innerHTML = '';
+    var groups = {};
+    items.forEach(function (it, i) {
+      if (filter && (it.title + ' ' + it.group + ' ' + it.kind).toLowerCase().indexOf(filter) < 0) return;
+      (groups[it.group] = groups[it.group] || []).push(i);
+    });
+    Object.keys(groups).forEach(function (g) {
+      var h = document.createElement('h2'); h.textContent = g; listEl.appendChild(h);
+      groups[g].forEach(function (i) {
+        var a = document.createElement('a'); a.textContent = items[i].title;
+        var s = document.createElement('small'); s.textContent = items[i].lang; a.appendChild(s);
+        a.dataset.index = i; if (i === current) a.setAttribute('aria-current', 'true');
+        a.onclick = function () { show(i); };
+        listEl.appendChild(a);
+      });
+    });
+    if (!listEl.children.length) listEl.innerHTML = '<div class="empty">No diagram matches.</div>';
+  }
+
+  function apply() { canvas.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.k + ')'; }
+  function fit() {
+    var r = viewport.getBoundingClientRect(), pad = 24;
+    var k = Math.min((r.width - pad * 2) / size.w, (r.height - pad * 2) / size.h, 2);
+    view.k = k > 0 ? k : 1; view.x = (r.width - size.w * view.k) / 2; view.y = (r.height - size.h * view.k) / 2; apply();
+  }
+  function zoomAt(f, cx, cy) {
+    var r = viewport.getBoundingClientRect(); cx = cx == null ? r.width / 2 : cx; cy = cy == null ? r.height / 2 : cy;
+    var k = Math.max(0.05, Math.min(12, view.k * f)), s = k / view.k;
+    view.x = cx - (cx - view.x) * s; view.y = cy - (cy - view.y) * s; view.k = k; apply();
+  }
+
+  function show(i, keepHash) {
+    if (i < 0 || i >= items.length) return;
+    current = i; selected = null; infoEl.style.display = 'none'; qs('#find').value = '';
+    var it = items[i];
+    canvas.innerHTML = it.svg;
+    var svg = qs('svg', canvas);
+    if (svg) {
+      var vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+      var w = vb.length === 4 ? vb[2] : parseFloat(svg.getAttribute('width')) || 800;
+      var h = vb.length === 4 ? vb[3] : parseFloat(svg.getAttribute('height')) || 600;
+      size = { w: w, h: h };
+      svg.removeAttribute('style'); svg.setAttribute('width', w); svg.setAttribute('height', h);
+    }
+    sourceEl.textContent = it.source;
+    qs('#title').textContent = it.title + ' · ' + it.lang;
+    var doc = qs('#doc'); if (it.doc) { doc.href = it.doc; doc.style.display = ''; } else doc.style.display = 'none';
+    qsa('nav a').forEach(function (a) { a.removeAttribute('aria-current'); if (+a.dataset.index === i) a.setAttribute('aria-current', 'true'); });
+    setTab('diagram'); fit();
+    if (!keepHash) location.hash = 'd=' + encodeURIComponent(it.id);
+  }
+
+  function setTab(t) {
+    var d = t === 'diagram';
+    viewport.style.display = d ? '' : 'none'; sourceEl.style.display = d ? 'none' : 'block';
+    qs('#tab-diagram').setAttribute('aria-pressed', d); qs('#tab-source').setAttribute('aria-pressed', !d);
+    qs('#hint').style.display = d ? '' : 'none';
+  }
+
+  function clearSel() {
+    qsa('.dim, .sel', canvas).forEach(function (e) { e.classList.remove('dim'); e.classList.remove('sel'); });
+    selected = null; infoEl.style.display = 'none';
+  }
+
+  function nameOf(el) { return (el.getAttribute('data-qualified-name') || '').replace(/^.*./, '') || text(el).slice(0, 60) || el.id; }
+
+  function select(el) {
+    clearSel(); selected = el;
+    var all = qsa('g.entity, g.cluster, g.link, g.node, g.edgePath, g.edgeLabel, g.actor, g.participant', canvas);
+    var keep = [el], neighbours = [];
+    var id = el.id;
+    if (id) {
+      qsa('g.link', canvas).forEach(function (l) {
+        var a = l.getAttribute('data-entity-1'), b = l.getAttribute('data-entity-2');
+        if (a === id || b === id) {
+          keep.push(l);
+          var other = document.getElementById(a === id ? b : a);
+          if (other) { keep.push(other); neighbours.push(nameOf(other)); }
+        }
+      });
+    }
+    if (el.classList.contains('cluster')) qsa('g.entity', el).forEach(function (e) { keep.push(e); });
+    var kept = {}; keep.forEach(function (e) { kept[e.id || ''] = 1; });
+    all.forEach(function (e) { if (keep.indexOf(e) < 0 && !keep.some(function (k) { return k.contains(e); })) e.classList.add('dim'); });
+    el.classList.add('sel');
+    infoEl.style.display = 'block';
+    infoEl.innerHTML = '<b></b><span></span>';
+    qs('b', infoEl).textContent = nameOf(el);
+    qs('span', infoEl).textContent = neighbours.length ? 'Related: ' + neighbours.join(', ') : 'No relations found for this element.';
+  }
+
+  function find(q) {
+    qsa('.hit', canvas).forEach(function (e) { e.classList.remove('hit'); });
+    clearSel();
+    q = q.trim().toLowerCase(); if (!q) return;
+    var hits = qsa('text', canvas).filter(function (t) { return text(t).toLowerCase().indexOf(q) >= 0; });
+    qsa('foreignObject', canvas).forEach(function (fo) { if (text(fo).toLowerCase().indexOf(q) >= 0) hits.push(fo.querySelector('span, p, div') || fo); });
+    hits.forEach(function (t) { t.classList.add('hit'); });
+    if (hits.length) {
+      var groups = qsa('g.entity, g.cluster, g.node, g.link', canvas);
+      if (groups.length) groups.forEach(function (g) { if (!g.querySelector('.hit')) g.classList.add('dim'); });
+    }
+    infoEl.style.display = 'block'; infoEl.innerHTML = '<b></b>'; qs('b', infoEl).textContent = hits.length + ' match' + (hits.length === 1 ? '' : 'es');
+  }
+
+  viewport.addEventListener('wheel', function (e) {
+    e.preventDefault(); var r = viewport.getBoundingClientRect();
+    zoomAt(e.deltaY < 0 ? 1.12 : 1 / 1.12, e.clientX - r.left, e.clientY - r.top);
+  }, { passive: false });
+  var drag = null, moved = false;
+  viewport.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y }; moved = false; viewport.setPointerCapture(e.pointerId); });
+  viewport.addEventListener('pointermove', function (e) {
+    if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) { moved = true; viewport.classList.add('dragging'); }
+    view.x = drag.vx + dx; view.y = drag.vy + dy; apply();
+  });
+  viewport.addEventListener('pointerup', function (e) {
+    var wasMoved = moved; drag = null; viewport.classList.remove('dragging');
+    if (wasMoved) return;
+    var target = e.target.closest ? e.target.closest('g.entity, g.cluster, g.node, g.actor, g.participant') : null;
+    if (target && target !== selected) select(target); else clearSel();
+  });
+
+  qs('#zoom-in').onclick = function () { zoomAt(1.25); };
+  qs('#zoom-out').onclick = function () { zoomAt(1 / 1.25); };
+  qs('#fit').onclick = fit;
+  qs('#actual').onclick = function () { var r = viewport.getBoundingClientRect(); view.k = 1; view.x = (r.width - size.w) / 2; view.y = (r.height - size.h) / 2; apply(); };
+  qs('#tab-diagram').onclick = function () { setTab('diagram'); };
+  qs('#tab-source').onclick = function () { setTab('source'); };
+  qs('#find').oninput = function (e) { find(e.target.value); };
+  qs('#filter').oninput = function (e) { buildList(e.target.value.trim().toLowerCase()); };
+  qs('#download').onclick = function () {
+    var svg = qs('svg', canvas); if (!svg) return;
+    var clone = svg.cloneNode(true); clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    qsa('.dim, .sel, .hit', clone).forEach(function (e) { e.classList.remove('dim'); e.classList.remove('sel'); e.classList.remove('hit'); });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], { type: 'image/svg+xml' }));
+    a.download = items[current].id.replace(/[^\w.-]+/g, '-') + '.svg'; a.click(); URL.revokeObjectURL(a.href);
+  };
+  qs('#mode').onclick = function () {
+    var dark = document.documentElement.getAttribute('data-mode') !== 'dark';
+    document.documentElement.setAttribute('data-mode', dark ? 'dark' : 'light'); this.setAttribute('aria-pressed', dark);
+    canvas.style.filter = dark ? 'invert(1) hue-rotate(180deg)' : '';
+  };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'INPUT') { if (e.key === 'Escape') e.target.blur(); return; }
+    if (e.key === '/') { e.preventDefault(); qs('#filter').focus(); }
+    else if (e.key === 'f') fit();
+    else if (e.key === 'Escape') { clearSel(); qs('#find').value = ''; find(''); }
+    else if (e.key === '+') zoomAt(1.25); else if (e.key === '-') zoomAt(1 / 1.25);
+  });
+  window.addEventListener('resize', function () { if (current >= 0) fit(); });
+
+  function fromHash() {
+    var p = {}; location.hash.replace(/^#/, '').split('&').forEach(function (kv) { var s = kv.split('='); if (s[0]) p[s[0]] = decodeURIComponent(s[1] || ''); });
+    var idx = 0;
+    if (p.d) items.forEach(function (it, i) { if (it.id === p.d) idx = i; });
+    show(idx, true);
+    if (p.dark === '1') qs('#mode').click();
+    if (p.tab === 'source') setTab('source');
+    if (p.find) { qs('#find').value = p.find; find(p.find); }
+    if (p.select) {
+      var want = p.select.toLowerCase();
+      var el = qsa('g.entity, g.cluster, g.node', canvas).filter(function (e) { var n = nameOf(e).toLowerCase(); return n === want || n.slice(-want.length - 1) === '.' + want; })[0];
+      if (el) select(el);
+    }
+  }
+  buildList('');
+  if (!items.length) { canvas.innerHTML = '<div class="empty">No rendered diagrams found. Run render first.</div>'; return; }
+  fromHash();
+})();
+</script>
+</body>
+</html>

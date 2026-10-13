@@ -51,7 +51,7 @@ Why the actor does this and where it fits in the business.
 
 ## Specification
 
-Behaviour source of truth: [specification.puml](./specification.puml)
+Behaviour source of truth: [{{specFile}}](./{{specFile}})
 
 ![Specification](./specification.svg)
 
