@@ -23,7 +23,7 @@ jobs:
           node-version: 22
       - run: npm run validate
       - run: node tools/package-web.mjs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: rup-flow-skill
           path: dist/rup-flow-skill.zip
