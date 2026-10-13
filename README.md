@@ -35,7 +35,7 @@ Pick one. Full step-by-step guides are linked.
 | **Codex and other Agent Skills clients** | `node install.mjs --target agents` (installs into `.agents/skills`) | [Other agents](docs/other-agents.md) |
 | Cursor, Copilot, Gemini CLI | `node <skill>/scripts/rup.mjs instructions --target agents,cursor,copilot,gemini` | [Other agents](docs/other-agents.md) |
 
-The skill is written once in the open [Agent Skills](https://agentskills.io/specification) format and adapted per client; Claude Code is the most tested, the others follow the vendors' documented layouts and are not yet tested (see the [compatibility table](docs/other-agents.md#compatibility)).
+The skill is written once in the open [Agent Skills](https://agentskills.io/specification) format and adapted per client; tested with Claude Code, Codex and Gemini CLI; Cursor and Copilot follow the vendors' documented layouts and are not yet tested (see the [compatibility table](docs/other-agents.md#compatibility)).
 
 Requirements: Node.js 18+. Docker is optional and only renders `.svg` diagrams and builds the explorer (not available on the web: render locally).
 

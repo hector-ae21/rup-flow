@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.2]
+
+### Changed
+
+- Compatibility table: Codex and Gemini CLI are marked as tested by the maintainer; Cursor and Copilot remain untested.
+
 ## [0.1.1]
 
 ### Added

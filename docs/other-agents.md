@@ -8,10 +8,11 @@ rup-flow is written once, in the open [Agent Skills](https://agentskills.io/spec
 | --- | --- | --- |
 | Claude Code | Plugin, or `.claude/skills` plus two subagents | Plugin validated by the directory scanner; install by marketplace not yet tested end to end |
 | Claude on the web | Upload `rup-flow-skill.zip` | Format follows the documented rules; upload not yet tested |
-| Codex (CLI, IDE, app) | Skill in `.agents/skills/rup-flow` | Folder and frontmatter follow the documented format; **not yet tested in Codex** |
-| Cursor, GitHub Copilot, Gemini CLI, others | Instruction file that points the agent to the skill | Files generated in the documented locations; **not yet tested in those tools** |
+| Codex (CLI, IDE, app) | Skill in `.agents/skills/rup-flow` | **Tested by the maintainer: works** |
+| Gemini CLI | Skill and/or the `GEMINI.md` instruction block | **Tested by the maintainer: works** |
+| Cursor, GitHub Copilot, others | Instruction file that points the agent to the skill | Files generated in the documented locations; **not yet tested in those tools** |
 
-"Not yet tested" means the layout follows the vendor documentation but nobody has run it there. Please report what you find in an [issue](https://github.com/hector-ae21/rup-flow/issues/new/choose).
+"Not yet tested" means the layout follows the vendor documentation but nobody has run it there. "Tested" means a person ran a real task with it; it is not a guarantee for every version of the client. Please report what you find in an [issue](https://github.com/hector-ae21/rup-flow/issues/new/choose).
 
 ## One universal location
 
