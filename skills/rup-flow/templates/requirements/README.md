@@ -20,6 +20,6 @@ sourceOfTruth: model
 
 ## Conventions
 
-- `specification.puml` is the behavioural source of truth of a use case: a statechart with the Actor/System conversation.
+- `{{specFile}}` is the behavioural source of truth of a use case: a statechart with the Actor/System conversation.
 - `wireframes.puml` is the interface prototype, even when it holds a single screen.
-- Each use-case folder holds `README.md`, `specification.puml` and `wireframes.puml`.
+- Each use-case folder holds `README.md`, `{{specFile}}` and `wireframes.puml`.

@@ -10,6 +10,10 @@ Start the server once with `RUP server up`; check with `RUP health`; render with
 
 A file with several `@start…/@end…` blocks yields `name-01.svg`, `name-02.svg`.
 
+## Language and style
+
+The language (`.puml` or `.mmd`) and the palette come from `rup.config.json` (see [formats-and-themes](formats-and-themes.md)). Do not put colors or theme blocks in sources: the renderer applies the theme.
+
 ## Header
 
 ```
@@ -20,7 +24,7 @@ hide circle
 skinparam linetype polyline
 ```
 
-Use `top to bottom direction` for hierarchies (domain, class diagrams, deployment) and `left to right direction` for collaborations and flows.
+Use `top to bottom direction` by default (domain, class diagrams, collaborations, deployment). Use `left to right direction` only for short linear flows of four elements or fewer: wide diagrams shrink to unreadable text when embedded.
 
 ## Avoiding collisions
 

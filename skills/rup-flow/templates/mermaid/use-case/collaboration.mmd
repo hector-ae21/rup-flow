@@ -1,0 +1,9 @@
+flowchart TB
+  user(["{{actor}}"])
+  screen["{{ucName}}Screen<br/>boundary"]
+  controller["{{ucName}}Controller<br/>control"]
+  entity["Entity<br/>entity"]
+
+  user -->|"1: acts"| screen
+  screen -->|"2: requests"| controller
+  controller -->|"3: reads and updates"| entity

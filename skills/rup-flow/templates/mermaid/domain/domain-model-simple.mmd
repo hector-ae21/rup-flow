@@ -1,0 +1,9 @@
+classDiagram
+  direction TB
+
+  class CoreEntity:::level1
+  class StructuralEntity:::level2
+  class DetailEntity:::level3
+
+  CoreEntity *-- StructuralEntity
+  StructuralEntity o-- DetailEntity

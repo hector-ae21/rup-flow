@@ -1,0 +1,12 @@
+sequenceDiagram
+  actor user as {{actor}}
+  participant controller as {{ucName}}Controller
+  participant service as {{ucName}}Service
+  participant repository as Repository
+
+  user->>controller: request
+  controller->>service: execute(command)
+  service->>repository: save(entity)
+  repository-->>service: entity
+  service-->>controller: result
+  controller-->>user: response

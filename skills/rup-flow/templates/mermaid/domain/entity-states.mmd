@@ -1,0 +1,5 @@
+stateDiagram-v2
+  [*] --> Draft
+  Draft --> Active : activate
+  Active --> Archived : archive
+  Archived --> [*]

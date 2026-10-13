@@ -1,0 +1,14 @@
+stateDiagram-v2
+  state {{ucName}} {
+    [*] --> Start
+    Start --> Form : Actor opens the function
+    Form --> Validate : Actor submits data
+    Validate --> Form : System reports errors
+    Validate --> Done : System accepts the data
+    Done --> [*]
+  }
+
+  note right of Form
+    Actor: opens the function
+    System: shows the form
+  end note

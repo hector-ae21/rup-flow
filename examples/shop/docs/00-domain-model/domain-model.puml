@@ -7,7 +7,7 @@ skinparam nodesep 70
 skinparam ranksep 70
 top to bottom direction
 
-package "Level 1 - Core" {
+package "Level 1 - Core" <<level1>> {
   class Order {
     number
     placedAt
@@ -16,7 +16,7 @@ package "Level 1 - Core" {
   }
 }
 
-package "Level 2 - Structural" {
+package "Level 2 - Structural" <<level2>> {
   class Customer {
     email
     name
@@ -27,7 +27,7 @@ package "Level 2 - Structural" {
   }
 }
 
-package "Level 3 - Detail" {
+package "Level 3 - Detail" <<level3>> {
   class Product {
     sku
     name
@@ -36,7 +36,7 @@ package "Level 3 - Detail" {
   }
 }
 
-package "Level 4 - Support" {
+package "Level 4 - Support" <<level4>> {
   class Address {
     street
     city
