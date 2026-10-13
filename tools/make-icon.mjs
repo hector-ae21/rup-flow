@@ -1,9 +1,9 @@
-const SVG_NS = ['http:/', 'www.w3.org', '2000', 'svg'].join('/');
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
+const SVG_NS = ["http:/", "www.w3.org", "2000", "svg"].join("/");
 
 const SIZE = 512;
 const SUPERSAMPLE = 4;

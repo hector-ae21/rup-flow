@@ -1,10 +1,10 @@
-const SVG_NS = ['http:/', 'www.w3.org', '2000', 'svg'].join('/');
 #!/usr/bin/env node
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+const SVG_NS = ["http:/", "www.w3.org", "2000", "svg"].join("/");
 import { PRESETS } from '../skills/rup-flow/scripts/lib/themes.mjs';
 import { makeReadable } from './svg-readable.mjs';
 
@@ -25,13 +25,10 @@ function put(from, ...to) {
   else fs.copyFileSync(from, target);
 }
 
-const browserFlag = process.argv.indexOf('--browser');
-const browserArg = browserFlag >= 0 ? process.argv[browserFlag + 1] : undefined;
 const SHOTS = path.join(ROOT, 'dist', 'gallery', 'explorer');
 
 function findChrome() {
   const candidates = [
-    browserArg,
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
     '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
