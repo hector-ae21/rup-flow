@@ -4,6 +4,16 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.3.3]
+
+### Added
+
+- The generated `claude-plugin` branch carries a square 512 px icon at `.claude-plugin/icon.png`, which the plugin directory asks for. It is drawn by the same code as the SVG icon and exists only in that branch; `main` still has no binary files.
+
+### Changed
+
+- The CLI help describes the four cards of a use case, and CONTRIBUTING.md documents the repository branches.
+
 ## [0.3.2]
 
 ### Changed

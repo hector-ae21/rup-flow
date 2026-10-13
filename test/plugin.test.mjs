@@ -37,8 +37,21 @@ test('the payload is a valid plugin and a valid marketplace on its own', () => {
   assert.ok(fs.existsSync(path.join(out, 'skills', 'rup-flow', 'SKILL.md')));
 });
 
-test('the payload has no binary files', () => {
-  assert.deepEqual(list(built()).filter((f) => /\.(png|jpe?g|gif|webp|ico|woff2?|ttf|otf)$/i.test(f)), []);
+test('the only binary in the payload is the square icon the directory asks for', () => {
+  const out = built();
+  assert.deepEqual(list(out).filter((f) => /\.(png|jpe?g|gif|webp|ico|woff2?|ttf|otf)$/i.test(f)), ['.claude-plugin/icon.png']);
+  const png = fs.readFileSync(path.join(out, '.claude-plugin', 'icon.png'));
+  assert.equal(png.subarray(1, 4).toString(), 'PNG');
+  const width = png.readUInt32BE(16);
+  assert.equal(width, png.readUInt32BE(20));
+  assert.ok(width >= 512 && width <= 2048);
+  assert.ok(png.length < 2 * 1024 * 1024);
+});
+
+test('nothing in the payload names the icon file', () => {
+  const out = built();
+  const named = list(out).filter((f) => !f.endsWith('.png')).filter((f) => /icon\.(png|svg)/.test(fs.readFileSync(path.join(out, f), 'utf8')));
+  assert.deepEqual(named, []);
 });
 
 test('the payload CLI runs on its own', async () => {
