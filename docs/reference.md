@@ -47,6 +47,7 @@ node <skill-dir>/scripts/rup.mjs <command> [flags]
 | `render [--path dir] [--force] [--outputs svg,png,html] [--theme name]` | `.puml` and `.mmd` → themed `.svg`; up-to-date files are skipped, a theme change re-renders all |
 | `explore` | Build `explorer.html`, an interactive viewer of every rendered diagram |
 | `themes [--json]` | List the color presets |
+| `instructions [--target agents,claude,gemini,copilot,cursor] [--skill-path dir]` | Add or refresh a marked rup-flow block in agent instruction files; without `--target` it lists them. See [other agents](other-agents.md) |
 | `check [--strict]` | Diagram balance, missing SVGs, broken links, front matter, missing realizations, traceability gaps. `--strict` fails on warnings |
 | `server up\|down` | Start or stop the PlantUML container |
 | `health` | Render a test diagram through the configured server |

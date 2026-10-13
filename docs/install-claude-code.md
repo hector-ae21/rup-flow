@@ -2,6 +2,8 @@
 
 Works in the Claude Code terminal, the VS Code extension and the desktop app: they share the same skills and plugins.
 
+Using Codex, Cursor, Copilot or Gemini CLI instead? See [other agents](other-agents.md).
+
 ## Requirements
 
 | Requirement | Needed for | Check |

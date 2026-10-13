@@ -9,6 +9,7 @@ rup-flow is a Claude skill. You describe a system (or point Claude at existing c
 | Claude Code (terminal, VS Code, desktop) | [Install in Claude Code](install-claude-code.md) | Yes, with Docker |
 | Claude on the web (claude.ai) | [Install in Claude on the web](install-claude-web.md) | No: Claude writes the `.puml` files, you render them locally |
 | Both | Do both guides; the same skill runs in each | |
+| Codex, Cursor, Copilot, Gemini CLI | [Using rup-flow with other agents](other-agents.md) | Yes, with Docker; depends on whether the client can run commands |
 
 ## 2. The five-minute path (Claude Code)
 

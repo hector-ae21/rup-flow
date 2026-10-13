@@ -31,7 +31,8 @@ Run the gallery build whenever templates, themes or the explorer change, and com
 - The `description` in `SKILL.md` is at most 200 characters (claude.ai limit); `npm run validate` enforces it.
 - A new template needs an entry in `init` or `new use-case` in `rup.mjs` and a test.
 - Templates and references are written in English. Generated documentation language is the user's `docLanguage`.
-- Keep the version equal in `package.json` and `.claude-plugin/plugin.json`.
+- Keep the version equal in `package.json`, `.claude-plugin/plugin.json` and `SKILL.md` (`metadata.version`).
+- Keep agent-specific behaviour out of `skills/rup-flow/`; adapters are listed in [docs/architecture.md](docs/architecture.md), which also explains how to add a client.
 
 ## Pull requests
 

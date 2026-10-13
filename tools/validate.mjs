@@ -43,6 +43,13 @@ for (const agent of fs.readdirSync(path.join(ROOT, 'agents'))) {
 const plugin = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin', 'plugin.json'), 'utf8'));
 const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin', 'marketplace.json'), 'utf8'));
 const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+const skillText = fs.readFileSync(path.join(SKILL_DIR, 'SKILL.md'), 'utf8');
+const skillVersion = /^\s+version:\s*"?([^"\r\n]+)"?/m.exec(skillText)?.[1];
+if (skillVersion !== pkg.version) fail(`SKILL.md metadata.version ${skillVersion} differs from package.json ${pkg.version}`);
+if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(skill.name ?? '') || skill.name.length > 64) fail('SKILL.md: name must follow the Agent Skills format (lowercase, digits, single hyphens, max 64)');
+if (path.basename(SKILL_DIR) !== skill.name) fail('SKILL.md: name must match its folder name (Agent Skills requirement)');
+if (skill.compatibility && skill.compatibility.length > 500) fail('SKILL.md: compatibility is longer than 500 characters');
+if (!skill.license) fail('SKILL.md: license is required for portable distribution');
 if (plugin.name !== marketplace.plugins[0].name) fail('plugin.json and marketplace.json disagree on the plugin name');
 if (plugin.version !== pkg.version) fail(`plugin.json version ${plugin.version} differs from package.json ${pkg.version}`);
 if (!fs.existsSync(path.join(ROOT, plugin.icon))) fail(`plugin icon not found: ${plugin.icon}`);
