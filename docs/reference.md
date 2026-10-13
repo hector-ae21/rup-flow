@@ -29,7 +29,7 @@ Created by `init` in the project root. Every key is optional.
 | `targetStack` | empty | `language`, `framework`, `persistence`, `testing` for code generation |
 | `traceTag` | `@rup` | Doc-comment tag that links code to the model |
 
-Precedence, highest first: command-line flags, environment variables, the config file, defaults. Environment variables: `RUP_OUT_DIR`, `RUP_LANG`, `RUP_PLANTUML_URL`. A path stated in your prompt overrides the config for that run.
+Precedence, highest first: command-line flags, the config file, defaults. A path stated in your prompt overrides the config for that run. The CLI reads no environment variables.
 
 If you change `outDir` or `paths` on a project that already has documentation, move the folders and fix the links as one step.
 

@@ -25,7 +25,11 @@ Never rename the plugin: installs are recorded by `name@marketplace`.
 
 1. Validate: `claude plugin validate . --strict` (the portal applies more rules than the CLI).
 2. Open the developer portal at <https://claude.ai/directory/manage> (requires a paid claude.ai plan) and follow *Submit a plugin*.
-3. The manifest already carries the listing fields: `icon`, `documentationUrl`, `supportUrl`. A privacy policy URL may be requested by the portal; this plugin collects no data, and a short statement in the repository is enough to link.
+3. Fill the listing in the portal, not in `plugin.json` (the fields would be reported as findings by the scan):
+   - Icon: download <https://raw.githubusercontent.com/hector-ae21/rup-flow/docs-assets/icon.png> (512 × 512) and upload it.
+   - Documentation: `https://github.com/hector-ae21/rup-flow/blob/main/docs/getting-started.md`
+   - Support: `https://github.com/hector-ae21/rup-flow/issues`
+   - Privacy policy, if requested: the plugin collects no data; link [PRIVACY.md](../PRIVACY.md).
 4. Reviewed versions reach users after publication; new versions go through the same portal.
 
 The listing reaches Claude Code users as `rup-flow@synced`. The web-only parts of the plugin are the skill (Markdown and scripts); the Docker rendering is Claude Code and local only.

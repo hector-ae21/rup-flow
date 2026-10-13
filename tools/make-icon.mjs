@@ -123,5 +123,12 @@ function toSvg() {
 
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'icon.svg'), toSvg());
-fs.writeFileSync(path.join(OUT, 'icon.png'), encodePng(rasterize()));
-console.log(`Wrote ${path.join(OUT, 'icon.svg')} and icon.png`);
+console.log(`Wrote ${path.join(OUT, 'icon.svg')}`);
+
+const pngFlag = process.argv.indexOf('--png');
+if (pngFlag >= 0) {
+  const target = path.resolve(process.argv[pngFlag + 1] ?? 'dist/icon-512.png');
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, encodePng(rasterize()));
+  console.log(`Wrote ${target}`);
+}

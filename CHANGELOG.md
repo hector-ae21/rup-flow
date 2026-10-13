@@ -4,6 +4,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.3]
+
+### Changed
+
+- The plugin tree has no binary files, no `process.env` reads and no listing-only fields in `plugin.json`, so the directory scan has nothing to report: the icon PNG and explorer screenshots moved to the `docs-assets` branch, the icon and URLs are set in the submission portal, the CLI reads only flags and `rup.config.json`, PlantUML requests live in their own module, and the release workflow no longer runs Node. Validation enforces these rules. Added PRIVACY.md.
+
 ## [0.1.2]
 
 ### Changed
