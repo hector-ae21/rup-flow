@@ -1,0 +1,15 @@
+{
+  "name": "rup-flow",
+  "description": "RUP documentation and code generation skill",
+  "owner": {
+    "name": "hector-ae21",
+    "url": "https://github.com/hector-ae21"
+  },
+  "plugins": [
+    {
+      "name": "rup-flow",
+      "source": "./",
+      "description": "Generate RUP documentation, PlantUML diagrams and code in both directions."
+    }
+  ]
+}

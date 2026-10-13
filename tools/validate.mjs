@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const SKILL_DIR = path.join(ROOT, 'skills', 'rup-flow');
+const errors = [];
+
+function fail(message) {
+  errors.push(message);
+}
+
+function frontMatter(file) {
+  const text = fs.readFileSync(file, 'utf8');
+  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!match) { fail(`${path.relative(ROOT, file)}: missing front matter`); return {}; }
+  const data = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const pair = /^([\w-]+):\s*(.*)$/.exec(line);
+    if (pair) data[pair[1]] = pair[2].trim();
+  }
+  return data;
+}
+
+function walk(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name);
+    return entry.isDirectory() ? walk(full) : [full];
+  });
+}
+
+const skill = frontMatter(path.join(SKILL_DIR, 'SKILL.md'));
+if (skill.name !== 'rup-flow') fail('SKILL.md: name must be rup-flow');
+if (!skill.description) fail('SKILL.md: description is required');
+else if (skill.description.length > 200) fail(`SKILL.md: description has ${skill.description.length} characters, claude.ai allows 200`);
+
+for (const agent of fs.readdirSync(path.join(ROOT, 'agents'))) {
+  const data = frontMatter(path.join(ROOT, 'agents', agent));
+  if (!data.name || !data.description) fail(`agents/${agent}: name and description are required`);
+}
+
+const plugin = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin', 'plugin.json'), 'utf8'));
+const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin', 'marketplace.json'), 'utf8'));
+const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+if (plugin.name !== marketplace.plugins[0].name) fail('plugin.json and marketplace.json disagree on the plugin name');
+if (plugin.version !== pkg.version) fail(`plugin.json version ${plugin.version} differs from package.json ${pkg.version}`);
+if (!fs.existsSync(path.join(ROOT, plugin.icon))) fail(`plugin icon not found: ${plugin.icon}`);
+
+const markdown = [...walk(ROOT)].filter((f) => f.endsWith('.md') && !f.includes('node_modules') && !f.includes(`${path.sep}.git${path.sep}`));
+const linkPattern = /\]\(([^)\s]+)\)/g;
+for (const file of markdown) {
+  const text = fs.readFileSync(file, 'utf8');
+  const isTemplate = [`${path.sep}templates${path.sep}`, `${path.sep}references${path.sep}`].some((p) => file.includes(p));
+  let match;
+  while ((match = linkPattern.exec(text)) !== null) {
+    const target = match[1].split('#')[0];
+    if (!target || /^[a-z]+:/i.test(target) || target.includes('{{') || isTemplate) continue;
+    if (!fs.existsSync(path.resolve(path.dirname(file), decodeURI(target)))) {
+      const pendingDiagram = /\.svg$/.test(target) && fs.existsSync(path.resolve(path.dirname(file), target.replace(/\.svg$/, '.puml')));
+      if (!pendingDiagram) fail(`${path.relative(ROOT, file)}: broken link ${match[1]}`);
+    }
+  }
+}
+
+if (errors.length) {
+  console.error(errors.map((e) => `- ${e}`).join('\n'));
+  process.exit(1);
+}
+console.log(`OK: skill, ${fs.readdirSync(path.join(ROOT, 'agents')).length} agents, manifests and ${markdown.length} Markdown files are consistent`);
